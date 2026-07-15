@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Works — Rowena Chen</title>
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=DM+Sans:wght@300;400;500;700&family=Archivo+Black&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif; color: #111; cursor: none;
+  background:
+    radial-gradient(#f4dbe8 1.5px, transparent 1.5px);
+  background-size: 26px 26px;
+  background-color: #fff7fb;
+}
+
+/* CURSOR */
+.cursor { position: fixed; z-index: 9999; pointer-events: none; transform: translate(-50%,-50%); }
+.cursor-dot { width: 12px; height: 12px; background: #ff2d9b; border-radius: 50%; mix-blend-mode: multiply; transition: transform 0.2s; }
+.cursor.hovering .cursor-dot { transform: scale(2.4); background: #ff2d9b44; border: 2px solid #ff2d9b; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 40px;
+  background: rgba(255,247,251,0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 3px solid #111;
+}
+.nav-logo { display: flex; align-items: center; cursor: none; }
+.nav-logo img { height: 40px; width: auto; }
+.nav-links { display: flex; gap: 26px; }
+.nav-link { font-family: 'VT323', monospace; font-size: 19px; color: #111; text-decoration: none; cursor: none; letter-spacing: 1px; transition: color 0.2s; }
+.nav-link:hover, .nav-link.active { color: #ff2d9b; }
+
+/* HEADER */
+.page-header { padding: 150px 48px 40px; }
+.page-header h1 {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(52px, 9vw, 110px);
+  text-transform: uppercase; letter-spacing: -2px;
+  line-height: 0.9;
+}
+.page-header h1 em { color: #ff2d9b; font-style: normal; }
+.page-header p { font-family: 'VT323', monospace; font-size: 18px; color: #b78aa2; letter-spacing: 1px; margin-top: 16px; max-width: 480px; }
+
+/* MARQUEE */
+.marquee { background: #ff2d9b; overflow: hidden; white-space: nowrap; padding: 10px 0; border-top: 3px solid #111; border-bottom: 3px solid #111; margin-bottom: 40px; }
+.marquee-inner { display: inline-flex; animation: scroll 20s linear infinite; }
+@keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee span { font-family: 'VT323', monospace; font-size: 20px; color: white; letter-spacing: 2px; padding: 0 26px; display: inline-flex; align-items: center; gap: 18px; }
+.marquee span::after { content: '✦'; }
+
+/* FILTERS */
+.filters {
+  padding: 0 48px 36px;
+  display: flex; gap: 10px; flex-wrap: wrap;
+}
+.filter-btn {
+  font-family: 'VT323', monospace; font-size: 18px;
+  letter-spacing: 1px; cursor: none;
+  border: 3px solid #111; border-radius: 999px;
+  padding: 8px 22px; background: white;
+  color: #111; transition: all 0.15s;
+  box-shadow: 3px 3px 0 #111;
+}
+.filter-btn:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 #111; }
+.filter-btn:active { transform: translate(0,0); box-shadow: 1px 1px 0 #111; }
+.filter-btn.active { background: #ff2d9b; color: white; }
+
+/* GRID */
+.works-grid {
+  padding: 0 48px 80px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.work-card {
+  border: 3px solid #111; border-radius: 18px;
+  background: white; overflow: hidden;
+  cursor: none; text-decoration: none; color: inherit;
+  box-shadow: 5px 5px 0 #ffc7e3;
+  transition: transform 0.25s, box-shadow 0.25s;
+  display: block;
+}
+.work-card:hover { transform: translate(-4px,-4px); box-shadow: 10px 10px 0 #ff2d9b; }
+
+.card-img {
+  width: 100%; aspect-ratio: 4/3;
+  background: #f2eaee; position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'VT323', monospace; color: #d8bfcc; font-size: 14px;
+}
+.card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+.work-card:hover .card-img img { transform: scale(1.06); }
+.card-badge {
+  position: absolute; top: 12px; left: 12px;
+  font-family: 'VT323', monospace; font-size: 14px;
+  background: #ff2d9b; color: white;
+  border: 2px solid #111; border-radius: 999px;
+  padding: 2px 12px; letter-spacing: 1px;
+  transform: rotate(-3deg);
+}
+.card-body { padding: 18px 20px; border-top: 3px solid #111; }
+.card-title { font-family: 'Archivo Black', sans-serif; font-size: 19px; text-transform: uppercase; margin-bottom: 5px; }
+.card-desc { font-size: 12.5px; color: #999; line-height: 1.55; margin-bottom: 12px; }
+.card-footer { display: flex; justify-content: space-between; align-items: center; }
+.card-year { font-family: 'VT323', monospace; font-size: 15px; color: #d0b3c2; }
+.card-arrow { font-family: 'VT323', monospace; font-size: 18px; opacity: 0; transform: translateX(-4px); transition: 0.2s; }
+.work-card:hover .card-arrow { opacity: 1; transform: translateX(0); }
+.work-card.hidden { display: none; }
+
+/* CONTACT BAR */
+.contact-bar { background: #0d0d0d; padding: 32px 48px; display: flex; justify-content: center; align-items: center; gap: 24px; border-top: 3px solid #ff2d9b; flex-wrap: wrap; }
+.contact-bar-icon { font-size: 18px; opacity: 0.4; }
+.contact-bar-text { font-family: 'VT323', monospace; font-size: 18px; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
+.contact-bar a { font-family: 'VT323', monospace; font-size: 18px; color: rgba(255,255,255,0.7); text-decoration: none; cursor: none; transition: color 0.2s; }
+.contact-bar a:hover { color: #ff2d9b; }
+.contact-bar-sep { color: rgba(255,255,255,0.2); font-size: 18px; }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"><div class="cursor-dot"></div></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="./logo.png" alt="Rowena" onerror="this.style.display='none'">
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="works.html" class="nav-link active">All Works</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="resume.pdf" class="nav-link">Resume</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>All <em>Works</em></h1>
+  <p>Everything I've made — games, illustrations, brands, and experiments ✦</p>
+</div>
+
+<div class="marquee">
+  <div class="marquee-inner">
+    <span>GAME</span><span>2D / ILLUSTRATION</span><span>3D</span><span>BRAND / UI</span><span>MIXED MEDIA</span>
+    <span>GAME</span><span>2D / ILLUSTRATION</span><span>3D</span><span>BRAND / UI</span><span>MIXED MEDIA</span>
+  </div>
+</div>
+
+<div class="filters">
+  <button class="filter-btn active" onclick="filter(event,'all')">All</button>
+  <button class="filter-btn" onclick="filter(event,'game')">Game</button>
+  <button class="filter-btn" onclick="filter(event,'2d')">2D / Illustration</button>
+  <button class="filter-btn" onclick="filter(event,'3d')">3D</button>
+  <button class="filter-btn" onclick="filter(event,'brand')">Brand / UI</button>
+</div>
+
+<div class="works-grid" id="grid">
+
+  <a href="moon.html?from=work" class="work-card" data-type="game">
+    <div class="card-img">
+      <img src="./1.png" alt="">
+      <span class="card-badge">GAME</span>
+    </div>
+    <div class="card-body">
+      <div class="card-title">What the Moon Brings</div>
+      <div class="card-desc">Short description of this project.</div>
+      <div class="card-footer"><span class="card-year">2024</span><span class="card-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="aftertaste.html?from=work" class="work-card" data-type="2d">
+    <div class="card-img">
+      <img src="./2.png" alt="">
+      <span class="card-badge">2D</span>
+    </div>
+    <div class="card-body">
+      <div class="card-title">Aftertaste</div>
+      <div class="card-desc">Short description of this project.</div>
+      <div class="card-footer"><span class="card-year">2024</span><span class="card-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="apple.html?from=work" class="work-card" data-type="brand">
+    <div class="card-img">
+      <img src="./3.png" alt="">
+      <span class="card-badge">BRAND</span>
+    </div>
+    <div class="card-body">
+      <div class="card-title">Everything about Apple</div>
+      <div class="card-desc">Short description of this project.</div>
+      <div class="card-footer"><span class="card-year">2023</span><span class="card-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a href="insync.html?from=work" class="work-card" data-type="game">
+    <div class="card-img">
+      <img src="./4.png" alt="">
+      <span class="card-badge">GAME</span>
+    </div>
+    <div class="card-body">
+      <div class="card-title">Insync</div>
+      <div class="card-desc">Short description of this project.</div>
+      <div class="card-footer"><span class="card-year">2024</span><span class="card-arrow">→</span></div>
+    </div>
+  </a>
+
+  <!-- 继续加卡片 ↓ -->
+
+</div>
+
+<div class="contact-bar">
+  <span class="contact-bar-icon">✦</span>
+  <span class="contact-bar-text">Contact Me</span>
+  <span class="contact-bar-sep">/</span>
+  <a href="mailto:rowenach@usc.edu">rowenach@usc.edu</a>
+  <span class="contact-bar-sep">/</span>
+  <a href="tel:+16266629366">+1 626 662 9366</a>
+  <span class="contact-bar-icon">✦</span>
+</div>
+
+<script>
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('a, button, .work-card').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+});
+function filter(e, type) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active');
+  document.querySelectorAll('.work-card').forEach(card => {
+    card.classList.toggle('hidden', !(type === 'all' || card.dataset.type === type));
+  });
+}
+</script>
+</body>
+</html>
