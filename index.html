@@ -555,27 +555,58 @@ function closeTrailer(e) {
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTrailer(); });
 
-/* ───── CAROUSEL ───── */
+/* ───── CAROUSEL (infinite loop) ───── */
 const carousel = document.getElementById('carousel');
-let slideIdx = 0;
-const slideCount = carousel.children.length;
+const gap = 28;
 
-function goToSlide(i) {
-  slideIdx = (i + slideCount) % slideCount;
-  const card = carousel.children[0];
-  const w = card.offsetWidth + 28;
-  carousel.style.transform = 'translateX(' + (-slideIdx * w) + 'px)';
+// Clone all cards and append to end for seamless loop
+const origCards = Array.from(carousel.children);
+origCards.forEach(card => carousel.appendChild(card.cloneNode(true)));
+
+let slideIdx = 0;
+const realCount = origCards.length;
+
+function cardWidth() {
+  return carousel.children[0].offsetWidth + gap;
 }
+
+function goToSlide(i, animated = true) {
+  slideIdx = i;
+  carousel.style.transition = animated
+    ? 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)'
+    : 'none';
+  carousel.style.transform = 'translateX(' + (-slideIdx * cardWidth()) + 'px)';
+}
+
+// After transition ends, silently jump back if we've gone past originals
+carousel.addEventListener('transitionend', () => {
+  if (slideIdx >= realCount) {
+    goToSlide(slideIdx - realCount, false);
+  } else if (slideIdx < 0) {
+    goToSlide(slideIdx + realCount, false);
+  }
+});
+
 function slide(dir) {
   goToSlide(slideIdx + dir);
   resetAuto();
 }
+
+// Re-hook hover cursor on cloned cards
+document.querySelectorAll('.work-slide').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+});
+
 /* auto-advance every 4s */
 let autoTimer = setInterval(() => goToSlide(slideIdx + 1), 4000);
 function resetAuto() {
   clearInterval(autoTimer);
   autoTimer = setInterval(() => goToSlide(slideIdx + 1), 4000);
 }
+
+// Init position
+goToSlide(0, false);
 </script>
 </body>
 </html>
