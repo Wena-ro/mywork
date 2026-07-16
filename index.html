@@ -4,11 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rowena Chen — Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=VT323&family=DM+Sans:wght@300;400;500;700&family=Archivo+Black&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="./tab.png">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=DM+Sans:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor: none; overflow-x: hidden; }
+body { font-family: 'DM Sans', sans-serif; background: #fff; color: #2a5158; cursor: none; overflow-x: hidden; }
 
 /* ───────── CURSOR ───────── */
 .cursor {
@@ -17,7 +18,7 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
   transition: width 0.2s, height 0.2s;
 }
 .cursor-dot {
-  width: 8px; height: 8px;
+  width: 6px; height: 6px;
   background: #00a8b8; border-radius: 50%;
   mix-blend-mode: multiply;
   transition: transform 0.2s;
@@ -35,13 +36,13 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
 }
 .cursor.play-mode .cursor-dot { transform: scale(0); }
 .cursor.play-mode .cursor-label { opacity: 1; scale: 1; }
-.cursor.hovering .cursor-dot { transform: scale(2.4); background: #00a8b844; border: 1px solid #00a8b8; }
+.cursor.hovering .cursor-dot { transform: scale(5); background: rgba(0,168,184,0.12); border: 0.5px solid #00a8b8; backdrop-filter: blur(1px); }
 
 /* ───────── HERO / TRAILER ───────── */
 .hero {
   position: relative;
   width: 100vw; height: 100vh;
-  background: #0d0d0d;
+  background: #12282c;
   overflow: hidden;
 }
 
@@ -93,7 +94,7 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
   margin-bottom: 8px;
 }
 .trailer-title {
-  font-family: 'Archivo Black', sans-serif;
+  font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: 0.5px;
   font-size: clamp(36px, 6vw, 80px);
   line-height: 0.95; letter-spacing: -1px;
   text-transform: uppercase;
@@ -146,18 +147,18 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
   background: #00a8b8;
   overflow: hidden; white-space: nowrap;
   padding: 12px 0;
-  border-top: 1px solid #111;
-  border-bottom: 1px solid #111;
+  border-top: 1px solid #2a5158;
+  border-bottom: 1px solid #2a5158;
 }
 .marquee-inner { display: inline-flex; animation: scroll 20s linear infinite; }
 @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .marquee span {
   font-family: 'VT323', monospace; font-size: 22px;
   color: white; letter-spacing: 2px;
-  padding: 0 28px;
-  display: inline-flex; align-items: center; gap: 20px;
+  padding: 0;
+  display: inline-flex; align-items: center;
 }
-.marquee span::after { content: '✦'; }
+.marquee span::after { content: '✦'; margin: 0 26px; opacity: 0.85; }
 
 /* ───────── SELECTED WORKS ───────── */
 .works-section {
@@ -175,7 +176,7 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
   padding: 0 48px; margin-bottom: 48px;
 }
 .works-title {
-  font-family: 'Archivo Black', sans-serif;
+  font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: 0.5px;
   font-size: clamp(36px, 6vw, 72px);
   text-transform: uppercase; letter-spacing: -1px;
   line-height: 0.95;
@@ -185,7 +186,7 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
 
 .all-works-btn {
   font-family: 'VT323', monospace; font-size: 20px;
-  background: #111; color: white;
+  background: #2a5158; color: white;
   border: none; border-radius: 999px;
   padding: 14px 32px; letter-spacing: 1px;
   text-decoration: none; cursor: none;
@@ -204,7 +205,7 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
 
 .work-slide {
   flex: 0 0 min(520px, 78vw);
-  border: 1.5px solid #111;
+  border: 1.5px solid #2a5158;
   border-radius: 18px;
   background: white;
   overflow: hidden;
@@ -228,12 +229,12 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
   position: absolute; top: 14px; left: 14px;
   font-family: 'VT323', monospace; font-size: 15px;
   background: #00a8b8; color: white;
-  border: 1px solid #111; border-radius: 999px;
+  border: 1px solid #2a5158; border-radius: 999px;
   padding: 3px 14px; letter-spacing: 1px;
   transform: rotate(-3deg);
 }
-.slide-body { padding: 22px 24px; border-top: 1px solid #111; }
-.slide-title { font-family: 'Archivo Black', sans-serif; font-size: 24px; text-transform: uppercase; margin-bottom: 6px; }
+.slide-body { padding: 22px 24px; border-top: 1px solid #2a5158; }
+.slide-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: 0.5px; font-size: 24px; text-transform: uppercase; margin-bottom: 6px; }
 .slide-desc { font-size: 13px; color: #888; line-height: 1.6; }
 
 /* carousel arrows */
@@ -243,15 +244,15 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
 }
 .car-btn {
   width: 54px; height: 54px;
-  border: 1.5px solid #111; border-radius: 50%;
+  border: 1.5px solid #2a5158; border-radius: 50%;
   background: white; cursor: none;
   font-family: 'VT323', monospace; font-size: 24px;
   display: flex; align-items: center; justify-content: center;
   transition: all 0.15s;
-  box-shadow: 2px 2px 0 #111;
+  box-shadow: 2px 2px 0 #2a5158;
 }
-.car-btn:hover { background: #00a8b8; color: white; transform: translate(-2px,-2px); box-shadow: 3px 3px 0 #111; }
-.car-btn:active { transform: translate(0,0); box-shadow: 1px 1px 0 #111; }
+.car-btn:hover { background: #00a8b8; color: white; transform: translate(-2px,-2px); box-shadow: 3px 3px 0 #2a5158; }
+.car-btn:active { transform: translate(0,0); box-shadow: 1px 1px 0 #2a5158; }
 
 
 
@@ -294,53 +295,23 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
   position: fixed; bottom: 26px; right: 26px;
   z-index: 200;
   width: 50px; height: 50px;
-  border: 1.5px solid #111; border-radius: 50%;
+  border: 1.5px solid #2a5158; border-radius: 50%;
   background: white;
   font-family: 'VT323', monospace; font-size: 22px;
-  color: #111;
+  color: #2a5158;
   display: flex; align-items: center; justify-content: center;
   cursor: none;
   opacity: 0; transform: translateY(12px);
   pointer-events: none;
   transition: all 0.3s;
-  box-shadow: 2px 2px 0 #111;
+  box-shadow: 2px 2px 0 #2a5158;
 }
 .back-top.show { opacity: 1; transform: translateY(0); pointer-events: all; }
 .back-top:hover { background: #00a8b8; color: white; border-color: #00a8b8; box-shadow: 2px 2px 0 #007a86; }
 
-/* ───────── YOUTUBE MODAL ───────── */
-.yt-modal {
-  position: fixed; inset: 0; z-index: 500;
-  background: rgba(0,0,0,0.88);
-  display: flex; align-items: center; justify-content: center;
-  opacity: 0; pointer-events: none;
-  transition: opacity 0.3s;
-}
-.yt-modal.open { opacity: 1; pointer-events: all; }
-.yt-frame-wrap {
-  width: min(1100px, 90vw);
-  aspect-ratio: 16/9;
-  background: #000;
-  border: 1.5px solid #00a8b8;
-  border-radius: 12px;
-  overflow: hidden;
-  position: relative;
-}
-.yt-frame-wrap iframe { width: 100%; height: 100%; border: none; }
-.yt-close {
-  position: absolute; top: -52px; right: 0;
-  font-family: 'VT323', monospace; font-size: 20px;
-  background: #00a8b8; color: white;
-  border: none; border-radius: 999px;
-  padding: 8px 24px; cursor: none;
-  letter-spacing: 1px;
-  transition: background 0.2s;
-}
-.yt-close:hover { background: white; color: #00a8b8; }
-
 /* ───────── CONTACT BAR ───────── */
 .contact-bar {
-  background: #0d0d0d;
+  background: #12282c;
   padding: 32px 48px;
   display: flex; justify-content: center; align-items: center; gap: 24px;
   border-top: 1.5px solid #00a8b8;
@@ -358,7 +329,7 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
 <!-- CURSOR -->
 <div class="cursor" id="cursor">
   <div class="cursor-dot"></div>
-  <div class="cursor-label">PLAY TRAILER ▶</div>
+  <div class="cursor-label">VIEW PROJECT →</div>
 </div>
 
 <!-- FLOATING LOGO + BACK TO TOP -->
@@ -386,7 +357,7 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
       <img src="./logo.png" alt="Rowena" onerror="this.style.display='none'">
     </a>
     <div class="hero-nav">
-      <a href="works.html">All Works</a>
+      <a href="works.html">Works</a>
       <a href="about.html">About</a>
       <a href="resume.pdf">Resume</a>
     </div>
@@ -395,7 +366,7 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
   <!-- current trailer info -->
   <div class="trailer-info">
     <div class="trailer-count" id="trailerCount">01 / 04</div>
-    <div class="trailer-title" id="trailerTitle">What the Moon Brings</div>
+    <div class="trailer-title" id="trailerTitle">Aftertaste</div>
   </div>
 
   <!-- progress bars -->
@@ -442,21 +413,10 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
       <!-- ==============================
            每张卡片：href / 图 / 标题 / 描述 自己换
            ============================== -->
-      <a href="moon.html" class="work-slide">
+      <a href="aftertaste.html" class="work-slide">
         <div class="slide-img">
           <img src="./1.png" alt="">
           <span class="slide-badge">GAME</span>
-        </div>
-        <div class="slide-body">
-          <div class="slide-title">What the Moon Brings</div>
-          <div class="slide-desc">Short description — what it is, your role.</div>
-        </div>
-      </a>
-
-      <a href="aftertaste.html" class="work-slide">
-        <div class="slide-img">
-          <img src="./2.png" alt="">
-          <span class="slide-badge">2D</span>
         </div>
         <div class="slide-body">
           <div class="slide-title">Aftertaste</div>
@@ -464,24 +424,35 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
         </div>
       </a>
 
-      <a href="apple.html" class="work-slide">
+      <a href="insync.html" class="work-slide">
         <div class="slide-img">
-          <img src="./3.png" alt="">
-          <span class="slide-badge">BRAND</span>
+          <img src="./2.png" alt="">
+          <span class="slide-badge">INSTALLATION</span>
         </div>
         <div class="slide-body">
-          <div class="slide-title">Everything about Apple</div>
+          <div class="slide-title">Insync</div>
           <div class="slide-desc">Short description — what it is, your role.</div>
         </div>
       </a>
 
-      <a href="insync.html" class="work-slide">
+      <a href="cat.html" class="work-slide">
+        <div class="slide-img">
+          <img src="./3.png" alt="">
+          <span class="slide-badge">GAME</span>
+        </div>
+        <div class="slide-body">
+          <div class="slide-title">How to Pet Your Cat</div>
+          <div class="slide-desc">Short description — what it is, your role.</div>
+        </div>
+      </a>
+
+      <a href="alibi.html" class="work-slide">
         <div class="slide-img">
           <img src="./4.png" alt="">
           <span class="slide-badge">GAME</span>
         </div>
         <div class="slide-body">
-          <div class="slide-title">Insync</div>
+          <div class="slide-title">Alibi</div>
           <div class="slide-desc">Short description — what it is, your role.</div>
         </div>
       </a>
@@ -495,14 +466,6 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
   </div>
 </div>
 
-
-<!-- ═══════════ YOUTUBE MODAL ═══════════ -->
-<div class="yt-modal" id="ytModal" onclick="closeTrailer(event)">
-  <div class="yt-frame-wrap">
-    <button class="yt-close" onclick="closeTrailer()">CLOSE ✕</button>
-    <iframe id="ytFrame" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-  </div>
-</div>
 
 <!-- ═══════════ CONTACT BAR ═══════════ -->
 <div class="contact-bar">
@@ -536,10 +499,10 @@ hero.addEventListener('mouseleave', () => cursor.classList.remove('play-mode'));
 
 /* ───── TRAILER CYCLE ───── */
 const titles = [
-  'What the Moon Brings',
   'Aftertaste',
-  'Everything about Apple',
-  'Insync'
+  'Insync',
+  'How to Pet Your Cat',
+  'Alibi'
 ];
 // ↑ 改成你的项目名，和视频顺序对应
 
@@ -592,32 +555,13 @@ let fallbackTimer = setInterval(() => {
 
 playCurrent();
 
-/* ───── YOUTUBE TRAILERS ───── */
-/* 填入每个项目的 YouTube 视频 ID（youtube.com/watch?v=XXXXXXX 里的 XXXXXXX）*/
-const ytIds = [
-  'YOUTUBE_ID_1',   // What the Moon Brings
-  'YOUTUBE_ID_2',   // Aftertaste
-  'YOUTUBE_ID_3',   // Everything about Apple
-  'YOUTUBE_ID_4'    // Insync
-];
-
-const ytModal = document.getElementById('ytModal');
-const ytFrame = document.getElementById('ytFrame');
-
-/* click hero (not links) = open YouTube trailer modal */
+/* click hero (not links/buttons) = go to that project page */
+const projectLinks = ['aftertaste.html','insync.html','cat.html','alibi.html'];
+// ↑ 和 titles 顺序对应，改成你的项目页文件名
 hero.addEventListener('click', e => {
   if (e.target.closest('a, button, .prog-bar, .hero-top')) return;
-  ytFrame.src = 'https://www.youtube.com/embed/' + ytIds[cur] + '?autoplay=1&rel=0';
-  ytModal.classList.add('open');
-  videos[cur].pause();
+  window.location.href = projectLinks[cur];
 });
-
-function closeTrailer(e) {
-  if (e && e.target.closest('.yt-frame-wrap') && !e.target.closest('.yt-close')) return;
-  ytModal.classList.remove('open');
-  ytFrame.src = '';
-  videos[cur].play().catch(()=>{});
-}
 
 /* hero manual arrows */
 function heroNext() { next(); }
@@ -635,7 +579,6 @@ window.addEventListener('scroll', () => {
   backTop.classList.toggle('show', past);
 });
 
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTrailer(); });
 
 /* ───── CAROUSEL (infinite loop) ───── */
 const carousel = document.getElementById('carousel');
