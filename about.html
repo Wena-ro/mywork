@@ -4,12 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About — Rowena Chen</title>
-<link href="https://fonts.googleapis.com/css2?family=VT323&family=DM+Sans:wght@300;400;500;700&family=Archivo+Black&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="./tab.png">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=DM+Sans:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
-  font-family: 'DM Sans', sans-serif; color: #111; cursor: none;
+  font-family: 'DM Sans', sans-serif; color: #2a5158; cursor: none;
   background: radial-gradient(#ddf0f3 1.5px, transparent 1.5px);
   background-size: 26px 26px;
   background-color: #f8fdfe;
@@ -17,8 +18,8 @@ body {
 
 /* CURSOR */
 .cursor { position: fixed; z-index: 9999; pointer-events: none; transform: translate(-50%,-50%); }
-.cursor-dot { width: 8px; height: 8px; background: #00a8b8; border-radius: 50%; mix-blend-mode: multiply; transition: transform 0.2s; }
-.cursor.hovering .cursor-dot { transform: scale(2.4); background: #00a8b844; border: 1px solid #00a8b8; }
+.cursor-dot { width: 6px; height: 6px; background: #00a8b8; border-radius: 50%; mix-blend-mode: multiply; transition: transform 0.2s; }
+.cursor.hovering .cursor-dot { transform: scale(5); background: rgba(0,168,184,0.12); border: 0.5px solid #00a8b8; backdrop-filter: blur(1px); }
 
 /* NAV */
 nav {
@@ -27,12 +28,12 @@ nav {
   padding: 16px 40px;
   background: rgba(248,253,254,0.9);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid #111;
+  border-bottom: 1px solid #2a5158;
 }
 .nav-logo { display: flex; align-items: center; cursor: none; }
 .nav-logo img { height: 40px; width: auto; }
 .nav-links { display: flex; gap: 26px; }
-.nav-link { font-family: 'VT323', monospace; font-size: 19px; color: #111; text-decoration: none; cursor: none; letter-spacing: 1px; transition: color 0.2s; }
+.nav-link { font-family: 'VT323', monospace; font-size: 19px; color: #2a5158; text-decoration: none; cursor: none; letter-spacing: 1px; transition: color 0.2s; }
 .nav-link:hover, .nav-link.active { color: #00a8b8; }
 
 /* HERO */
@@ -44,7 +45,7 @@ nav {
 .hero-tag { font-family: 'VT323', monospace; font-size: 16px; letter-spacing: 3px; color: #00a8b8; margin-bottom: 16px; }
 .hero-tag::before { content: '✦ '; }
 .hero-name {
-  font-family: 'Archivo Black', sans-serif;
+  font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: 0.5px;
   font-size: clamp(44px, 7vw, 84px);
   text-transform: uppercase; letter-spacing: -1px;
   line-height: 0.95; margin-bottom: 26px;
@@ -54,52 +55,41 @@ nav {
 .hero-links { display: flex; gap: 10px; flex-wrap: wrap; }
 .hero-link {
   font-family: 'VT323', monospace; font-size: 17px;
-  color: #111; text-decoration: none; cursor: none;
-  border: 1.5px solid #111; border-radius: 999px;
+  color: #2a5158; text-decoration: none; cursor: none;
+  border: 1.5px solid #2a5158; border-radius: 999px;
   padding: 7px 20px; letter-spacing: 0.5px;
   background: white;
   transition: all 0.15s;
-  box-shadow: 2px 2px 0 #111;
 }
-.hero-link:hover { background: #00a8b8; border-color: #00a8b8; color: white; transform: translate(-1px,-1px); box-shadow: 3px 3px 0 #111; }
+.hero-link:hover { background: #00a8b8; border-color: #00a8b8; color: white; }
 
 .hero-photo {
-  border: 1.5px solid #111; border-radius: 18px;
-  background: white; overflow: hidden;
+  border-radius: 18px;
+  background: #edf6f7; overflow: hidden;
   aspect-ratio: 4/5;
-  box-shadow: 4px 4px 0 #c9eef2;
   display: flex; align-items: center; justify-content: center;
   flex-direction: column; gap: 10px;
   font-family: 'VT323', monospace; font-size: 15px; color: #bcdde1; letter-spacing: 1px;
 }
 .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
 
-/* MARQUEE */
-.marquee { background: #00a8b8; overflow: hidden; white-space: nowrap; padding: 10px 0; border-top: 1px solid #111; border-bottom: 1px solid #111; }
-.marquee-inner { display: inline-flex; animation: scroll 20s linear infinite; }
-@keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.marquee span { font-family: 'VT323', monospace; font-size: 20px; color: white; letter-spacing: 2px; padding: 0 26px; display: inline-flex; align-items: center; gap: 18px; }
-.marquee span::after { content: '✦'; }
 
 /* SECTIONS */
 .section { padding: 72px 48px; }
 .section + .section { border-top: 1px solid #dcebee; }
 .section-label { font-family: 'VT323', monospace; font-size: 15px; letter-spacing: 3px; color: #00a8b8; text-transform: uppercase; margin-bottom: 14px; }
 .section-label::before { content: '✦ '; }
-.section-title { font-family: 'Archivo Black', sans-serif; font-size: clamp(26px, 4vw, 42px); text-transform: uppercase; letter-spacing: -0.5px; margin-bottom: 40px; }
+.section-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: 0.5px; font-size: clamp(26px, 4vw, 42px); text-transform: uppercase; letter-spacing: -0.5px; margin-bottom: 40px; }
 
 /* SKILLS */
 .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
 .skill-card {
-  border: 1.5px solid #111; border-radius: 16px;
-  background: white; padding: 28px 24px;
-  box-shadow: 3px 3px 0 #c9eef2;
-  transition: transform 0.2s, box-shadow 0.2s;
+  border-top: 1px solid #dcebee;
+  padding: 24px 4px 0;
   cursor: none;
 }
-.skill-card:hover { transform: translate(-3px,-3px); box-shadow: 6px 6px 0 #00a8b8; }
 .skill-icon { font-size: 26px; margin-bottom: 14px; }
-.skill-title { font-family: 'Archivo Black', sans-serif; font-size: 17px; text-transform: uppercase; margin-bottom: 12px; }
+.skill-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: 0.5px; font-size: 17px; text-transform: uppercase; margin-bottom: 12px; }
 .skill-list { font-size: 13px; color: #78aeb5; line-height: 2; }
 
 /* EXPERIENCE */
@@ -110,22 +100,10 @@ nav {
 }
 .exp-item:last-child { border-bottom: none; }
 .exp-year { font-family: 'VT323', monospace; font-size: 17px; color: #a8cdd2; letter-spacing: 1px; padding-top: 4px; }
-.exp-role { font-family: 'Archivo Black', sans-serif; font-size: 19px; text-transform: uppercase; margin-bottom: 4px; }
+.exp-role { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: 0.5px; font-size: 19px; text-transform: uppercase; margin-bottom: 4px; }
 .exp-place { font-family: 'VT323', monospace; font-size: 16px; color: #00a8b8; margin-bottom: 8px; letter-spacing: 0.5px; }
 .exp-desc { font-size: 13px; color: #888; line-height: 1.7; max-width: 560px; }
 
-/* FUN FACTS */
-.facts-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-.fact-item {
-  border: 1.5px solid #111; border-radius: 16px;
-  background: white; padding: 28px 20px;
-  text-align: center; cursor: none;
-  box-shadow: 3px 3px 0 #c9eef2;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.fact-item:hover { transform: translate(-3px,-3px); box-shadow: 6px 6px 0 #00a8b8; }
-.fact-emoji { font-size: 26px; margin-bottom: 12px; }
-.fact-text { font-size: 12.5px; color: #666; line-height: 1.6; }
 
 /* CTA */
 .cta-section {
@@ -134,22 +112,21 @@ nav {
   display: flex; justify-content: space-between; align-items: center;
   flex-wrap: wrap; gap: 28px;
 }
-.cta-title { font-family: 'Archivo Black', sans-serif; font-size: clamp(28px, 5vw, 52px); text-transform: uppercase; line-height: 1; }
+.cta-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: 0.5px; font-size: clamp(28px, 5vw, 52px); text-transform: uppercase; line-height: 1; }
 .cta-title em { color: #00a8b8; font-style: normal; }
 .cta-sub { font-family: 'VT323', monospace; font-size: 17px; color: #78aeb5; margin-top: 10px; letter-spacing: 1px; }
 .cta-email {
   font-family: 'VT323', monospace; font-size: 21px;
-  color: #111; text-decoration: none; cursor: none;
-  border: 1.5px solid #111; border-radius: 999px;
+  color: #2a5158; text-decoration: none; cursor: none;
+  border: 1.5px solid #2a5158; border-radius: 999px;
   background: white;
   padding: 14px 34px; letter-spacing: 0.5px;
-  box-shadow: 3px 3px 0 #111;
   transition: all 0.15s;
 }
-.cta-email:hover { background: #00a8b8; border-color: #00a8b8; color: white; transform: translate(-2px,-2px); box-shadow: 5px 5px 0 #111; }
+.cta-email:hover { background: #00a8b8; border-color: #00a8b8; color: white; }
 
 /* CONTACT BAR */
-.contact-bar { background: #0d0d0d; padding: 32px 48px; display: flex; justify-content: center; align-items: center; gap: 24px; border-top: 1.5px solid #00a8b8; flex-wrap: wrap; }
+.contact-bar { background: #12282c; padding: 32px 48px; display: flex; justify-content: center; align-items: center; gap: 24px; border-top: 1.5px solid #00a8b8; flex-wrap: wrap; }
 .contact-bar-icon { font-size: 18px; opacity: 0.4; }
 .contact-bar-text { font-family: 'VT323', monospace; font-size: 18px; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
 .contact-bar a { font-family: 'VT323', monospace; font-size: 18px; color: rgba(255,255,255,0.7); text-decoration: none; cursor: none; transition: color 0.2s; }
@@ -160,14 +137,14 @@ nav {
 .back-top {
   position: fixed; bottom: 26px; right: 26px; z-index: 200;
   width: 50px; height: 50px;
-  border: 1.5px solid #111; border-radius: 50%;
+  border: 1.5px solid #2a5158; border-radius: 50%;
   background: white;
-  font-family: 'VT323', monospace; font-size: 22px; color: #111;
+  font-family: 'VT323', monospace; font-size: 22px; color: #2a5158;
   display: flex; align-items: center; justify-content: center;
   cursor: none;
   opacity: 0; transform: translateY(12px); pointer-events: none;
   transition: all 0.3s;
-  box-shadow: 2px 2px 0 #111;
+  box-shadow: 2px 2px 0 #2a5158;
 }
 .back-top.show { opacity: 1; transform: translateY(0); pointer-events: all; }
 .back-top:hover { background: #00a8b8; color: white; border-color: #00a8b8; }
@@ -183,7 +160,7 @@ nav {
   </a>
   <div class="nav-links">
     <a href="index.html" class="nav-link">Home</a>
-    <a href="works.html" class="nav-link">All Works</a>
+    <a href="works.html" class="nav-link">Works</a>
     <a href="about.html" class="nav-link active">About</a>
     <a href="resume.pdf" class="nav-link">Resume</a>
   </div>
@@ -212,13 +189,6 @@ nav {
     <!-- 换成你的照片：<img src="./photo.jpg" alt="Rowena"> -->
     <span>📷</span>
     <span>your photo here</span>
-  </div>
-</div>
-
-<div class="marquee">
-  <div class="marquee-inner">
-    <span>GAME DESIGN</span><span>ILLUSTRATION</span><span>CHARACTER ART</span><span>INSTALLATION</span><span>WORLD BUILDING</span>
-    <span>GAME DESIGN</span><span>ILLUSTRATION</span><span>CHARACTER ART</span><span>INSTALLATION</span><span>WORLD BUILDING</span>
   </div>
 </div>
 
@@ -279,19 +249,6 @@ nav {
   </div>
 </div>
 
-<!-- FUN -->
-<div class="section">
-  <div class="section-label">A little more</div>
-  <h2 class="section-title">Things I love</h2>
-  <div class="facts-grid">
-    <div class="fact-item"><div class="fact-emoji">☕</div><div class="fact-text">Oat latte, always</div></div>
-    <div class="fact-item"><div class="fact-emoji">🎮</div><div class="fact-text">Games with great character design</div></div>
-    <div class="fact-item"><div class="fact-emoji">🌙</div><div class="fact-text">Late night museum walks</div></div>
-    <div class="fact-item"><div class="fact-emoji">🐾</div><div class="fact-text">Drawing creatures that don't exist</div></div>
-    <!-- ↑ 改成你喜欢的东西 -->
-  </div>
-</div>
-
 <!-- CTA -->
 <div class="cta-section">
   <div>
@@ -319,7 +276,7 @@ document.addEventListener('mousemove', e => {
   cursor.style.left = e.clientX + 'px';
   cursor.style.top = e.clientY + 'px';
 });
-document.querySelectorAll('a, button, .skill-card, .fact-item').forEach(el => {
+document.querySelectorAll('a, button, .skill-card').forEach(el => {
   el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
   el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
 });
