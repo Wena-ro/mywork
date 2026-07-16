@@ -17,8 +17,8 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
   transition: width 0.2s, height 0.2s;
 }
 .cursor-dot {
-  width: 12px; height: 12px;
-  background: #ff2d9b; border-radius: 50%;
+  width: 8px; height: 8px;
+  background: #00a8b8; border-radius: 50%;
   mix-blend-mode: multiply;
   transition: transform 0.2s;
 }
@@ -27,7 +27,7 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
   transform: translate(-50%, -50%);
   font-family: 'VT323', monospace;
   font-size: 20px; letter-spacing: 1px;
-  background: #ff2d9b; color: white;
+  background: #00a8b8; color: white;
   border-radius: 999px; padding: 10px 22px;
   white-space: nowrap;
   opacity: 0; scale: 0.5;
@@ -35,7 +35,7 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
 }
 .cursor.play-mode .cursor-dot { transform: scale(0); }
 .cursor.play-mode .cursor-label { opacity: 1; scale: 1; }
-.cursor.hovering .cursor-dot { transform: scale(2.4); background: #ff2d9b44; border: 2px solid #ff2d9b; }
+.cursor.hovering .cursor-dot { transform: scale(2.4); background: #00a8b844; border: 1px solid #00a8b8; }
 
 /* ───────── HERO / TRAILER ───────── */
 .hero {
@@ -80,7 +80,7 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
   text-shadow: 0 1px 8px rgba(0,0,0,0.4);
   transition: color 0.2s;
 }
-.hero-nav a:hover { color: #ff2d9b; }
+.hero-nav a:hover { color: #00a8b8; }
 
 /* project name of current trailer */
 .trailer-info {
@@ -89,7 +89,7 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
 }
 .trailer-count {
   font-family: 'VT323', monospace; font-size: 16px;
-  letter-spacing: 3px; color: #ff2d9b;
+  letter-spacing: 3px; color: #00a8b8;
   margin-bottom: 8px;
 }
 .trailer-title {
@@ -114,7 +114,7 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
 }
 .prog-fill {
   height: 100%; width: 0%;
-  background: #ff2d9b;
+  background: #00a8b8;
   transition: width 0.2s linear;
 }
 
@@ -133,7 +133,7 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
   color: white; letter-spacing: 2px;
 }
 .scroll-hint-arrow {
-  font-size: 24px; color: #ff2d9b;
+  font-size: 24px; color: #00a8b8;
   animation: arrowBounce 1.4s ease-in-out infinite;
 }
 @keyframes arrowBounce {
@@ -143,11 +143,11 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
 
 /* ───────── MARQUEE ───────── */
 .marquee {
-  background: #ff2d9b;
+  background: #00a8b8;
   overflow: hidden; white-space: nowrap;
   padding: 12px 0;
-  border-top: 3px solid #111;
-  border-bottom: 3px solid #111;
+  border-top: 1px solid #111;
+  border-bottom: 1px solid #111;
 }
 .marquee-inner { display: inline-flex; animation: scroll 20s linear infinite; }
 @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
@@ -164,9 +164,9 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
   padding: 90px 0 100px;
   position: relative;
   background:
-    radial-gradient(#f4dbe8 1.5px, transparent 1.5px);
+    radial-gradient(#ddf0f3 1.5px, transparent 1.5px);
   background-size: 26px 26px;
-  background-color: #fff7fb;
+  background-color: #f8fdfe;
   overflow: hidden;
 }
 
@@ -180,8 +180,8 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
   text-transform: uppercase; letter-spacing: -1px;
   line-height: 0.95;
 }
-.works-title em { color: #ff2d9b; font-style: normal; }
-.works-sub { font-family: 'VT323', monospace; font-size: 17px; color: #b78aa2; letter-spacing: 2px; margin-top: 10px; }
+.works-title em { color: #00a8b8; font-style: normal; }
+.works-sub { font-family: 'VT323', monospace; font-size: 17px; color: #78aeb5; letter-spacing: 2px; margin-top: 10px; }
 
 .all-works-btn {
   font-family: 'VT323', monospace; font-size: 20px;
@@ -192,7 +192,7 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
   transition: background 0.2s, transform 0.2s;
   display: inline-flex; align-items: center; gap: 10px;
 }
-.all-works-btn:hover { background: #ff2d9b; transform: translate(-2px,-2px); }
+.all-works-btn:hover { background: #00a8b8; transform: translate(-2px,-2px); }
 
 /* carousel */
 .carousel-wrap { position: relative; }
@@ -204,35 +204,35 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
 
 .work-slide {
   flex: 0 0 min(520px, 78vw);
-  border: 3px solid #111;
+  border: 1.5px solid #111;
   border-radius: 18px;
   background: white;
   overflow: hidden;
   cursor: none;
   text-decoration: none; color: inherit;
-  box-shadow: 6px 6px 0 #ffc7e3;
+  box-shadow: 4px 4px 0 #c9eef2;
   transition: transform 0.3s, box-shadow 0.3s;
   display: block;
 }
-.work-slide:hover { transform: translate(-4px,-4px); box-shadow: 12px 12px 0 #ff2d9b; }
+.work-slide:hover { transform: translate(-4px,-4px); box-shadow: 7px 7px 0 #00a8b8; }
 
 .slide-img {
   width: 100%; aspect-ratio: 16/9;
-  background: #f2eaee;
+  background: #edf6f7;
   position: relative; overflow: hidden;
   display: flex; align-items: center; justify-content: center;
-  font-family: 'VT323', monospace; color: #d8bfcc; font-size: 15px; letter-spacing: 1px;
+  font-family: 'VT323', monospace; color: #bcdde1; font-size: 15px; letter-spacing: 1px;
 }
 .slide-img img { width: 100%; height: 100%; object-fit: cover; }
 .slide-badge {
   position: absolute; top: 14px; left: 14px;
   font-family: 'VT323', monospace; font-size: 15px;
-  background: #ff2d9b; color: white;
-  border: 2px solid #111; border-radius: 999px;
+  background: #00a8b8; color: white;
+  border: 1px solid #111; border-radius: 999px;
   padding: 3px 14px; letter-spacing: 1px;
   transform: rotate(-3deg);
 }
-.slide-body { padding: 22px 24px; border-top: 3px solid #111; }
+.slide-body { padding: 22px 24px; border-top: 1px solid #111; }
 .slide-title { font-family: 'Archivo Black', sans-serif; font-size: 24px; text-transform: uppercase; margin-bottom: 6px; }
 .slide-desc { font-size: 13px; color: #888; line-height: 1.6; }
 
@@ -243,16 +243,70 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
 }
 .car-btn {
   width: 54px; height: 54px;
-  border: 3px solid #111; border-radius: 50%;
+  border: 1.5px solid #111; border-radius: 50%;
   background: white; cursor: none;
   font-family: 'VT323', monospace; font-size: 24px;
   display: flex; align-items: center; justify-content: center;
   transition: all 0.15s;
-  box-shadow: 3px 3px 0 #111;
+  box-shadow: 2px 2px 0 #111;
 }
-.car-btn:hover { background: #ff2d9b; color: white; transform: translate(-2px,-2px); box-shadow: 5px 5px 0 #111; }
+.car-btn:hover { background: #00a8b8; color: white; transform: translate(-2px,-2px); box-shadow: 3px 3px 0 #111; }
 .car-btn:active { transform: translate(0,0); box-shadow: 1px 1px 0 #111; }
 
+
+
+/* ───────── HERO ARROWS ───────── */
+.hero-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  z-index: 10;
+  width: 52px; height: 52px;
+  border: 1.5px solid rgba(255,255,255,0.65);
+  border-radius: 50%;
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(4px);
+  color: white;
+  font-family: 'VT323', monospace; font-size: 24px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: none;
+  transition: all 0.2s;
+}
+.hero-arrow:hover { background: #00a8b8; border-color: #00a8b8; }
+.hero-arrow.left { left: 28px; }
+.hero-arrow.right { right: 28px; }
+
+/* ───────── FLOATING LOGO (appears on scroll) ───────── */
+.float-logo {
+  position: fixed; top: 18px; left: 24px;
+  z-index: 200; cursor: none;
+  opacity: 0; transform: translateY(-12px);
+  pointer-events: none;
+  transition: opacity 0.35s, transform 0.35s;
+}
+.float-logo.show { opacity: 1; transform: translateY(0); pointer-events: all; }
+.float-logo img {
+  height: 42px; width: auto;
+  transition: opacity 0.2s;
+}
+.float-logo img:hover { opacity: 0.7; }
+
+/* ───────── BACK TO TOP ───────── */
+.back-top {
+  position: fixed; bottom: 26px; right: 26px;
+  z-index: 200;
+  width: 50px; height: 50px;
+  border: 1.5px solid #111; border-radius: 50%;
+  background: white;
+  font-family: 'VT323', monospace; font-size: 22px;
+  color: #111;
+  display: flex; align-items: center; justify-content: center;
+  cursor: none;
+  opacity: 0; transform: translateY(12px);
+  pointer-events: none;
+  transition: all 0.3s;
+  box-shadow: 2px 2px 0 #111;
+}
+.back-top.show { opacity: 1; transform: translateY(0); pointer-events: all; }
+.back-top:hover { background: #00a8b8; color: white; border-color: #00a8b8; box-shadow: 2px 2px 0 #007a86; }
 
 /* ───────── YOUTUBE MODAL ───────── */
 .yt-modal {
@@ -267,7 +321,7 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
   width: min(1100px, 90vw);
   aspect-ratio: 16/9;
   background: #000;
-  border: 3px solid #ff2d9b;
+  border: 1.5px solid #00a8b8;
   border-radius: 12px;
   overflow: hidden;
   position: relative;
@@ -276,26 +330,26 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
 .yt-close {
   position: absolute; top: -52px; right: 0;
   font-family: 'VT323', monospace; font-size: 20px;
-  background: #ff2d9b; color: white;
+  background: #00a8b8; color: white;
   border: none; border-radius: 999px;
   padding: 8px 24px; cursor: none;
   letter-spacing: 1px;
   transition: background 0.2s;
 }
-.yt-close:hover { background: white; color: #ff2d9b; }
+.yt-close:hover { background: white; color: #00a8b8; }
 
 /* ───────── CONTACT BAR ───────── */
 .contact-bar {
   background: #0d0d0d;
   padding: 32px 48px;
   display: flex; justify-content: center; align-items: center; gap: 24px;
-  border-top: 3px solid #ff2d9b;
+  border-top: 1.5px solid #00a8b8;
   flex-wrap: wrap;
 }
 .contact-bar-icon { font-size: 18px; opacity: 0.4; }
 .contact-bar-text { font-family: 'VT323', monospace; font-size: 18px; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
 .contact-bar a { font-family: 'VT323', monospace; font-size: 18px; color: rgba(255,255,255,0.7); text-decoration: none; cursor: none; transition: color 0.2s; letter-spacing: 0.5px; }
-.contact-bar a:hover { color: #ff2d9b; }
+.contact-bar a:hover { color: #00a8b8; }
 .contact-bar-sep { color: rgba(255,255,255,0.2); font-size: 18px; }
 </style>
 </head>
@@ -306,6 +360,12 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
   <div class="cursor-dot"></div>
   <div class="cursor-label">PLAY TRAILER ▶</div>
 </div>
+
+<!-- FLOATING LOGO + BACK TO TOP -->
+<a href="index.html" class="float-logo" id="floatLogo">
+  <img src="./logo.png" alt="Rowena" onerror="this.style.display='none'">
+</a>
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <!-- ═══════════ HERO: TRAILER CYCLE ═══════════ -->
 <div class="hero" id="hero">
@@ -345,6 +405,11 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; cursor
     <div class="prog-bar" onclick="jumpTo(2)"><div class="prog-fill" id="p2"></div></div>
     <div class="prog-bar" onclick="jumpTo(3)"><div class="prog-fill" id="p3"></div></div>
   </div>
+
+
+  <!-- manual trailer arrows -->
+  <button class="hero-arrow left" onclick="heroPrev()">←</button>
+  <button class="hero-arrow right" onclick="heroNext()">→</button>
 
   <!-- scroll hint (appears after one full cycle) -->
   <div class="scroll-hint" id="scrollHint">
@@ -458,7 +523,7 @@ document.addEventListener('mousemove', e => {
   cursor.style.left = e.clientX + 'px';
   cursor.style.top = e.clientY + 'px';
 });
-document.querySelectorAll('a, button, .work-slide, .prog-bar').forEach(el => {
+document.querySelectorAll('a, button, .work-slide, .prog-bar, .hero-arrow, .back-top, .float-logo').forEach(el => {
   el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
   el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
 });
@@ -471,10 +536,10 @@ hero.addEventListener('mouseleave', () => cursor.classList.remove('play-mode'));
 
 /* ───── TRAILER CYCLE ───── */
 const titles = [
+  'What the Moon Brings',
   'Aftertaste',
-  'Insync',
-  'How to pet your cat',
-  'Alibi'
+  'Everything about Apple',
+  'Insync'
 ];
 // ↑ 改成你的项目名，和视频顺序对应
 
@@ -530,10 +595,10 @@ playCurrent();
 /* ───── YOUTUBE TRAILERS ───── */
 /* 填入每个项目的 YouTube 视频 ID（youtube.com/watch?v=XXXXXXX 里的 XXXXXXX）*/
 const ytIds = [
-  'rwMOgYJf9dNKDczI',   // Aftertaste
-  'YOUTUBE_ID_2',   // Insync
-  'YOUTUBE_ID_3',   // How to pet your cat
-  'YOUTUBE_ID_4'    // Alibi
+  'YOUTUBE_ID_1',   // What the Moon Brings
+  'YOUTUBE_ID_2',   // Aftertaste
+  'YOUTUBE_ID_3',   // Everything about Apple
+  'YOUTUBE_ID_4'    // Insync
 ];
 
 const ytModal = document.getElementById('ytModal');
@@ -553,6 +618,23 @@ function closeTrailer(e) {
   ytFrame.src = '';
   videos[cur].play().catch(()=>{});
 }
+
+/* hero manual arrows */
+function heroNext() { next(); }
+function heroPrev() {
+  cur = (cur - 1 + videos.length) % videos.length;
+  playCurrent();
+}
+
+/* floating logo + back to top on scroll */
+const floatLogo = document.getElementById('floatLogo');
+const backTop = document.getElementById('backTop');
+window.addEventListener('scroll', () => {
+  const past = window.scrollY > window.innerHeight * 0.7;
+  floatLogo.classList.toggle('show', past);
+  backTop.classList.toggle('show', past);
+});
+
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTrailer(); });
 
 /* ───── CAROUSEL (infinite loop) ───── */
