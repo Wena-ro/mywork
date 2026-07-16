@@ -4,12 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Project Name — Rowena Chen</title>
-<link href="https://fonts.googleapis.com/css2?family=VT323&family=DM+Sans:wght@300;400;500;700&family=Archivo+Black&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="./tab.png">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=DM+Sans:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
-  font-family: 'DM Sans', sans-serif; color: #111; cursor: none;
+  font-family: 'DM Sans', sans-serif; color: #2a5158; cursor: none;
   background: radial-gradient(#ddf0f3 1.5px, transparent 1.5px);
   background-size: 26px 26px;
   background-color: #f8fdfe;
@@ -17,8 +18,8 @@ body {
 
 /* CURSOR */
 .cursor { position: fixed; z-index: 9999; pointer-events: none; transform: translate(-50%,-50%); }
-.cursor-dot { width: 8px; height: 8px; background: #00a8b8; border-radius: 50%; mix-blend-mode: multiply; transition: transform 0.2s; }
-.cursor.hovering .cursor-dot { transform: scale(2.4); background: #00a8b844; border: 1px solid #00a8b8; }
+.cursor-dot { width: 6px; height: 6px; background: #00a8b8; border-radius: 50%; mix-blend-mode: multiply; transition: transform 0.2s; }
+.cursor.hovering .cursor-dot { transform: scale(5); background: rgba(0,168,184,0.12); border: 0.5px solid #00a8b8; backdrop-filter: blur(1px); }
 
 /* NAV */
 nav {
@@ -27,12 +28,12 @@ nav {
   padding: 16px 40px;
   background: rgba(248,253,254,0.9);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid #111;
+  border-bottom: 1px solid #2a5158;
 }
-.nav-back { font-family: 'VT323', monospace; font-size: 19px; color: #111; text-decoration: none; cursor: none; letter-spacing: 1px; transition: color 0.2s; }
+.nav-back { font-family: 'VT323', monospace; font-size: 19px; color: #2a5158; text-decoration: none; cursor: none; letter-spacing: 1px; transition: color 0.2s; }
 .nav-back:hover { color: #00a8b8; }
 .nav-links { display: flex; gap: 26px; }
-.nav-link { font-family: 'VT323', monospace; font-size: 19px; color: #111; text-decoration: none; cursor: none; letter-spacing: 1px; transition: color 0.2s; }
+.nav-link { font-family: 'VT323', monospace; font-size: 19px; color: #2a5158; text-decoration: none; cursor: none; letter-spacing: 1px; transition: color 0.2s; }
 .nav-link:hover { color: #00a8b8; }
 
 /* ───────── HERO ───────── */
@@ -47,7 +48,7 @@ nav {
 }
 .hero-tag::before { content: '✦ '; } .hero-tag::after { content: ' ✦'; }
 .hero-title {
-  font-family: 'Archivo Black', sans-serif;
+  font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: 0.5px;
   font-size: clamp(44px, 8vw, 100px);
   text-transform: uppercase; letter-spacing: -1px;
   line-height: 0.92; margin-bottom: 22px;
@@ -62,7 +63,7 @@ nav {
 }
 .meta-chip {
   font-family: 'VT323', monospace; font-size: 15px;
-  border: 1.5px solid #111; border-radius: 999px;
+  border: 1.5px solid #2a5158; border-radius: 999px;
   background: white; padding: 5px 16px;
   letter-spacing: 0.5px;
   box-shadow: 2px 2px 0 #c9eef2;
@@ -71,10 +72,11 @@ nav {
 /* key visual */
 .key-visual {
   margin: 0 48px;
-  border: 1.5px solid #111; border-radius: 18px;
+  border-radius: 18px;
   overflow: hidden;
-  box-shadow: 5px 5px 0 #c9eef2;
-  aspect-ratio: 21/9;
+  box-shadow: 0 18px 44px rgba(0,168,184,0.16);
+  aspect-ratio: 16/9;
+  max-width: 1100px; margin-left: auto; margin-right: auto;
   background: #edf6f7;
   display: flex; align-items: center; justify-content: center;
   font-family: 'VT323', monospace; color: #bcdde1; font-size: 16px; letter-spacing: 1px;
@@ -87,11 +89,11 @@ nav {
 
 .section-head {
   display: flex; align-items: baseline; gap: 18px;
-  border-bottom: 1px solid #111;
+  border-bottom: 1px solid #2a5158;
   padding-bottom: 14px; margin-bottom: 14px;
 }
 .section-num { font-family: 'VT323', monospace; font-size: 20px; color: #00a8b8; letter-spacing: 1px; }
-.section-title { font-family: 'Archivo Black', sans-serif; font-size: clamp(24px, 3.5vw, 38px); text-transform: uppercase; letter-spacing: -0.5px; }
+.section-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: 0.5px; font-size: clamp(24px, 3.5vw, 38px); text-transform: uppercase; letter-spacing: -0.5px; }
 .section-desc { font-size: 14px; color: #78aeb5; line-height: 1.75; max-width: 640px; margin-bottom: 32px; }
 
 /* image blocks — mix & match */
@@ -105,15 +107,14 @@ nav {
 .img-row.c12 { grid-template-columns: 1fr 2fr; }
 
 .img-box {
-  border: 1.5px solid #111; border-radius: 14px;
-  overflow: hidden; background: white;
+  border-radius: 14px;
+  overflow: hidden; background: #edf6f7;
   aspect-ratio: 16/9;
-  box-shadow: 3px 3px 0 #c9eef2;
   display: flex; align-items: center; justify-content: center;
   font-family: 'VT323', monospace; color: #bcdde1; font-size: 14px; letter-spacing: 1px;
   transition: transform 0.25s, box-shadow 0.25s;
 }
-.img-box:hover { transform: translate(-3px,-3px); box-shadow: 6px 6px 0 #00a8b8; }
+.img-box:hover { transform: translateY(-4px); box-shadow: 0 14px 32px rgba(0,168,184,0.18); }
 .img-box img { width: 100%; height: 100%; object-fit: cover; }
 .img-box.tall { aspect-ratio: 3/4; }
 .img-box.square { aspect-ratio: 1/1; }
@@ -128,13 +129,13 @@ nav {
 
 /* text + image split */
 .split { display: grid; grid-template-columns: 1fr 1.4fr; gap: 40px; align-items: center; margin-bottom: 16px; }
-.split-text h3 { font-family: 'Archivo Black', sans-serif; font-size: 20px; text-transform: uppercase; margin-bottom: 12px; }
+.split-text h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: 0.5px; font-size: 20px; text-transform: uppercase; margin-bottom: 12px; }
 .split-text p { font-size: 13.5px; color: #666; line-height: 1.8; }
 
 /* ───────── NEXT PROJECT ───────── */
 .next-project {
   margin-top: 90px;
-  background: #0d0d0d; color: white;
+  background: #12282c; color: white;
   padding: 64px 48px;
   display: flex; justify-content: space-between; align-items: center;
   text-decoration: none; cursor: none;
@@ -143,11 +144,11 @@ nav {
 }
 .next-project:hover { background: #00a8b8; }
 .next-label { font-family: 'VT323', monospace; font-size: 15px; letter-spacing: 3px; opacity: 0.5; margin-bottom: 10px; }
-.next-title { font-family: 'Archivo Black', sans-serif; font-size: clamp(28px, 5vw, 56px); text-transform: uppercase; line-height: 1; }
+.next-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: 0.5px; font-size: clamp(28px, 5vw, 56px); text-transform: uppercase; line-height: 1; }
 .next-arrow { font-family: 'VT323', monospace; font-size: 52px; }
 
 /* CONTACT BAR */
-.contact-bar { background: #0d0d0d; padding: 32px 48px; display: flex; justify-content: center; align-items: center; gap: 24px; border-top: 1px solid rgba(255,255,255,0.1); flex-wrap: wrap; }
+.contact-bar { background: #12282c; padding: 32px 48px; display: flex; justify-content: center; align-items: center; gap: 24px; border-top: 1px solid rgba(255,255,255,0.1); flex-wrap: wrap; }
 .contact-bar-icon { font-size: 18px; opacity: 0.4; }
 .contact-bar-text { font-family: 'VT323', monospace; font-size: 18px; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
 .contact-bar a { font-family: 'VT323', monospace; font-size: 18px; color: rgba(255,255,255,0.7); text-decoration: none; cursor: none; transition: color 0.2s; }
@@ -161,14 +162,14 @@ nav {
 .back-top {
   position: fixed; bottom: 26px; right: 26px; z-index: 200;
   width: 50px; height: 50px;
-  border: 1.5px solid #111; border-radius: 50%;
+  border: 1.5px solid #2a5158; border-radius: 50%;
   background: white;
-  font-family: 'VT323', monospace; font-size: 22px; color: #111;
+  font-family: 'VT323', monospace; font-size: 22px; color: #2a5158;
   display: flex; align-items: center; justify-content: center;
   cursor: none;
   opacity: 0; transform: translateY(12px); pointer-events: none;
   transition: all 0.3s;
-  box-shadow: 2px 2px 0 #111;
+  box-shadow: 2px 2px 0 #2a5158;
 }
 .back-top.show { opacity: 1; transform: translateY(0); pointer-events: all; }
 .back-top:hover { background: #00a8b8; color: white; border-color: #00a8b8; }
@@ -182,7 +183,7 @@ nav {
   <a id="nav-back" href="index.html" class="nav-back">← Home</a>
   <div class="nav-links">
     <a href="index.html" class="nav-link">Home</a>
-    <a href="works.html" class="nav-link">All Works</a>
+    <a href="works.html" class="nav-link">Works</a>
     <a href="about.html" class="nav-link">About</a>
     <a href="resume.pdf" class="nav-link">Resume</a>
   </div>
@@ -206,11 +207,12 @@ nav {
     <!-- ↑ 改成你的信息 -->
   </div>
 
-  <!-- 主视觉：图片 / 视频 / YouTube 都行 -->
+  <!-- ═══ 完整版 TRAILER（页面第一屏内容）═══
+       用 YouTube「不公开列出 Unlisted」视频：
+       <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
+       注意：Private 私享视频嵌入无法播放，要选 Unlisted -->
   <div class="key-visual">
-    <!-- <img src="./cover.jpg" alt=""> -->
-    <!-- 或 YouTube: <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe> -->
-    key visual — image / video / youtube
+    <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Full Trailer" allowfullscreen></iframe>
   </div>
 </div>
 
