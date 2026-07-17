@@ -1,0 +1,110 @@
+/* ═══════════════════════════════════════════════════════════
+   base.css — 全站共用样式（所有页面引入）
+   颜色全部由每个页面自己的 :root 调色板变量决定。
+
+   每页需要定义的变量（带 * 的有默认值，可不写）：
+   --accent            主强调色
+   --accent-hover *    链接 hover 色（默认 = --accent）
+   --text              正文颜色
+   --muted             次要文字颜色
+   --line              描边颜色
+   --bg                页面背景色
+   --dot               背景点阵颜色（不要点阵就设 transparent）
+   --nav-bg            导航栏半透明背景
+   --footer-bg         深色页脚背景
+   --contact-border *  页脚顶部分隔线（默认白色细线）
+   --footer-link-hover * 页脚链接 hover 色（默认 = --accent）
+   --footer-icon-color * 页脚 ✦ 颜色（默认继承）
+   --cursor-color *    光标圆点颜色（默认 = --accent）
+   --cursor-blend *    光标混合模式（默认 multiply；深色页用 screen）
+   --cursor-glow *     光标发光（默认无）
+   --cursor-hover-bg   光标 hover 大圆填充
+   --cursor-hover-border 光标 hover 大圆描边色
+   --backtop-bg *      返回顶部按钮背景（默认白）
+   --backtop-shadow *  返回顶部按钮投影色（默认 = --line）
+   --backtop-hover-color * hover 时文字色（默认白）
+   ═══════════════════════════════════════════════════════════ */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  cursor: none;
+  background: radial-gradient(var(--dot) 1.5px, transparent 1.5px);
+  background-size: 26px 26px;
+  background-color: var(--bg);
+}
+
+/* ───────── CURSOR ───────── */
+.cursor { position: fixed; z-index: 9999; pointer-events: none; transform: translate(-50%,-50%); }
+.cursor-dot {
+  width: 6px; height: 6px;
+  background: var(--cursor-color, var(--accent));
+  border-radius: 50%;
+  mix-blend-mode: var(--cursor-blend, multiply);
+  transition: transform 0.2s;
+  box-shadow: var(--cursor-glow, none);
+}
+.cursor.hovering .cursor-dot {
+  transform: scale(5);
+  background: var(--cursor-hover-bg);
+  border: 0.5px solid var(--cursor-hover-border);
+  backdrop-filter: blur(1px);
+}
+
+/* ───────── NAV ───────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 40px;
+  background: var(--nav-bg);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-logo { display: flex; align-items: center; cursor: none; }
+.nav-logo img { height: 40px; width: auto; }
+.nav-back { font-family: 'VT323', monospace; font-size: 19px; color: var(--text); text-decoration: none; cursor: none; letter-spacing: 1px; transition: color 0.2s; }
+.nav-back:hover { color: var(--accent-hover, var(--accent)); }
+.nav-links { display: flex; gap: 26px; }
+.nav-link { font-family: 'VT323', monospace; font-size: 19px; color: var(--text); text-decoration: none; cursor: none; letter-spacing: 1px; transition: color 0.2s; }
+.nav-link:hover, .nav-link.active { color: var(--accent-hover, var(--accent)); }
+
+/* ───────── CONTACT BAR ───────── */
+.contact-bar {
+  background: var(--footer-bg);
+  padding: 32px 48px;
+  display: flex; justify-content: center; align-items: center; gap: 24px;
+  border-top: var(--contact-border, 1px solid rgba(255,255,255,0.1));
+  flex-wrap: wrap;
+}
+.contact-bar-icon { font-size: 18px; opacity: 0.4; color: var(--footer-icon-color, inherit); }
+.contact-bar-text { font-family: 'VT323', monospace; font-size: 18px; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
+.contact-bar a { font-family: 'VT323', monospace; font-size: 18px; color: rgba(255,255,255,0.72); text-decoration: none; cursor: none; transition: color 0.2s; }
+.contact-bar a:hover { color: var(--footer-link-hover, var(--accent)); }
+.contact-bar-sep { color: rgba(255,255,255,0.2); font-size: 18px; }
+
+/* ───────── BACK TO TOP ───────── */
+.back-top {
+  position: fixed; bottom: 26px; right: 26px; z-index: 200;
+  width: 50px; height: 50px;
+  border: 1.5px solid var(--line); border-radius: 50%;
+  background: var(--backtop-bg, white);
+  font-family: 'VT323', monospace; font-size: 22px; color: var(--text);
+  display: flex; align-items: center; justify-content: center;
+  cursor: none;
+  opacity: 0; transform: translateY(12px); pointer-events: none;
+  transition: all 0.3s;
+  box-shadow: 2px 2px 0 var(--backtop-shadow, var(--line));
+}
+.back-top.show { opacity: 1; transform: translateY(0); pointer-events: all; }
+.back-top:hover { background: var(--accent); color: var(--backtop-hover-color, white); border-color: var(--accent); }
+
+/* ───────── MOBILE ───────── */
+@media (max-width: 760px) {
+  body { cursor: auto; }
+  .cursor { display: none; }
+  nav { padding: 14px 20px; }
+  .nav-links { gap: 14px; }
+  .nav-link { font-size: 16px; }
+}

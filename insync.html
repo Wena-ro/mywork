@@ -6,138 +6,49 @@
 <title>InSync — Rowena Chen</title>
 <link rel="icon" type="image/png" href="./tab.png">
 <link href="https://fonts.googleapis.com/css2?family=VT323&family=DM+Sans:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/project.css">
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-
-/* INSYNC PALETTE: black + blue-leaning blue-violet */
+/* ═══ INSYNC PALETTE: black + blue-leaning blue-violet ═══ */
 :root {
-  --bg: #0a0a14;
-  --panel: #12121f;
   --accent: #4f7dff;
-  --accent-bright: #85aaff;
-  --accent-deep: #2b4fd6;
+  --accent-hover: #85aaff;
   --accent-soft: rgba(79,125,255,0.16);
+  --panel: #12121f;
   --text: #e8eaf4;
   --muted: #8a90a8;
   --line: rgba(133,170,255,0.35);
+  --bg: #0a0a14;
+  --dot: rgba(79,125,255,0.12);
+  --nav-bg: rgba(10,10,20,0.88);
+  --footer-bg: #060610;
+  --footer-hover-text: #0a0a14;
+  --footer-link-hover: var(--accent-hover);
+  --footer-icon-color: var(--accent-hover);
+  --contact-border: 1px solid rgba(255,255,255,0.08);
+  --cursor-color: var(--accent-hover);
+  --cursor-blend: screen;
+  --cursor-glow: 0 0 12px rgba(79,125,255,0.8);
+  --cursor-hover-bg: rgba(79,125,255,0.15);
+  --cursor-hover-border: var(--accent-hover);
+  --title-glow: 0 0 40px rgba(79,125,255,0.4);
+  --chip-bg: var(--panel);
+  --frame-shadow: 0 0 55px rgba(79,125,255,0.28);
+  --frame-bg: var(--panel);
+  /* flat editorial：页面内图片不做卡片，不做 hover 特效 */
+  --box-border: 1px solid var(--line);
+  --box-radius: 0;
+  --box-bg: var(--panel);
+  --box-shadow: none;
+  --box-hover-transform: none;
+  --box-hover-shadow: none;
+  --box-placeholder: #47435f;
+  --backtop-bg: var(--panel);
+  --backtop-shadow: var(--accent-soft);
+  --backtop-hover-color: #0a0a14;
 }
 
-body {
-  font-family: 'DM Sans', sans-serif;
-  color: var(--text);
-  cursor: none;
-  background: radial-gradient(rgba(79,125,255,0.12) 1.5px, transparent 1.5px);
-  background-size: 26px 26px;
-  background-color: var(--bg);
-}
-
-/* CURSOR */
-.cursor { position: fixed; z-index: 9999; pointer-events: none; transform: translate(-50%,-50%); }
-.cursor-dot { width: 8px; height: 8px; background: var(--accent-bright); border-radius: 50%; mix-blend-mode: screen; transition: transform 0.2s; box-shadow: 0 0 12px rgba(79,125,255,0.8); }
-.cursor.hovering .cursor-dot { transform: scale(2.4); background: rgba(79,125,255,0.3); border: 1px solid var(--accent-bright); }
-
-/* NAV */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 16px 40px;
-  background: rgba(10,10,20,0.88);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--line);
-}
-.nav-back { font-family: 'VT323', monospace; font-size: 19px; color: var(--text); text-decoration: none; cursor: none; letter-spacing: 1px; transition: color 0.2s; }
-.nav-back:hover { color: var(--accent-bright); }
-.nav-links { display: flex; gap: 26px; }
-.nav-link { font-family: 'VT323', monospace; font-size: 19px; color: var(--text); text-decoration: none; cursor: none; letter-spacing: 1px; transition: color 0.2s; }
-.nav-link:hover { color: var(--accent-bright); }
-
-/* HERO */
-.hero { padding: 130px 48px 0; text-align: center; }
-.hero-tag {
-  font-family: 'VT323', monospace; font-size: 16px;
-  letter-spacing: 3px; color: var(--accent-bright);
-  margin-bottom: 18px;
-}
-.hero-tag::before { content: '✦ '; }
-.hero-tag::after { content: ' ✦'; }
-.hero-title {
-  font-family: 'Space Grotesk', sans-serif; font-weight: 700;
-  font-size: clamp(44px, 8vw, 100px);
-  text-transform: uppercase; letter-spacing: -1px;
-  line-height: 0.92; margin-bottom: 22px;
-  color: var(--text);
-  text-shadow: 0 0 40px rgba(79,125,255,0.4);
-}
-.hero-desc {
-  font-size: 15px; color: var(--muted); line-height: 1.8;
-  max-width: 620px; margin: 0 auto 28px;
-}
-.hero-meta {
-  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
-  margin-bottom: 48px;
-}
-.meta-chip {
-  font-family: 'VT323', monospace; font-size: 15px;
-  border: 1.5px solid var(--line); border-radius: 999px;
-  background: var(--panel); padding: 5px 16px;
-  letter-spacing: 0.5px; color: var(--text);
-  box-shadow: 2px 2px 0 var(--accent-soft);
-}
-
-/* KEY VISUAL — trailer */
-.key-visual {
-  margin: 0 auto;
-  max-width: 1100px;
-  border: 1.5px solid var(--line); border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 0 55px rgba(79,125,255,0.28);
-  aspect-ratio: 16/9;
-  background: var(--panel);
-  display: flex; align-items: center; justify-content: center;
-}
-.key-visual img, .key-visual video, .key-visual iframe { width: 100%; height: 100%; object-fit: cover; border: none; display: block; }
-
-/* SECTIONS */
-.section { padding: 80px 48px 0; max-width: 1200px; margin: 0 auto; }
-.section:last-of-type { padding-bottom: 90px; }
-.section-head {
-  display: flex; align-items: baseline; gap: 18px;
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 14px; margin-bottom: 14px;
-}
-.section-num { font-family: 'VT323', monospace; font-size: 20px; color: var(--accent-bright); letter-spacing: 1px; }
-.section-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(24px, 3.5vw, 38px); text-transform: uppercase; letter-spacing: -0.5px; }
-.section-desc { font-size: 14px; color: var(--muted); line-height: 1.75; max-width: 720px; margin-bottom: 32px; }
-
-/* MEDIA BLOCKS */
-.img-row { display: grid; gap: 16px; margin-bottom: 16px; }
-.img-row.c1 { grid-template-columns: 1fr; }
-.img-row.c2 { grid-template-columns: 1fr 1fr; }
-.img-row.c3 { grid-template-columns: repeat(3, 1fr); }
-.img-row.c21 { grid-template-columns: 2fr 1fr; }
-.img-row.c12 { grid-template-columns: 1fr 2fr; }
-/* flat editorial style — no rounded cards, no shadows inside the page */
-.img-box {
-  border: 1px solid var(--line);
-  overflow: hidden; background: var(--panel);
-  aspect-ratio: 16/9;
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'VT323', monospace; color: #47435f; font-size: 14px; letter-spacing: 1px;
-  transition: border-color 0.4s ease;
-}
-.img-box:hover { border-color: var(--accent-bright); }
-.img-box img, .img-box video, .img-box iframe { width: 100%; height: 100%; object-fit: cover; border: none; display: block; }
-.img-box.contain img { object-fit: contain; padding: 18px; background: var(--panel); }
-.img-box.tall { aspect-ratio: 3/4; }
-.img-box.wide { aspect-ratio: 21/9; }
-.img-caption {
-  font-family: 'VT323', monospace; font-size: 14px;
-  color: var(--muted); letter-spacing: 1px;
-  text-align: center; margin: -6px 0 16px;
-}
-
-/* ═══════ NEW: EXPERIENCE PRINCIPLES ═══════ */
+/* ═══════ EXPERIENCE PRINCIPLES ═══════ */
 .principles {
   display: grid; grid-template-columns: repeat(3, 1fr);
   gap: 48px; padding-top: 12px;
@@ -150,16 +61,16 @@ nav {
 .principle:nth-child(2) { transition-delay: 0.15s; }
 .principle:nth-child(3) { transition-delay: 0.3s; }
 .principle.is-visible { opacity: 1; transform: none; }
-.principle-num { font-family: 'VT323', monospace; font-size: 18px; letter-spacing: 2px; color: var(--accent-bright); }
+.principle-num { font-family: 'VT323', monospace; font-size: 18px; letter-spacing: 2px; color: var(--accent-hover); }
 .principle h3 {
   font-family: 'Space Grotesk', sans-serif; font-weight: 700;
   font-size: 20px; text-transform: uppercase; letter-spacing: 0.5px;
-  color: var(--accent-bright); margin: 10px 0 14px;
+  color: var(--accent-hover); margin: 10px 0 14px;
 }
 .principle-line { height: 1px; background: var(--accent); opacity: 0.5; margin-bottom: 14px; }
 .principle p { font-size: 14px; color: var(--text); line-height: 1.8; }
 
-/* ═══════ NEW: OMU CREATURE DESIGN (scroll narrative) ═══════ */
+/* ═══════ OMU CREATURE DESIGN (scroll narrative) ═══════ */
 .omu-scroll { height: 300vh; }
 .omu-sticky {
   position: sticky; top: 0; height: 100vh;
@@ -168,7 +79,7 @@ nav {
   padding: 90px 0 40px;
 }
 .omu-text { text-align: left; }
-.omu-kicker { font-family: 'VT323', monospace; font-size: 16px; letter-spacing: 3px; color: var(--accent-bright); margin-bottom: 10px; }
+.omu-kicker { font-family: 'VT323', monospace; font-size: 16px; letter-spacing: 3px; color: var(--accent-hover); margin-bottom: 10px; }
 .omu-title {
   font-family: 'Space Grotesk', sans-serif; font-weight: 700;
   font-size: clamp(32px, 4vw, 54px); text-transform: uppercase;
@@ -177,7 +88,7 @@ nav {
 .omu-stage-text { display: none; }
 .omu-stage-text.is-active { display: block; animation: omuFade 0.8s ease; }
 @keyframes omuFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-.omu-stage-text h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 17px; letter-spacing: 0.5px; color: var(--accent-bright); margin-bottom: 10px; }
+.omu-stage-text h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 17px; letter-spacing: 0.5px; color: var(--accent-hover); margin-bottom: 10px; }
 .omu-stage-text p { font-size: 14px; color: var(--text); line-height: 1.8; max-width: 340px; }
 .omu-progress { display: flex; gap: 22px; margin-top: 32px; }
 .omu-progress span {
@@ -187,7 +98,7 @@ nav {
   min-width: 74px;
   transition: color 0.5s ease, border-color 0.5s ease;
 }
-.omu-progress span.is-active { color: var(--accent-bright); border-top-color: var(--accent); }
+.omu-progress span.is-active { color: var(--accent-hover); border-top-color: var(--accent); }
 .omu-visuals { position: relative; height: min(78vh, 640px); }
 .omu-visuals figure {
   position: absolute; inset: 0; margin: 0;
@@ -211,7 +122,7 @@ nav {
   .omu-visuals figure { position: static; opacity: 1; transform: none; margin-bottom: 36px; }
   .omu-visuals img { height: auto; max-height: 70vh; }
   .omu-visuals figcaption { display: block; font-size: 13.5px; color: var(--muted); line-height: 1.7; margin-top: 10px; }
-  .omu-visuals figcaption strong { display: block; font-family: 'VT323', monospace; font-weight: 400; font-size: 15px; letter-spacing: 1.5px; color: var(--accent-bright); margin-bottom: 4px; }
+  .omu-visuals figcaption strong { display: block; font-family: 'VT323', monospace; font-weight: 400; font-size: 15px; letter-spacing: 1.5px; color: var(--accent-hover); margin-bottom: 4px; }
 }
 
 /* stacked fallback: reduced motion — show all stages statically, no scroll animation */
@@ -225,58 +136,7 @@ nav {
   .omu-visuals figure { position: static; opacity: 1; transform: none; transition: none; margin-bottom: 36px; }
   .omu-visuals img { height: auto; max-height: 70vh; }
   .omu-visuals figcaption { display: block; font-size: 13.5px; color: var(--muted); line-height: 1.7; margin-top: 10px; }
-  .omu-visuals figcaption strong { display: block; font-family: 'VT323', monospace; font-weight: 400; font-size: 15px; letter-spacing: 1.5px; color: var(--accent-bright); margin-bottom: 4px; }
-}
-
-/* NEXT PROJECT */
-.next-project {
-  margin-top: 90px;
-  background: #060610; color: var(--text);
-  padding: 64px 48px;
-  display: flex; justify-content: space-between; align-items: center;
-  text-decoration: none; cursor: none;
-  border-top: 1.5px solid var(--accent);
-  transition: background 0.25s, color 0.25s;
-}
-.next-project:hover { background: var(--accent); color: #0a0a14; }
-.next-label { font-family: 'VT323', monospace; font-size: 15px; letter-spacing: 3px; opacity: 0.55; margin-bottom: 10px; }
-.next-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(28px, 5vw, 56px); text-transform: uppercase; line-height: 1; }
-.next-arrow { font-family: 'VT323', monospace; font-size: 52px; }
-
-/* CONTACT */
-.contact-bar { background: #060610; padding: 32px 48px; display: flex; justify-content: center; align-items: center; gap: 24px; border-top: 1px solid rgba(255,255,255,0.08); flex-wrap: wrap; }
-.contact-bar-icon { font-size: 18px; opacity: 0.5; color: var(--accent-bright); }
-.contact-bar-text { font-family: 'VT323', monospace; font-size: 18px; color: rgba(232,230,244,0.5); letter-spacing: 1px; }
-.contact-bar a { font-family: 'VT323', monospace; font-size: 18px; color: rgba(232,230,244,0.72); text-decoration: none; cursor: none; transition: color 0.2s; }
-.contact-bar a:hover { color: var(--accent-bright); }
-.contact-bar-sep { color: rgba(255,255,255,0.2); font-size: 18px; }
-
-/* BACK TO TOP */
-.back-top {
-  position: fixed; bottom: 26px; right: 26px; z-index: 200;
-  width: 50px; height: 50px;
-  border: 1.5px solid var(--line); border-radius: 50%;
-  background: var(--panel);
-  font-family: 'VT323', monospace; font-size: 22px; color: var(--text);
-  display: flex; align-items: center; justify-content: center;
-  cursor: none;
-  opacity: 0; transform: translateY(12px); pointer-events: none;
-  transition: all 0.3s;
-  box-shadow: 2px 2px 0 var(--accent-soft);
-}
-.back-top.show { opacity: 1; transform: translateY(0); pointer-events: all; }
-.back-top:hover { background: var(--accent); color: #0a0a14; border-color: var(--accent); }
-
-@media (max-width: 760px) {
-  body { cursor: auto; }
-  .cursor { display: none; }
-  nav { padding: 14px 20px; }
-  .nav-links { gap: 14px; }
-  .nav-link { font-size: 16px; }
-  .hero { padding: 110px 20px 0; }
-  .section { padding: 64px 20px 0; }
-  .img-row.c2, .img-row.c3, .img-row.c21, .img-row.c12 { grid-template-columns: 1fr; }
-  .next-project { padding: 48px 24px; }
+  .omu-visuals figcaption strong { display: block; font-family: 'VT323', monospace; font-weight: 400; font-size: 15px; letter-spacing: 1.5px; color: var(--accent-hover); margin-bottom: 4px; }
 }
 </style>
 </head>
@@ -331,7 +191,7 @@ nav {
   </div>
 </div>
 
-<!-- ═══ NEW: 02 EXPERIENCE PRINCIPLES ═══ -->
+<!-- 02 EXPERIENCE PRINCIPLES -->
 <div class="section" id="principles">
   <div class="section-head">
     <span class="section-num">02</span>
@@ -380,7 +240,7 @@ nav {
   </div>
 </div>
 
-<!-- ═══ NEW: 04 OMU CREATURE DESIGN (replaces "Omu, a Living Presence") ═══ -->
+<!-- 04 OMU CREATURE DESIGN -->
 <div class="section" id="creature-design">
   <div class="section-head">
     <span class="section-num">04</span>
@@ -473,23 +333,11 @@ nav {
 
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
+<script src="js/common.js"></script>
 <script>
-const cursor = document.getElementById('cursor');
-document.addEventListener('mousemove', e => {
-  cursor.style.left = e.clientX + 'px';
-  cursor.style.top = e.clientY + 'px';
-});
-document.querySelectorAll('a, button, .img-box, .meta-chip').forEach(el => {
-  el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
-  el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
-});
+/* ═══ InSync 页面专属脚本 ═══ */
 
-const backTop = document.getElementById('backTop');
-window.addEventListener('scroll', () => {
-  backTop.classList.toggle('show', window.scrollY > 500);
-});
-
-/* ═══ NEW: Experience Principles — staggered reveal on enter ═══ */
+/* Experience Principles — staggered reveal on enter */
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const principleEls = document.querySelectorAll('.principle');
 if ('IntersectionObserver' in window && !reduceMotion.matches) {
@@ -506,7 +354,7 @@ if ('IntersectionObserver' in window && !reduceMotion.matches) {
   principleEls.forEach(el => el.classList.add('is-visible'));
 }
 
-/* ═══ NEW: Omu creature design — scroll-driven stage switching ═══ */
+/* Omu creature design — scroll-driven stage switching */
 (() => {
   const scrollWrap = document.getElementById('omuScroll');
   if (!scrollWrap) return;

@@ -6,10 +6,23 @@
 <title>Rowena Chen — Portfolio</title>
 <link rel="icon" type="image/png" href="./tab.png">
 <link href="https://fonts.googleapis.com/css2?family=VT323&family=DM+Sans:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { font-family: 'DM Sans', sans-serif; background: #fff; color: #2a5158; cursor: none; overflow-x: hidden; }
+/* ═══ SITE PALETTE: teal（首页白底、无点阵）═══ */
+:root {
+  --accent: #00a8b8;
+  --text: #2a5158;
+  --muted: #78aeb5;
+  --line: #2a5158;
+  --bg: #fff;
+  --dot: transparent;
+  --nav-bg: rgba(248,253,254,0.92);
+  --footer-bg: #12282c;
+  --contact-border: 1.5px solid var(--accent);
+  --cursor-hover-bg: rgba(0,168,184,0.12);
+  --cursor-hover-border: var(--accent);
+}
+body { overflow-x: hidden; }
 
 
 /* ───────── SITE LOADING SCREEN ───────── */
@@ -74,18 +87,7 @@ body.is-loading { overflow: hidden; }
   .site-loader, .site-loader-bar { transition: none; }
 }
 
-/* ───────── CURSOR ───────── */
-.cursor {
-  position: fixed; z-index: 9999; pointer-events: none;
-  transform: translate(-50%, -50%);
-  transition: width 0.2s, height 0.2s;
-}
-.cursor-dot {
-  width: 6px; height: 6px;
-  background: #00a8b8; border-radius: 50%;
-  mix-blend-mode: multiply;
-  transition: transform 0.2s;
-}
+/* ───────── CURSOR：基础样式在 base.css，这里只有首页专属的 label ───────── */
 .cursor-label {
   position: absolute; top: 50%; left: 50%;
   transform: translate(-50%, -50%);
@@ -99,7 +101,6 @@ body.is-loading { overflow: hidden; }
 }
 .cursor.play-mode .cursor-dot { transform: scale(0); }
 .cursor.play-mode .cursor-label { opacity: 1; scale: 1; }
-.cursor.hovering .cursor-dot { transform: scale(5); background: rgba(0,168,184,0.12); border: 0.5px solid #00a8b8; backdrop-filter: blur(1px); }
 
 /* ───────── HERO / TRAILER ───────── */
 .hero {
@@ -353,38 +354,7 @@ body.is-loading { overflow: hidden; }
 }
 .float-logo img:hover { opacity: 0.7; }
 
-/* ───────── BACK TO TOP ───────── */
-.back-top {
-  position: fixed; bottom: 26px; right: 26px;
-  z-index: 200;
-  width: 50px; height: 50px;
-  border: 1.5px solid #2a5158; border-radius: 50%;
-  background: white;
-  font-family: 'VT323', monospace; font-size: 22px;
-  color: #2a5158;
-  display: flex; align-items: center; justify-content: center;
-  cursor: none;
-  opacity: 0; transform: translateY(12px);
-  pointer-events: none;
-  transition: all 0.3s;
-  box-shadow: 2px 2px 0 #2a5158;
-}
-.back-top.show { opacity: 1; transform: translateY(0); pointer-events: all; }
-.back-top:hover { background: #00a8b8; color: white; border-color: #00a8b8; box-shadow: 2px 2px 0 #007a86; }
-
-/* ───────── CONTACT BAR ───────── */
-.contact-bar {
-  background: #12282c;
-  padding: 32px 48px;
-  display: flex; justify-content: center; align-items: center; gap: 24px;
-  border-top: 1.5px solid #00a8b8;
-  flex-wrap: wrap;
-}
-.contact-bar-icon { font-size: 18px; opacity: 0.4; }
-.contact-bar-text { font-family: 'VT323', monospace; font-size: 18px; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
-.contact-bar a { font-family: 'VT323', monospace; font-size: 18px; color: rgba(255,255,255,0.7); text-decoration: none; cursor: none; transition: color 0.2s; letter-spacing: 0.5px; }
-.contact-bar a:hover { color: #00a8b8; }
-.contact-bar-sep { color: rgba(255,255,255,0.2); font-size: 18px; }
+/* back-top / contact-bar 样式在 base.css */
 </style>
 </head>
 <body class="is-loading">
@@ -495,7 +465,7 @@ body.is-loading { overflow: hidden; }
            ============================== -->
       <a href="aftertaste.html" class="work-slide">
         <div class="slide-img">
-          <img src="./1.png" alt="">
+          <img src="img/aftertaste/aftertaste_banner.png" alt="Aftertaste banner">
           <span class="slide-badge">GAME</span>
         </div>
         <div class="slide-body">
@@ -506,7 +476,7 @@ body.is-loading { overflow: hidden; }
 
       <a href="insync.html" class="work-slide">
         <div class="slide-img">
-          <img src="./2.png" alt="">
+          <img src="img/insync/insync_banner.png" alt="InSync banner">
           <span class="slide-badge">INSTALLATION</span>
         </div>
         <div class="slide-body">
@@ -528,7 +498,7 @@ body.is-loading { overflow: hidden; }
 
       <a href="alibi.html" class="work-slide">
         <div class="slide-img">
-          <img src="./4.png" alt="">
+          <img src="img/alibi/alibi_banner.png" alt="Alibi banner">
           <span class="slide-badge">GAME</span>
         </div>
         <div class="slide-body">
@@ -567,6 +537,13 @@ body.is-loading { overflow: hidden; }
   const percent = document.getElementById('siteLoaderPercent');
   const status = document.getElementById('siteLoaderStatus');
   if (!loader || !bar || !percent) return;
+
+  /* 同一会话内重复进入首页时跳过 loading（媒体已在缓存里） */
+  if (sessionStorage.getItem('siteLoaderShown')) {
+    loader.remove();
+    document.body.classList.remove('is-loading');
+    return;
+  }
 
   const startedAt = performance.now();
   const minimumVisibleTime = 1050;
@@ -620,6 +597,7 @@ body.is-loading { overflow: hidden; }
     const elapsed = performance.now() - startedAt;
     const remaining = Math.max(0, minimumVisibleTime - elapsed);
     setTimeout(() => {
+      sessionStorage.setItem('siteLoaderShown', '1');
       loader.classList.add('is-complete');
       document.body.classList.remove('is-loading');
       setTimeout(() => loader.remove(), 700);
@@ -751,17 +729,21 @@ function goToSlide(i, animated = true) {
   carousel.style.transform = 'translateX(' + (-slideIdx * cardWidth()) + 'px)';
 }
 
-// After transition ends, silently jump back if we've gone past originals
-carousel.addEventListener('transitionend', () => {
-  if (slideIdx >= realCount) {
+// Wrap BEFORE moving instead of on transitionend — that event never fires
+// in a background tab, which let the index run off the end of the clones.
+function step(dir) {
+  if (dir > 0 && slideIdx >= realCount) {
     goToSlide(slideIdx - realCount, false);
-  } else if (slideIdx < 0) {
+    carousel.offsetHeight; // force reflow so the jump isn't animated
+  } else if (dir < 0 && slideIdx <= 0) {
     goToSlide(slideIdx + realCount, false);
+    carousel.offsetHeight;
   }
-});
+  goToSlide(slideIdx + dir);
+}
 
 function slide(dir) {
-  goToSlide(slideIdx + dir);
+  step(dir);
   resetAuto();
 }
 
@@ -771,12 +753,20 @@ document.querySelectorAll('.work-slide').forEach(el => {
   el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
 });
 
-/* auto-advance every 4s */
-let autoTimer = setInterval(() => goToSlide(slideIdx + 1), 4000);
+/* auto-advance every 4s; pause while the tab is hidden */
+let autoTimer = setInterval(() => step(1), 4000);
 function resetAuto() {
   clearInterval(autoTimer);
-  autoTimer = setInterval(() => goToSlide(slideIdx + 1), 4000);
+  autoTimer = setInterval(() => step(1), 4000);
 }
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    clearInterval(autoTimer);
+  } else {
+    goToSlide(((slideIdx % realCount) + realCount) % realCount, false);
+    resetAuto();
+  }
+});
 
 // Init position
 goToSlide(0, false);
