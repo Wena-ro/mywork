@@ -11,6 +11,69 @@
 html { scroll-behavior: smooth; }
 body { font-family: 'DM Sans', sans-serif; background: #fff; color: #2a5158; cursor: none; overflow-x: hidden; }
 
+
+/* ───────── SITE LOADING SCREEN ───────── */
+body.is-loading { overflow: hidden; }
+.site-loader {
+  position: fixed; inset: 0; z-index: 12000;
+  display: grid; place-items: center;
+  background:
+    radial-gradient(rgba(201,238,242,0.16) 1.2px, transparent 1.2px),
+    #12282c;
+  background-size: 24px 24px;
+  color: white;
+  transition: opacity 0.65s ease, visibility 0.65s ease;
+}
+.site-loader.is-complete { opacity: 0; visibility: hidden; pointer-events: none; }
+.site-loader::before {
+  content: ''; position: absolute; inset: 16px;
+  border: 1px solid rgba(201,238,242,0.22); pointer-events: none;
+}
+.site-loader-inner { width: min(620px, calc(100vw - 48px)); }
+.site-loader-kicker {
+  font-family: 'VT323', monospace;
+  font-size: 17px; letter-spacing: 3px;
+  color: #78d4dd; margin-bottom: 10px;
+}
+.site-loader-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700; text-transform: uppercase;
+  font-size: clamp(38px, 8vw, 78px);
+  line-height: 0.9; letter-spacing: -2px;
+  margin-bottom: 28px;
+}
+.site-loader-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 18px; margin-bottom: 9px;
+  font-family: 'VT323', monospace;
+  font-size: 16px; letter-spacing: 1.5px;
+  color: rgba(255,255,255,0.58);
+}
+.site-loader-percent { color: white; min-width: 48px; text-align: right; }
+.site-loader-track {
+  position: relative; height: 12px;
+  border: 1px solid rgba(255,255,255,0.72);
+  padding: 2px; overflow: hidden;
+}
+.site-loader-bar {
+  height: 100%; width: 0%; background: #00a8b8;
+  box-shadow: 0 0 18px rgba(0,168,184,0.28);
+  transition: width 0.18s ease-out;
+}
+.site-loader-note {
+  margin-top: 10px;
+  font-family: 'VT323', monospace;
+  font-size: 14px; letter-spacing: 1.5px;
+  color: rgba(255,255,255,0.36);
+}
+@media (max-width: 640px) {
+  .site-loader::before { inset: 10px; }
+  .site-loader-inner { width: calc(100vw - 40px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-loader, .site-loader-bar { transition: none; }
+}
+
 /* ───────── CURSOR ───────── */
 .cursor {
   position: fixed; z-index: 9999; pointer-events: none;
@@ -324,7 +387,24 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #2a5158; cur
 .contact-bar-sep { color: rgba(255,255,255,0.2); font-size: 18px; }
 </style>
 </head>
-<body>
+<body class="is-loading">
+
+<!-- SITE LOADER -->
+<div class="site-loader" id="siteLoader" role="status" aria-live="polite" aria-label="Loading portfolio">
+  <div class="site-loader-inner">
+    <div class="site-loader-kicker">ROWENA CHEN / PORTFOLIO</div>
+    <div class="site-loader-title">Loading<br>Selected Works</div>
+    <div class="site-loader-row">
+      <span id="siteLoaderStatus">PREPARING MEDIA</span>
+      <span class="site-loader-percent" id="siteLoaderPercent">00%</span>
+    </div>
+    <div class="site-loader-track" aria-hidden="true">
+      <div class="site-loader-bar" id="siteLoaderBar"></div>
+    </div>
+    <div class="site-loader-note">VIDEO / IMAGE / TYPE</div>
+  </div>
+</div>
+
 
 <!-- CURSOR -->
 <div class="cursor" id="cursor">
@@ -346,10 +426,10 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #2a5158; cur
        文件命名 trailer1.mp4 ~ trailer4.mp4 传到 repo
        poster 是视频加载前显示的封面图
        ============================== -->
-  <video class="trailer-video active" id="v0" src="./trailer1.mp4" poster="./1.png" muted playsinline></video>
-  <video class="trailer-video" id="v1" src="./trailer2.mp4" poster="./2.png" muted playsinline></video>
-  <video class="trailer-video" id="v2" src="./trailer3.mp4" poster="./3.png" muted playsinline></video>
-  <video class="trailer-video" id="v3" src="./trailer4.mp4" poster="./4.png" muted playsinline></video>
+  <video class="trailer-video active" id="v0" src="./trailer1.mp4" poster="./1.png" muted playsinline preload="auto"></video>
+  <video class="trailer-video" id="v1" src="./trailer2.mp4" poster="./2.png" muted playsinline preload="auto"></video>
+  <video class="trailer-video" id="v2" src="./trailer3.mp4" poster="./3.png" muted playsinline preload="auto"></video>
+  <video class="trailer-video" id="v3" src="./trailer4.mp4" poster="./4.png" muted playsinline preload="auto"></video>
 
   <!-- top bar -->
   <div class="hero-top">
@@ -479,6 +559,74 @@ body { font-family: 'DM Sans', sans-serif; background: #fff; color: #2a5158; cur
 </div>
 
 <script>
+
+/* ───── SITE LOADER: waits for page images, fonts and playable video frames ───── */
+(() => {
+  const loader = document.getElementById('siteLoader');
+  const bar = document.getElementById('siteLoaderBar');
+  const percent = document.getElementById('siteLoaderPercent');
+  const status = document.getElementById('siteLoaderStatus');
+  if (!loader || !bar || !percent) return;
+
+  const startedAt = performance.now();
+  const minimumVisibleTime = 1050;
+  const maximumWaitTime = 12000;
+  const tasks = [];
+
+  document.querySelectorAll('img').forEach(img => {
+    tasks.push(new Promise(resolve => {
+      if (img.complete) return resolve();
+      img.addEventListener('load', resolve, { once: true });
+      img.addEventListener('error', resolve, { once: true });
+    }));
+  });
+
+  document.querySelectorAll('video').forEach(video => {
+    tasks.push(new Promise(resolve => {
+      if (video.readyState >= 3) return resolve();
+      video.addEventListener('canplay', resolve, { once: true });
+      video.addEventListener('error', resolve, { once: true });
+      video.preload = 'auto';
+      video.load();
+    }));
+  });
+
+  if (document.fonts && document.fonts.ready) {
+    tasks.push(document.fonts.ready.catch(() => {}));
+  }
+
+  const total = Math.max(tasks.length, 1);
+  let finished = 0;
+
+  const paint = value => {
+    const safeValue = Math.min(100, Math.max(0, Math.round(value)));
+    bar.style.width = safeValue + '%';
+    percent.textContent = String(safeValue).padStart(2, '0') + '%';
+    if (safeValue >= 72) status.textContent = 'CUEING TRAILERS';
+    if (safeValue >= 96) status.textContent = 'READY';
+  };
+
+  paint(0);
+  tasks.forEach(task => Promise.resolve(task).finally(() => {
+    finished += 1;
+    paint((finished / total) * 100);
+  }));
+
+  const ready = Promise.allSettled(tasks);
+  const timeout = new Promise(resolve => setTimeout(resolve, maximumWaitTime));
+
+  Promise.race([ready, timeout]).then(() => {
+    paint(100);
+    const elapsed = performance.now() - startedAt;
+    const remaining = Math.max(0, minimumVisibleTime - elapsed);
+    setTimeout(() => {
+      loader.classList.add('is-complete');
+      document.body.classList.remove('is-loading');
+      setTimeout(() => loader.remove(), 700);
+    }, remaining + 260);
+  });
+})();
+
 /* ───── CURSOR ───── */
 const cursor = document.getElementById('cursor');
 const hero = document.getElementById('hero');

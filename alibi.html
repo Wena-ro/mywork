@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Alibi — Rowena Chen</title>
 <link href="https://fonts.googleapis.com/css2?family=VT323&family=DM+Sans:wght@300;400;500;700&family=Archivo+Black&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/alibi/alibi-logo.png">
+<link rel="preload" as="image" href="img/alibi/alibi-cover.jpg">
+<link rel="preload" as="image" href="img/alibi/alibi-trailer-poster.jpg">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -26,6 +29,134 @@ body {
   --muted: #6f6854;
   --line: #111;
 }
+
+/* ARCHIVE SEARCH LOADING SCREEN */
+body.is-loading { overflow: hidden; }
+.archive-loader {
+  position: fixed; inset: 0; z-index: 12000;
+  display: grid; place-items: center;
+  background:
+    linear-gradient(rgba(199,166,0,0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(199,166,0,0.045) 1px, transparent 1px),
+    #0d0d0d;
+  background-size: 34px 34px;
+  color: #faf9f4;
+  transition: opacity 0.62s ease, visibility 0.62s ease;
+}
+.archive-loader.is-complete { opacity: 0; visibility: hidden; pointer-events: none; }
+.archive-loader::before {
+  content: ''; position: absolute; inset: 14px;
+  border: 1px solid rgba(234,223,138,0.22); pointer-events: none;
+}
+.archive-loader-inner {
+  width: min(760px, calc(100vw - 36px));
+  display: flex; flex-direction: column; align-items: center;
+}
+.archive-kicker {
+  font-family: 'VT323', monospace; font-size: 16px;
+  color: rgba(250,249,244,0.48); letter-spacing: 3px;
+  margin-bottom: 26px;
+}
+.archive-stage {
+  position: relative;
+  width: min(470px, 80vw); height: 300px;
+  perspective: 1100px;
+}
+.archive-file {
+  --x: 0px; --y: 0px; --r: 0deg; --s: 1;
+  position: absolute; left: 50%; top: 50%;
+  width: min(330px, 67vw); height: 205px;
+  transform: translate(-50%, -50%) translate(var(--x), var(--y)) rotate(var(--r)) scale(var(--s));
+  transform-origin: 50% 100%;
+  transition: transform 0.48s cubic-bezier(0.22,1,0.36,1), opacity 0.48s ease, filter 0.48s ease;
+  filter: brightness(1); opacity: 1;
+}
+.archive-file::before {
+  content: ''; position: absolute; left: 8px; top: -20px;
+  width: 104px; height: 26px;
+  background: var(--file-color, #ded7b8);
+  border: 1.5px solid #111; border-bottom: 0;
+  border-radius: 7px 7px 0 0;
+}
+.archive-file-body {
+  position: absolute; inset: 0;
+  background: var(--file-color, #ded7b8);
+  border: 1.5px solid #111; border-radius: 4px 8px 8px 8px;
+  box-shadow: 6px 7px 0 rgba(0,0,0,0.3);
+  padding: 22px 24px;
+  color: #111;
+}
+.archive-file[data-pos="0"] { --x: 0px; --y: 18px; --r: -1deg; --s: 1; z-index: 5; }
+.archive-file[data-pos="1"] { --x: -34px; --y: -2px; --r: -5deg; --s: .97; z-index: 4; filter: brightness(.9); }
+.archive-file[data-pos="2"] { --x: 34px; --y: -18px; --r: 5deg; --s: .94; z-index: 3; filter: brightness(.8); }
+.archive-file[data-pos="3"] { --x: -16px; --y: -36px; --r: -2deg; --s: .91; z-index: 2; filter: brightness(.7); }
+.archive-file[data-pos="4"] { --x: 17px; --y: -51px; --r: 2deg; --s: .88; z-index: 1; filter: brightness(.62); }
+.archive-file.is-moving { transform: translate(-50%, -50%) translate(118px, -14px) rotate(10deg) scale(.94); }
+.file-code {
+  font-family: 'VT323', monospace; font-size: 16px;
+  letter-spacing: 2px; color: rgba(17,17,17,0.55);
+}
+.file-title {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(28px, 7vw, 48px);
+  line-height: .9; letter-spacing: -1px;
+  text-transform: uppercase; margin-top: 24px;
+}
+.file-meta {
+  position: absolute; left: 24px; right: 24px; bottom: 20px;
+  display: flex; justify-content: space-between;
+  font-family: 'VT323', monospace; font-size: 14px;
+  letter-spacing: 1.5px; color: rgba(17,17,17,.56);
+  border-top: 1px solid rgba(17,17,17,.25); padding-top: 8px;
+}
+.archive-file.alibi { --file-color: #d8bc28; }
+.archive-file:nth-child(2) { --file-color: #d7d0b1; }
+.archive-file:nth-child(3) { --file-color: #cfc7a6; }
+.archive-file:nth-child(4) { --file-color: #e6dfc2; }
+.archive-file:nth-child(5) { --file-color: #bbb59c; }
+.archive-stage.is-found .archive-file:not(.alibi) {
+  opacity: .22; filter: brightness(.38) blur(1px);
+  transform: translate(-50%, -50%) translate(var(--x), calc(var(--y) + 20px)) rotate(var(--r)) scale(calc(var(--s) * .96));
+}
+.archive-stage.is-found .archive-file.alibi {
+  z-index: 9;
+  transform: translate(-50%, -50%) translate(0, -28px) rotate(0deg) scale(1.06);
+  filter: brightness(1); opacity: 1;
+}
+.archive-stage.is-pulled .archive-file.alibi {
+  transform: translate(-50%, -50%) translate(0, -155px) rotate(0deg) scale(1.24);
+  box-shadow: 0 30px 65px rgba(0,0,0,.38);
+}
+.archive-status {
+  min-height: 24px; margin-top: 18px;
+  font-family: 'VT323', monospace; font-size: 18px;
+  letter-spacing: 3px; color: var(--accent-soft);
+  text-align: center;
+}
+.archive-status::after { content: '...'; animation: archiveDots 1.05s steps(4,end) infinite; }
+.archive-loader.file-found .archive-status::after { content: ''; animation: none; }
+@keyframes archiveDots {
+  0% { content: ''; } 25% { content: '.'; } 50% { content: '..'; } 75%,100% { content: '...'; }
+}
+.archive-index {
+  margin-top: 7px; font-family: 'VT323', monospace;
+  font-size: 14px; letter-spacing: 2px;
+  color: rgba(250,249,244,.35);
+}
+@media (max-width: 600px) {
+  .archive-stage { height: 260px; }
+  .archive-file { height: 182px; }
+  .archive-file-body { padding: 18px 19px; }
+  .file-meta { left: 19px; right: 19px; bottom: 16px; }
+  .archive-stage.is-pulled .archive-file.alibi {
+    transform: translate(-50%, -50%) translate(0, -118px) scale(1.12);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .archive-loader, .archive-file { transition-duration: .01ms; }
+  .archive-status::after { animation: none; content: ''; }
+}
+
 
 /* CURSOR */
 .cursor { position: fixed; z-index: 9999; pointer-events: none; transform: translate(-50%,-50%); }
@@ -176,7 +307,52 @@ nav {
 }
 </style>
 </head>
-<body>
+<body class="is-loading">
+
+<div class="archive-loader" id="archiveLoader" role="status" aria-live="polite" aria-label="Searching Alibi archive">
+  <div class="archive-loader-inner">
+    <div class="archive-kicker">CASE ARCHIVE / SEARCH REQUEST 04</div>
+    <div class="archive-stage" id="archiveStage" aria-hidden="true">
+      <div class="archive-file alibi" data-pos="3">
+        <div class="archive-file-body">
+          <div class="file-code">CASE FILE / 2023</div>
+          <div class="file-title">Alibi</div>
+          <div class="file-meta"><span>EVIDENCE 04</span><span>RESTRICTED</span></div>
+        </div>
+      </div>
+      <div class="archive-file" data-pos="0">
+        <div class="archive-file-body">
+          <div class="file-code">CASE FILE / 2024</div>
+          <div class="file-title">Aftertaste</div>
+          <div class="file-meta"><span>MEMORY 01</span><span>ARCHIVED</span></div>
+        </div>
+      </div>
+      <div class="archive-file" data-pos="1">
+        <div class="archive-file-body">
+          <div class="file-code">CASE FILE / 2024</div>
+          <div class="file-title">Insync</div>
+          <div class="file-meta"><span>SIGNAL 02</span><span>ARCHIVED</span></div>
+        </div>
+      </div>
+      <div class="archive-file" data-pos="2">
+        <div class="archive-file-body">
+          <div class="file-code">CASE FILE / 2024</div>
+          <div class="file-title">Cat</div>
+          <div class="file-meta"><span>RECORD 03</span><span>ARCHIVED</span></div>
+        </div>
+      </div>
+      <div class="archive-file" data-pos="4">
+        <div class="archive-file-body">
+          <div class="file-code">CASE FILE / ----</div>
+          <div class="file-title">Unknown</div>
+          <div class="file-meta"><span>FILE 05</span><span>SEALED</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="archive-status" id="archiveStatus">SEARCHING CASE FILES</div>
+    <div class="archive-index" id="archiveIndex">INDEX 01 / 05</div>
+  </div>
+</div>
 
 <div class="cursor" id="cursor"><div class="cursor-dot"></div></div>
 
@@ -219,7 +395,7 @@ nav {
   </p>
   <div class="img-row c1">
     <div class="img-box">
-      <video controls playsinline preload="metadata" poster="img/alibi/alibi-trailer-poster.jpg">
+      <video controls playsinline preload="auto" poster="img/alibi/alibi-trailer-poster.jpg">
         <source src="img/alibi/alibi-trailer.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
@@ -304,6 +480,89 @@ nav {
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
+/* Archive loader: flips through case files while media is prepared. */
+(() => {
+  const loader = document.getElementById('archiveLoader');
+  const stage = document.getElementById('archiveStage');
+  const status = document.getElementById('archiveStatus');
+  const index = document.getElementById('archiveIndex');
+  const files = Array.from(stage.querySelectorAll('.archive-file'));
+  const alibiFile = stage.querySelector('.archive-file.alibi');
+  const startedAt = performance.now();
+  const minimumSearchTime = 3000;
+  const maximumWaitTime = 10000;
+  let searchStep = 0;
+  let stopped = false;
+
+  const rotateFiles = () => {
+    if (stopped) return;
+    const front = files.find(file => file.dataset.pos === '0');
+    if (front) {
+      front.classList.add('is-moving');
+      setTimeout(() => front.classList.remove('is-moving'), 430);
+    }
+    files.forEach(file => {
+      file.dataset.pos = String((Number(file.dataset.pos) + 4) % 5);
+    });
+    searchStep = (searchStep + 1) % 5;
+    index.textContent = 'INDEX ' + String(searchStep + 1).padStart(2, '0') + ' / 05';
+  };
+
+  const flipTimer = setInterval(rotateFiles, 720);
+  const tasks = [];
+
+  document.querySelectorAll('img').forEach(img => {
+    tasks.push(new Promise(resolve => {
+      if (img.complete) return resolve();
+      img.addEventListener('load', resolve, { once: true });
+      img.addEventListener('error', resolve, { once: true });
+    }));
+  });
+
+  document.querySelectorAll('video').forEach(video => {
+    tasks.push(new Promise(resolve => {
+      if (video.readyState >= 3) return resolve();
+      video.addEventListener('canplay', resolve, { once: true });
+      video.addEventListener('error', resolve, { once: true });
+      video.preload = 'auto';
+      video.load();
+    }));
+  });
+
+  if (document.fonts && document.fonts.ready) tasks.push(document.fonts.ready.catch(() => {}));
+
+  const assetsReady = Promise.allSettled(tasks);
+  const timeout = new Promise(resolve => setTimeout(resolve, maximumWaitTime));
+
+  Promise.race([assetsReady, timeout]).then(() => {
+    const elapsed = performance.now() - startedAt;
+    setTimeout(() => {
+      stopped = true;
+      clearInterval(flipTimer);
+
+      files.forEach((file, i) => {
+        file.classList.remove('is-moving');
+        file.dataset.pos = file === alibiFile ? '0' : String(i < 3 ? i + 1 : 4);
+      });
+      loader.classList.add('file-found');
+      stage.classList.add('is-found');
+      status.textContent = 'FILE LOCATED / ALIBI';
+      index.textContent = 'CASE 04 / SELECTED';
+
+      setTimeout(() => {
+        stage.classList.add('is-pulled');
+        status.textContent = 'OPENING CASE FILE';
+      }, 560);
+
+      setTimeout(() => {
+        loader.classList.add('is-complete');
+        document.body.classList.remove('is-loading');
+        setTimeout(() => loader.remove(), 700);
+      }, 1320);
+    }, Math.max(0, minimumSearchTime - elapsed));
+  });
+})();
+
 const cursor = document.getElementById('cursor');
 document.addEventListener('mousemove', e => {
   cursor.style.left = e.clientX + 'px';
