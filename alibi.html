@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alibi — Rowena Chen</title>
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=DM+Sans:wght@300;400;500;700&family=Archivo+Black&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: #111;
+  cursor: none;
+  background: radial-gradient(#e4dcc0 1.5px, transparent 1.5px);
+  background-size: 26px 26px;
+  background-color: #faf9f4;
+}
+
+/* ALIBI PALETTE: black + off-white + muted yellow */
+:root {
+  --accent: #c7a600;
+  --accent-dark: #9c8100;
+  --accent-soft: #eadf8a;
+  --paper: #faf9f4;
+  --muted: #6f6854;
+  --line: #111;
+}
+
+/* CURSOR */
+.cursor { position: fixed; z-index: 9999; pointer-events: none; transform: translate(-50%,-50%); }
+.cursor-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; mix-blend-mode: multiply; transition: transform 0.2s; }
+.cursor.hovering .cursor-dot { transform: scale(2.4); background: #c7a60044; border: 1px solid var(--accent-dark); }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 40px;
+  background: rgba(250,249,244,0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-back { font-family: 'VT323', monospace; font-size: 19px; color: #111; text-decoration: none; cursor: none; letter-spacing: 1px; transition: color 0.2s; }
+.nav-back:hover { color: var(--accent-dark); }
+.nav-links { display: flex; gap: 26px; }
+.nav-link { font-family: 'VT323', monospace; font-size: 19px; color: #111; text-decoration: none; cursor: none; letter-spacing: 1px; transition: color 0.2s; }
+.nav-link:hover { color: var(--accent-dark); }
+
+/* HERO */
+.hero { padding: 130px 48px 0; text-align: center; }
+.hero-tag {
+  font-family: 'VT323', monospace; font-size: 16px;
+  letter-spacing: 3px; color: var(--accent-dark);
+  margin-bottom: 18px;
+}
+.hero-tag::before { content: '✦ '; }
+.hero-tag::after { content: ' ✦'; }
+.hero-logo { max-width: min(360px, 78vw); max-height: 120px; object-fit: contain; margin-bottom: 22px; }
+.hero-desc {
+  font-size: 15px; color: #555; line-height: 1.8;
+  max-width: 620px; margin: 0 auto 28px;
+}
+.hero-meta {
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+.meta-chip {
+  font-family: 'VT323', monospace; font-size: 15px;
+  border: 1.5px solid #111; border-radius: 999px;
+  background: white; padding: 5px 16px;
+  letter-spacing: 0.5px;
+  box-shadow: 2px 2px 0 var(--accent-soft);
+}
+
+/* KEY VISUAL */
+.key-visual {
+  margin: 0 auto;
+  max-width: 1100px;
+  border: 1.5px solid #111; border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 5px 5px 0 var(--accent-soft);
+  aspect-ratio: 16/9;
+  background: #f0eee4;
+  display: flex; align-items: center; justify-content: center;
+}
+.key-visual img, .key-visual video, .key-visual iframe { width: 100%; height: 100%; object-fit: cover; border: none; display: block; }
+
+/* SECTIONS */
+.section { padding: 80px 48px 0; max-width: 1200px; margin: 0 auto; }
+.section:last-of-type { padding-bottom: 90px; }
+.section-head {
+  display: flex; align-items: baseline; gap: 18px;
+  border-bottom: 1px solid #111;
+  padding-bottom: 14px; margin-bottom: 14px;
+}
+.section-num { font-family: 'VT323', monospace; font-size: 20px; color: var(--accent-dark); letter-spacing: 1px; }
+.section-title { font-family: 'Archivo Black', sans-serif; font-size: clamp(24px, 3.5vw, 38px); text-transform: uppercase; letter-spacing: -0.5px; }
+.section-desc { font-size: 14px; color: var(--muted); line-height: 1.75; max-width: 720px; margin-bottom: 32px; }
+
+/* MEDIA BLOCKS */
+.img-row { display: grid; gap: 16px; margin-bottom: 16px; }
+.img-row.c1 { grid-template-columns: 1fr; }
+.img-row.c2 { grid-template-columns: 1fr 1fr; }
+.img-row.c3 { grid-template-columns: repeat(3, 1fr); }
+.img-box {
+  border: 1.5px solid #111; border-radius: 14px;
+  overflow: hidden; background: white;
+  aspect-ratio: 16/9;
+  box-shadow: 3px 3px 0 var(--accent-soft);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.img-box:hover { transform: translate(-3px,-3px); box-shadow: 6px 6px 0 var(--accent); }
+.img-box img, .img-box video, .img-box iframe { width: 100%; height: 100%; object-fit: cover; border: none; display: block; }
+.img-box.contain img { object-fit: contain; padding: 18px; background: #fff; }
+.img-box.character { aspect-ratio: 16/7; }
+.img-box.workflow { aspect-ratio: 16/10; }
+.img-caption {
+  font-family: 'VT323', monospace; font-size: 14px;
+  color: var(--muted); letter-spacing: 1px;
+  text-align: center; margin: -6px 0 16px;
+}
+
+/* NEXT PROJECT */
+.next-project {
+  margin-top: 90px;
+  background: #0d0d0d; color: white;
+  padding: 64px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  text-decoration: none; cursor: none;
+  border-top: 1.5px solid var(--accent);
+  transition: background 0.25s, color 0.25s;
+}
+.next-project:hover { background: var(--accent); color: #111; }
+.next-label { font-family: 'VT323', monospace; font-size: 15px; letter-spacing: 3px; opacity: 0.55; margin-bottom: 10px; }
+.next-title { font-family: 'Archivo Black', sans-serif; font-size: clamp(28px, 5vw, 56px); text-transform: uppercase; line-height: 1; }
+.next-arrow { font-family: 'VT323', monospace; font-size: 52px; }
+
+/* CONTACT */
+.contact-bar { background: #0d0d0d; padding: 32px 48px; display: flex; justify-content: center; align-items: center; gap: 24px; border-top: 1px solid rgba(255,255,255,0.1); flex-wrap: wrap; }
+.contact-bar-icon { font-size: 18px; opacity: 0.4; color: var(--accent-soft); }
+.contact-bar-text { font-family: 'VT323', monospace; font-size: 18px; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
+.contact-bar a { font-family: 'VT323', monospace; font-size: 18px; color: rgba(255,255,255,0.72); text-decoration: none; cursor: none; transition: color 0.2s; }
+.contact-bar a:hover { color: var(--accent-soft); }
+.contact-bar-sep { color: rgba(255,255,255,0.2); font-size: 18px; }
+
+/* BACK TO TOP */
+.back-top {
+  position: fixed; bottom: 26px; right: 26px; z-index: 200;
+  width: 50px; height: 50px;
+  border: 1.5px solid #111; border-radius: 50%;
+  background: white;
+  font-family: 'VT323', monospace; font-size: 22px; color: #111;
+  display: flex; align-items: center; justify-content: center;
+  cursor: none;
+  opacity: 0; transform: translateY(12px); pointer-events: none;
+  transition: all 0.3s;
+  box-shadow: 2px 2px 0 #111;
+}
+.back-top.show { opacity: 1; transform: translateY(0); pointer-events: all; }
+.back-top:hover { background: var(--accent); color: #111; border-color: #111; }
+
+@media (max-width: 760px) {
+  body { cursor: auto; }
+  .cursor { display: none; }
+  nav { padding: 14px 20px; }
+  .nav-links { gap: 14px; }
+  .nav-link { font-size: 16px; }
+  .hero { padding: 110px 20px 0; }
+  .section { padding: 64px 20px 0; }
+  .img-row.c2, .img-row.c3 { grid-template-columns: 1fr; }
+  .img-box.character { aspect-ratio: 4/3; }
+  .img-box.workflow { aspect-ratio: 4/3; }
+  .next-project { padding: 48px 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"><div class="cursor-dot"></div></div>
+
+<nav>
+  <a id="nav-back" href="works.html" class="nav-back">← All Works</a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="works.html" class="nav-link">All Works</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="resume.pdf" class="nav-link">Resume</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">2D Mystery Game · 2023</div>
+  <img class="hero-logo" src="img/alibi/alibi-logo.png" alt="Alibi logo">
+  <p class="hero-desc">
+    A 2D mystery game that tells a collective story of school bullying through conflicting memories and lingering trauma.
+  </p>
+  <div class="hero-meta">
+    <span class="meta-chip">Character Design</span>
+    <span class="meta-chip">Environment Art Direction</span>
+    <span class="meta-chip">Visual Development</span>
+  </div>
+
+  <div class="key-visual">
+    <img src="img/alibi/alibi-cover.jpg" alt="Alibi key visual">
+  </div>
+</div>
+
+<!-- 01 TRAILER -->
+<div class="section" id="trailer">
+  <div class="section-head">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Trailer</h2>
+  </div>
+  <p class="section-desc">
+    A first look at Alibi's fragmented memories, shifting perspectives, and central mystery.
+  </p>
+  <div class="img-row c1">
+    <div class="img-box">
+      <video controls playsinline preload="metadata" poster="img/alibi/alibi-trailer-poster.jpg">
+        <source src="img/alibi/alibi-trailer.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+</div>
+
+<!-- 02 CHARACTER DESIGN -->
+<div class="section" id="character-design">
+  <div class="section-head">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Character Design</h2>
+  </div>
+  <p class="section-desc">
+    I designed and illustrated the main cast, translating each character's role, personality, and relationship to the incident into a unified visual language.
+  </p>
+  <div class="img-row c1">
+    <div class="img-box character contain">
+      <img src="img/alibi/alibi-character-lineup.png" alt="Alibi character lineup">
+    </div>
+  </div>
+  <div class="img-caption">character lineup — designed and illustrated by Rowena Chen</div>
+</div>
+
+<!-- 03 ENVIRONMENT ART DIRECTION -->
+<div class="section" id="environment">
+  <div class="section-head">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Environment Art Direction</h2>
+  </div>
+  <p class="section-desc">
+    I art directed the environments, coordinating composition, atmosphere, color, and revision feedback so the locations supported the story's unease and unreliable memories.
+  </p>
+  <div class="img-row c3">
+    <div class="img-box"><img src="img/alibi/alibi-scene-01.jpg" alt="Alibi environment scene 1"></div>
+    <div class="img-box"><img src="img/alibi/alibi-scene-02.jpg" alt="Alibi environment scene 2"></div>
+    <div class="img-box"><img src="img/alibi/alibi-scene-03.jpg" alt="Alibi environment scene 3"></div>
+  </div>
+  <div class="img-row c3">
+    <div class="img-box"><img src="img/alibi/alibi-scene-04.jpg" alt="Alibi environment scene 4"></div>
+    <div class="img-box"><img src="img/alibi/alibi-scene-05.jpg" alt="Alibi environment scene 5"></div>
+    <div class="img-box"><img src="img/alibi/alibi-scene-06.jpg" alt="Alibi environment scene 6"></div>
+  </div>
+  <div class="img-caption">environment artwork — art direction and revision feedback by Rowena Chen</div>
+</div>
+
+<!-- 04 WORKFLOW -->
+<div class="section" id="workflow">
+  <div class="section-head">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Workflow</h2>
+  </div>
+  <p class="section-desc">
+    The Miro board records our visual references, review rounds, paint-over notes, and communication process from early exploration to final delivery.
+  </p>
+  <div class="img-row c1">
+    <div class="img-box workflow contain">
+      <img src="img/alibi/alibi-workflow-miro.jpg" alt="Alibi Miro workflow board">
+    </div>
+  </div>
+  <div class="img-caption">Miro board — communication, feedback, and revision workflow</div>
+</div>
+
+<a href="works.html" class="next-project">
+  <div>
+    <div class="next-label">RETURN TO</div>
+    <div class="next-title">All Works</div>
+  </div>
+  <div class="next-arrow">→</div>
+</a>
+
+<div class="contact-bar">
+  <span class="contact-bar-icon">✦</span>
+  <span class="contact-bar-text">Contact Me</span>
+  <span class="contact-bar-sep">/</span>
+  <a href="mailto:rowenach@usc.edu">rowenach@usc.edu</a>
+  <span class="contact-bar-sep">/</span>
+  <a href="tel:+16266629366">+1 626 662 9366</a>
+  <span class="contact-bar-icon">✦</span>
+</div>
+
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('a, button, .img-box, .meta-chip').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+});
+
+const backTop = document.getElementById('backTop');
+window.addEventListener('scroll', () => {
+  backTop.classList.toggle('show', window.scrollY > 500);
+});
+</script>
+</body>
+</html>
