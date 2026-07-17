@@ -538,12 +538,25 @@ body.is-loading { overflow: hidden; }
   const status = document.getElementById('siteLoaderStatus');
   if (!loader || !bar || !percent) return;
 
-  /* 同一会话内重复进入首页时跳过 loading（媒体已在缓存里） */
-  if (sessionStorage.getItem('siteLoaderShown')) {
+  /* 重复访问时跳过 loading：本会话看过 / 30 分钟内看过 / 从站内其他页跳回来 */
+  let skipLoader = false;
+  try {
+    skipLoader = sessionStorage.getItem('siteLoaderShown') === '1'
+      || Date.now() - Number(localStorage.getItem('siteLoaderAt') || 0) < 30 * 60 * 1000;
+  } catch (e) {}
+  if (!skipLoader && document.referrer) {
+    try { skipLoader = new URL(document.referrer).origin === location.origin; } catch (e) {}
+  }
+  if (skipLoader) {
     loader.remove();
     document.body.classList.remove('is-loading');
     return;
   }
+  /* 一开始就记录，避免中途点走导致标记没存上 */
+  try {
+    sessionStorage.setItem('siteLoaderShown', '1');
+    localStorage.setItem('siteLoaderAt', String(Date.now()));
+  } catch (e) {}
 
   const startedAt = performance.now();
   const minimumVisibleTime = 1050;
@@ -597,7 +610,6 @@ body.is-loading { overflow: hidden; }
     const elapsed = performance.now() - startedAt;
     const remaining = Math.max(0, minimumVisibleTime - elapsed);
     setTimeout(() => {
-      sessionStorage.setItem('siteLoaderShown', '1');
       loader.classList.add('is-complete');
       document.body.classList.remove('is-loading');
       setTimeout(() => loader.remove(), 700);
