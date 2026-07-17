@@ -7,9 +7,8 @@
 <link href="https://fonts.googleapis.com/css2?family=VT323&family=DM+Sans:wght@300;400;500;700&family=Archivo+Black&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/project.css">
+<link rel="preload" as="image" href="img/alibi/alibi_banner.png">
 <link rel="preload" as="image" href="img/alibi/alibi-logo.png">
-<link rel="preload" as="image" href="img/alibi/alibi-cover.jpg">
-<link rel="preload" as="image" href="img/alibi/alibi-trailer-poster.jpg">
 <style>
 /* ═══ ALIBI PALETTE: black + off-white + muted yellow ═══ */
 :root {
@@ -35,6 +34,9 @@
   --frame-shadow: 5px 5px 0 var(--accent-soft);
   --frame-bg: #f0eee4;
   --backtop-hover-color: #111;
+  /* 图片不做 hover 特效（和 insync 一致，hover 时保持原样） */
+  --box-hover-transform: none;
+  --box-hover-shadow: 3px 3px 0 var(--accent-soft);
 }
 
 /* ARCHIVE SEARCH LOADING SCREEN */
@@ -168,8 +170,58 @@ body.is-loading { overflow: hidden; }
 /* ═══ 页面专属：特殊图片比例 ═══ */
 .img-box.character { aspect-ratio: 16/7; }
 .img-box.workflow { aspect-ratio: 16/10; }
+
+/* ═══ 顶部通栏 BANNER（顶格全宽，logo 居中）═══ */
+.banner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/5;
+  max-height: 72vh; min-height: 320px;
+  overflow: hidden;
+  border-bottom: 1.5px solid var(--line);
+}
+.banner-bg { width: 100%; height: 100%; object-fit: cover; display: block; }
+.banner-logo {
+  position: absolute; left: 50%; top: 52%;
+  transform: translate(-50%,-50%);
+  max-width: min(400px, 55vw); max-height: 42%;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 18px rgba(0,0,0,0.35));
+}
+
+/* ═══ 简介 + 项目信息表 ═══ */
+.intro { padding: 56px 48px 0; text-align: center; }
+.intro p { font-size: 15px; color: #555; line-height: 1.9; max-width: 660px; margin: 0 auto; }
+.info-table {
+  max-width: 880px; margin: 44px auto 0; padding: 0 48px;
+  display: grid; grid-template-columns: 190px 1fr;
+  row-gap: 12px; column-gap: 30px;
+  text-align: left;
+}
+.info-label {
+  font-family: 'VT323', monospace; font-size: 17px;
+  letter-spacing: 1.5px; color: var(--muted);
+  text-align: right; padding-top: 2px;
+}
+.info-value { font-size: 14px; line-height: 1.75; }
+.info-value em { color: var(--accent-hover); font-style: normal; font-weight: 600; }
+
+/* ═══ BEFORE & AFTER 列标题 ═══ */
+.ba-head { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 12px; }
+.ba-head span {
+  font-family: 'VT323', monospace; font-size: 16px;
+  letter-spacing: 2px; color: var(--muted);
+  text-align: center; border-bottom: 1px solid var(--line); padding-bottom: 8px;
+}
+.ba-head span.active-col { color: var(--accent-hover); border-bottom: 2px solid var(--accent); }
+
 @media (max-width: 760px) {
   .img-box.character, .img-box.workflow { aspect-ratio: 4/3; }
+  .banner { aspect-ratio: 16/9; min-height: 220px; }
+  .intro { padding: 40px 20px 0; }
+  .info-table { grid-template-columns: 1fr; row-gap: 4px; padding: 0 24px; margin-top: 32px; }
+  .info-label { text-align: left; margin-top: 14px; }
+  .ba-head { display: none; }
 }
 </style>
 </head>
@@ -232,47 +284,38 @@ body.is-loading { overflow: hidden; }
   </div>
 </nav>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-tag">2D Mystery Game · 2023</div>
-  <img class="hero-logo" src="img/alibi/alibi-logo.png" alt="Alibi logo">
-  <p class="hero-desc">
-    A 2D mystery game that tells a collective story of school bullying through conflicting memories and lingering trauma.
-  </p>
-  <div class="hero-meta">
-    <span class="meta-chip">Character Design</span>
-    <span class="meta-chip">Environment Art Direction</span>
-    <span class="meta-chip">Visual Development</span>
-  </div>
-
-  <div class="key-visual">
-    <img src="img/alibi/alibi-cover.jpg" alt="Alibi key visual">
-  </div>
+<!-- 顶部通栏 BANNER：logo 居中压在 key art 上 -->
+<div class="banner">
+  <img class="banner-bg" src="img/alibi/alibi_banner.png" alt="Alibi key art banner">
+  <img class="banner-logo" src="img/alibi/alibi-logo.png" alt="Alibi logo">
 </div>
 
-<!-- 01 TRAILER -->
-<div class="section" id="trailer">
-  <div class="section-head">
-    <span class="section-num">01</span>
-    <h2 class="section-title">Trailer</h2>
-  </div>
-  <p class="section-desc">
-    A first look at Alibi's fragmented memories, shifting perspectives, and central mystery.
+<!-- 简介（两行）-->
+<div class="intro">
+  <p>
+    A 2D mystery game that tells a collective story of school bullying through
+    conflicting memories and lingering trauma.<br>
+    Players piece together what really happened from testimonies that never quite agree.
   </p>
-  <div class="img-row c1">
-    <div class="img-box">
-      <video controls playsinline preload="auto" poster="img/alibi/alibi-trailer-poster.jpg">
-        <source src="img/alibi/alibi-trailer.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-    </div>
-  </div>
+  <!-- ↑ 第二行简介自己改 -->
 </div>
 
-<!-- 02 CHARACTER DESIGN -->
+<!-- 项目信息表 -->
+<div class="info-table">
+  <div class="info-label">DURATION</div>
+  <div class="info-value">2023 · TBD months</div>
+  <div class="info-label">TEAM SIZE</div>
+  <div class="info-value">Team of TBD</div>
+  <div class="info-label">RESPONSIBILITIES</div>
+  <div class="info-value"><em>Character Design</em>: main cast design &amp; illustration&nbsp;|&nbsp;<em>Environment Art Direction</em>: composition, atmosphere, color &amp; revision feedback&nbsp;|&nbsp;<em>Visual Development</em></div>
+  <div class="info-label">KEY ACHIEVEMENTS</div>
+  <div class="info-value">One or two lines — reception, awards, downloads. TBD</div>
+</div>
+
+<!-- 01 CHARACTER DESIGN -->
 <div class="section" id="character-design">
   <div class="section-head">
-    <span class="section-num">02</span>
+    <span class="section-num">01</span>
     <h2 class="section-title">Character Design</h2>
   </div>
   <p class="section-desc">
@@ -286,10 +329,10 @@ body.is-loading { overflow: hidden; }
   <div class="img-caption">character lineup — designed and illustrated by Rowena Chen</div>
 </div>
 
-<!-- 03 ENVIRONMENT ART DIRECTION -->
+<!-- 02 ENVIRONMENT ART DIRECTION -->
 <div class="section" id="environment">
   <div class="section-head">
-    <span class="section-num">03</span>
+    <span class="section-num">02</span>
     <h2 class="section-title">Environment Art Direction</h2>
   </div>
   <p class="section-desc">
@@ -308,10 +351,10 @@ body.is-loading { overflow: hidden; }
   <div class="img-caption">environment artwork — art direction and revision feedback by Rowena Chen</div>
 </div>
 
-<!-- 04 WORKFLOW -->
+<!-- 03 WORKFLOW -->
 <div class="section" id="workflow">
   <div class="section-head">
-    <span class="section-num">04</span>
+    <span class="section-num">03</span>
     <h2 class="section-title">Workflow</h2>
   </div>
   <p class="section-desc">
@@ -323,6 +366,35 @@ body.is-loading { overflow: hidden; }
     </div>
   </div>
   <div class="img-caption">Miro board — communication, feedback, and revision workflow</div>
+</div>
+
+<!-- 04 BEFORE & AFTER -->
+<div class="section" id="before-after">
+  <div class="section-head">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Art Direction: Before &amp; After</h2>
+  </div>
+  <p class="section-desc">
+    How revision feedback shaped the final environments — the original submission,
+    my paint-over notes, and the final version.
+  </p>
+  <div class="ba-head">
+    <span>ORIGINAL</span>
+    <span class="active-col">MY PAINT-OVER</span>
+    <span>FINAL</span>
+  </div>
+  <!-- 每行一组对比，图片放好后把占位换成 <img src="..."> -->
+  <div class="img-row c3">
+    <div class="img-box">original 1</div>
+    <div class="img-box">paint-over 1</div>
+    <div class="img-box">final 1</div>
+  </div>
+  <div class="img-row c3">
+    <div class="img-box">original 2</div>
+    <div class="img-box">paint-over 2</div>
+    <div class="img-box">final 2</div>
+  </div>
+  <div class="img-caption">art direction feedback — images coming soon</div>
 </div>
 
 <a href="works.html" class="next-project">
