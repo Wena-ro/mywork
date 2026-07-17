@@ -10,32 +10,32 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
-/* INSYNC PALETTE: black + blue-purple */
+/* INSYNC PALETTE: black + blue-leaning blue-violet */
 :root {
   --bg: #0a0a14;
   --panel: #12121f;
-  --accent: #7c6cff;
-  --accent-bright: #a597ff;
-  --accent-deep: #4b3fd4;
-  --accent-soft: rgba(124,108,255,0.16);
-  --text: #e8e6f4;
-  --muted: #8a86a8;
-  --line: rgba(165,151,255,0.35);
+  --accent: #4f7dff;
+  --accent-bright: #85aaff;
+  --accent-deep: #2b4fd6;
+  --accent-soft: rgba(79,125,255,0.16);
+  --text: #e8eaf4;
+  --muted: #8a90a8;
+  --line: rgba(133,170,255,0.35);
 }
 
 body {
   font-family: 'DM Sans', sans-serif;
   color: var(--text);
   cursor: none;
-  background: radial-gradient(rgba(124,108,255,0.13) 1.5px, transparent 1.5px);
+  background: radial-gradient(rgba(79,125,255,0.12) 1.5px, transparent 1.5px);
   background-size: 26px 26px;
   background-color: var(--bg);
 }
 
 /* CURSOR */
 .cursor { position: fixed; z-index: 9999; pointer-events: none; transform: translate(-50%,-50%); }
-.cursor-dot { width: 8px; height: 8px; background: var(--accent-bright); border-radius: 50%; mix-blend-mode: screen; transition: transform 0.2s; box-shadow: 0 0 12px rgba(124,108,255,0.8); }
-.cursor.hovering .cursor-dot { transform: scale(2.4); background: rgba(124,108,255,0.3); border: 1px solid var(--accent-bright); }
+.cursor-dot { width: 8px; height: 8px; background: var(--accent-bright); border-radius: 50%; mix-blend-mode: screen; transition: transform 0.2s; box-shadow: 0 0 12px rgba(79,125,255,0.8); }
+.cursor.hovering .cursor-dot { transform: scale(2.4); background: rgba(79,125,255,0.3); border: 1px solid var(--accent-bright); }
 
 /* NAV */
 nav {
@@ -67,7 +67,7 @@ nav {
   text-transform: uppercase; letter-spacing: -1px;
   line-height: 0.92; margin-bottom: 22px;
   color: var(--text);
-  text-shadow: 0 0 40px rgba(124,108,255,0.45);
+  text-shadow: 0 0 40px rgba(79,125,255,0.4);
 }
 .hero-desc {
   font-size: 15px; color: var(--muted); line-height: 1.8;
@@ -91,7 +91,7 @@ nav {
   max-width: 1100px;
   border: 1.5px solid var(--line); border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 0 55px rgba(124,108,255,0.28);
+  box-shadow: 0 0 55px rgba(79,125,255,0.28);
   aspect-ratio: 16/9;
   background: var(--panel);
   display: flex; align-items: center; justify-content: center;
@@ -117,16 +117,16 @@ nav {
 .img-row.c3 { grid-template-columns: repeat(3, 1fr); }
 .img-row.c21 { grid-template-columns: 2fr 1fr; }
 .img-row.c12 { grid-template-columns: 1fr 2fr; }
+/* flat editorial style — no rounded cards, no shadows inside the page */
 .img-box {
-  border: 1.5px solid var(--line); border-radius: 14px;
+  border: 1px solid var(--line);
   overflow: hidden; background: var(--panel);
   aspect-ratio: 16/9;
-  box-shadow: 3px 3px 0 var(--accent-soft);
   display: flex; align-items: center; justify-content: center;
   font-family: 'VT323', monospace; color: #47435f; font-size: 14px; letter-spacing: 1px;
-  transition: transform 0.25s, box-shadow 0.25s;
+  transition: border-color 0.4s ease;
 }
-.img-box:hover { transform: translate(-3px,-3px); box-shadow: 6px 6px 0 var(--accent-deep); }
+.img-box:hover { border-color: var(--accent-bright); }
 .img-box img, .img-box video, .img-box iframe { width: 100%; height: 100%; object-fit: cover; border: none; display: block; }
 .img-box.contain img { object-fit: contain; padding: 18px; background: var(--panel); }
 .img-box.tall { aspect-ratio: 3/4; }
@@ -135,6 +135,97 @@ nav {
   font-family: 'VT323', monospace; font-size: 14px;
   color: var(--muted); letter-spacing: 1px;
   text-align: center; margin: -6px 0 16px;
+}
+
+/* ═══════ NEW: EXPERIENCE PRINCIPLES ═══════ */
+.principles {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 48px; padding-top: 12px;
+}
+.principle {
+  max-width: 360px; text-align: left;
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.principle:nth-child(2) { transition-delay: 0.15s; }
+.principle:nth-child(3) { transition-delay: 0.3s; }
+.principle.is-visible { opacity: 1; transform: none; }
+.principle-num { font-family: 'VT323', monospace; font-size: 18px; letter-spacing: 2px; color: var(--accent-bright); }
+.principle h3 {
+  font-family: 'Space Grotesk', sans-serif; font-weight: 700;
+  font-size: 20px; text-transform: uppercase; letter-spacing: 0.5px;
+  color: var(--accent-bright); margin: 10px 0 14px;
+}
+.principle-line { height: 1px; background: var(--accent); opacity: 0.5; margin-bottom: 14px; }
+.principle p { font-size: 14px; color: var(--text); line-height: 1.8; }
+
+/* ═══════ NEW: OMU CREATURE DESIGN (scroll narrative) ═══════ */
+.omu-scroll { height: 300vh; }
+.omu-sticky {
+  position: sticky; top: 0; height: 100vh;
+  display: grid; grid-template-columns: 32% 1fr;
+  align-items: center; gap: 36px;
+  padding: 90px 0 40px;
+}
+.omu-text { text-align: left; }
+.omu-kicker { font-family: 'VT323', monospace; font-size: 16px; letter-spacing: 3px; color: var(--accent-bright); margin-bottom: 10px; }
+.omu-title {
+  font-family: 'Space Grotesk', sans-serif; font-weight: 700;
+  font-size: clamp(32px, 4vw, 54px); text-transform: uppercase;
+  line-height: 1; margin-bottom: 26px;
+}
+.omu-stage-text { display: none; }
+.omu-stage-text.is-active { display: block; animation: omuFade 0.8s ease; }
+@keyframes omuFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.omu-stage-text h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 17px; letter-spacing: 0.5px; color: var(--accent-bright); margin-bottom: 10px; }
+.omu-stage-text p { font-size: 14px; color: var(--text); line-height: 1.8; max-width: 340px; }
+.omu-progress { display: flex; gap: 22px; margin-top: 32px; }
+.omu-progress span {
+  font-family: 'VT323', monospace; font-size: 15px; letter-spacing: 1.5px;
+  color: rgba(232,234,244,0.3);
+  padding-top: 8px; border-top: 1px solid rgba(232,234,244,0.22);
+  min-width: 74px;
+  transition: color 0.5s ease, border-color 0.5s ease;
+}
+.omu-progress span.is-active { color: var(--accent-bright); border-top-color: var(--accent); }
+.omu-visuals { position: relative; height: min(78vh, 640px); }
+.omu-visuals figure {
+  position: absolute; inset: 0; margin: 0;
+  opacity: 0; transform: scale(0.98);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.omu-visuals figure.is-active { opacity: 1; transform: scale(1); }
+.omu-visuals img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.omu-visuals figcaption { display: none; }
+.omu-outro { max-width: 720px; padding-top: 48px; }
+.omu-outro p { font-size: 14.5px; color: var(--text); line-height: 1.9; margin-bottom: 18px; }
+
+/* stacked fallback: mobile */
+@media (max-width: 760px) {
+  .principles { grid-template-columns: 1fr; gap: 40px; }
+  .omu-scroll { height: auto; }
+  .omu-sticky { position: static; height: auto; display: block; padding: 0; }
+  .omu-title { margin-bottom: 20px; }
+  .omu-stage-text, .omu-progress { display: none !important; }
+  .omu-visuals { height: auto; }
+  .omu-visuals figure { position: static; opacity: 1; transform: none; margin-bottom: 36px; }
+  .omu-visuals img { height: auto; max-height: 70vh; }
+  .omu-visuals figcaption { display: block; font-size: 13.5px; color: var(--muted); line-height: 1.7; margin-top: 10px; }
+  .omu-visuals figcaption strong { display: block; font-family: 'VT323', monospace; font-weight: 400; font-size: 15px; letter-spacing: 1.5px; color: var(--accent-bright); margin-bottom: 4px; }
+}
+
+/* stacked fallback: reduced motion — show all stages statically, no scroll animation */
+@media (prefers-reduced-motion: reduce) {
+  .principle { opacity: 1; transform: none; transition: none; }
+  .omu-stage-text.is-active { animation: none; }
+  .omu-scroll { height: auto; }
+  .omu-sticky { position: static; height: auto; display: block; padding: 0; }
+  .omu-stage-text, .omu-progress { display: none !important; }
+  .omu-visuals { height: auto; }
+  .omu-visuals figure { position: static; opacity: 1; transform: none; transition: none; margin-bottom: 36px; }
+  .omu-visuals img { height: auto; max-height: 70vh; }
+  .omu-visuals figcaption { display: block; font-size: 13.5px; color: var(--muted); line-height: 1.7; margin-top: 10px; }
+  .omu-visuals figcaption strong { display: block; font-family: 'VT323', monospace; font-weight: 400; font-size: 15px; letter-spacing: 1.5px; color: var(--accent-bright); margin-bottom: 4px; }
 }
 
 /* NEXT PROJECT */
@@ -240,10 +331,38 @@ nav {
   </div>
 </div>
 
-<!-- 02 THE MAZE -->
-<div class="section" id="maze">
+<!-- ═══ NEW: 02 EXPERIENCE PRINCIPLES ═══ -->
+<div class="section" id="principles">
   <div class="section-head">
     <span class="section-num">02</span>
+    <h2 class="section-title">Experience Principles</h2>
+  </div>
+  <div class="principles">
+    <div class="principle">
+      <div class="principle-num">01</div>
+      <h3>Embrace the Unknown</h3>
+      <div class="principle-line"></div>
+      <p>Darkness becomes a space for curiosity, inviting players to lean in rather than retreat.</p>
+    </div>
+    <div class="principle">
+      <div class="principle-num">02</div>
+      <h3>Living Interaction</h3>
+      <div class="principle-line"></div>
+      <p>Omu is treated as a living presence rather than an obstacle, responding gently to movement, touch, and proximity.</p>
+    </div>
+    <div class="principle">
+      <div class="principle-num">03</div>
+      <h3>Silent Understanding</h3>
+      <div class="principle-line"></div>
+      <p>Players communicate through movement, rhythm, and proximity, forming connections that extend beyond language.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 03 THE MAZE -->
+<div class="section" id="maze">
+  <div class="section-head">
+    <span class="section-num">03</span>
     <h2 class="section-title">The Path Into the Unknown</h2>
   </div>
   <p class="section-desc">
@@ -261,31 +380,64 @@ nav {
   </div>
 </div>
 
-<!-- 03 OMU -->
-<div class="section" id="omu">
+<!-- ═══ NEW: 04 OMU CREATURE DESIGN (replaces "Omu, a Living Presence") ═══ -->
+<div class="section" id="creature-design">
   <div class="section-head">
-    <span class="section-num">03</span>
-    <h2 class="section-title">Omu, a Living Presence</h2>
+    <span class="section-num">04</span>
+    <h2 class="section-title">Creature Design</h2>
   </div>
-  <p class="section-desc">
-    The journey ends in an embrace. Omu responds to touch in real time — flexible 3D-printed
-    joints, soft-circuit touch detection, breathing skin, and mechanical wings that
-    fold around the visitor.
-  </p>
-  <div class="img-row c21">
-    <div class="img-box">Omu full shot</div>
-    <div class="img-box">Omu detail</div>
+
+  <div class="omu-scroll" id="omuScroll">
+    <div class="omu-sticky">
+      <div class="omu-text">
+        <div class="omu-kicker">CREATURE DESIGN</div>
+        <div class="omu-title">Omu</div>
+        <div class="omu-stage-text is-active">
+          <h4>01 — Sketch</h4>
+          <p>Exploring Omu's silhouette through the three elemental qualities of land, sea, and sky.</p>
+        </div>
+        <div class="omu-stage-text">
+          <h4>02 — First Pass</h4>
+          <p>Refining the creature's proportions and translating gestures of connection into its anatomy.</p>
+        </div>
+        <div class="omu-stage-text">
+          <h4>03 — Final</h4>
+          <p>Bringing the creature, players, and environmental energy together into one visual system.</p>
+        </div>
+        <div class="omu-progress" id="omuProgress">
+          <span class="is-active">01 Sketch</span>
+          <span>02 First Pass</span>
+          <span>03 Final</span>
+        </div>
+      </div>
+      <div class="omu-visuals" id="omuVisuals">
+        <figure class="is-active">
+          <img src="img/insync/omu-sketch.png" alt="Early sketch exploring Omu's silhouette through land, sea, and sky qualities">
+          <figcaption><strong>01 — Sketch</strong>Exploring Omu's silhouette through the three elemental qualities of land, sea, and sky.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/insync/omu-first-pass.png" alt="First pass of Omu's design, refining proportions and gestures of connection">
+          <figcaption><strong>02 — First Pass</strong>Refining the creature's proportions and translating gestures of connection into its anatomy.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/insync/omu-final.png" alt="Final design of Omu uniting creature, players, and environmental energy">
+          <figcaption><strong>03 — Final</strong>Bringing the creature, players, and environmental energy together into one visual system.</figcaption>
+        </figure>
+      </div>
+    </div>
   </div>
-  <div class="img-row c2">
-    <div class="img-box">mechanism / process</div>
-    <div class="img-box">interaction moment</div>
+
+  <div class="omu-outro">
+    <p>Omu is a tri-elemental creature shaped by land, sea, and sky. Its soft gradients of white, blue, and violet allow its body to dissolve gently into the surrounding environment.</p>
+    <p>Its anatomy was designed around gestures of connection rather than utility: the tail coils like two forms entwining, the wings open like an embrace, and its feline features bring a quiet, drowsy warmth to its presence.</p>
+    <p>Omu is never meant to be revealed all at once. It is gradually understood through touch, sound, movement, and proximity.</p>
   </div>
 </div>
 
-<!-- 04 LAYOUT & STORYBOARD -->
+<!-- 05 LAYOUT & STORYBOARD -->
 <div class="section" id="layout">
   <div class="section-head">
-    <span class="section-num">04</span>
+    <span class="section-num">05</span>
     <h2 class="section-title">Layout &amp; Storyboard</h2>
   </div>
   <p class="section-desc">
@@ -336,6 +488,58 @@ const backTop = document.getElementById('backTop');
 window.addEventListener('scroll', () => {
   backTop.classList.toggle('show', window.scrollY > 500);
 });
+
+/* ═══ NEW: Experience Principles — staggered reveal on enter ═══ */
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const principleEls = document.querySelectorAll('.principle');
+if ('IntersectionObserver' in window && !reduceMotion.matches) {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.25 });
+  principleEls.forEach(el => io.observe(el));
+} else {
+  principleEls.forEach(el => el.classList.add('is-visible'));
+}
+
+/* ═══ NEW: Omu creature design — scroll-driven stage switching ═══ */
+(() => {
+  const scrollWrap = document.getElementById('omuScroll');
+  if (!scrollWrap) return;
+  const stageTexts = scrollWrap.querySelectorAll('.omu-stage-text');
+  const figures = scrollWrap.querySelectorAll('#omuVisuals figure');
+  const progressDots = scrollWrap.querySelectorAll('#omuProgress span');
+  const mobileLayout = window.matchMedia('(max-width: 760px)');
+  let currentStage = 0;
+  let ticking = false;
+
+  const setStage = i => {
+    if (i === currentStage) return;
+    currentStage = i;
+    stageTexts.forEach((el, n) => el.classList.toggle('is-active', n === i));
+    figures.forEach((el, n) => el.classList.toggle('is-active', n === i));
+    progressDots.forEach((el, n) => el.classList.toggle('is-active', n === i));
+  };
+
+  const update = () => {
+    ticking = false;
+    if (mobileLayout.matches || reduceMotion.matches) return;
+    const rect = scrollWrap.getBoundingClientRect();
+    const total = rect.height - window.innerHeight;
+    if (total <= 0) return;
+    const progress = Math.min(1, Math.max(0, -rect.top / total));
+    setStage(Math.min(2, Math.floor(progress * 3)));
+  };
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }, { passive: true });
+  update();
+})();
 </script>
 </body>
 </html>
