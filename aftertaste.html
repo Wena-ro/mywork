@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aftertaste — Rowena Chen</title>
+<link rel="icon" type="image/png" href="./tab.png">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=DM+Sans:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+/* AFTERTASTE PALETTE: soft paper + pink */
+:root {
+  --accent: #e85d9e;
+  --accent-dark: #c23d7e;
+  --accent-soft: #f9c2dc;
+  --paper: #fef8fb;
+  --muted: #a87b93;
+  --line: #3a2230;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--line);
+  cursor: none;
+  background: radial-gradient(#f8dcea 1.5px, transparent 1.5px);
+  background-size: 26px 26px;
+  background-color: var(--paper);
+}
+
+/* CURSOR */
+.cursor { position: fixed; z-index: 9999; pointer-events: none; transform: translate(-50%,-50%); }
+.cursor-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; mix-blend-mode: multiply; transition: transform 0.2s; }
+.cursor.hovering .cursor-dot { transform: scale(2.4); background: rgba(232,93,158,0.25); border: 1px solid var(--accent-dark); }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 40px;
+  background: rgba(254,248,251,0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-back { font-family: 'VT323', monospace; font-size: 19px; color: var(--line); text-decoration: none; cursor: none; letter-spacing: 1px; transition: color 0.2s; }
+.nav-back:hover { color: var(--accent-dark); }
+.nav-links { display: flex; gap: 26px; }
+.nav-link { font-family: 'VT323', monospace; font-size: 19px; color: var(--line); text-decoration: none; cursor: none; letter-spacing: 1px; transition: color 0.2s; }
+.nav-link:hover { color: var(--accent-dark); }
+
+/* HERO */
+.hero { padding: 130px 48px 0; text-align: center; }
+.hero-tag {
+  font-family: 'VT323', monospace; font-size: 16px;
+  letter-spacing: 3px; color: var(--accent-dark);
+  margin-bottom: 18px;
+}
+.hero-tag::before { content: '✦ '; }
+.hero-tag::after { content: ' ✦'; }
+.hero-title {
+  font-family: 'Space Grotesk', sans-serif; font-weight: 700;
+  font-size: clamp(44px, 8vw, 100px);
+  text-transform: uppercase; letter-spacing: -1px;
+  line-height: 0.92; margin-bottom: 22px;
+}
+.hero-title em { color: var(--accent); font-style: normal; }
+.hero-desc {
+  font-size: 15px; color: #7a5a6b; line-height: 1.8;
+  max-width: 620px; margin: 0 auto 28px;
+}
+.hero-meta {
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+.meta-chip {
+  font-family: 'VT323', monospace; font-size: 15px;
+  border: 1.5px solid var(--line); border-radius: 999px;
+  background: white; padding: 5px 16px;
+  letter-spacing: 0.5px;
+  box-shadow: 2px 2px 0 var(--accent-soft);
+}
+
+/* KEY VISUAL — trailer */
+.key-visual {
+  margin: 0 auto;
+  max-width: 1100px;
+  border: 1.5px solid var(--line); border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 5px 5px 0 var(--accent-soft);
+  aspect-ratio: 16/9;
+  background: #fbeef4;
+  display: flex; align-items: center; justify-content: center;
+}
+.key-visual img, .key-visual video, .key-visual iframe { width: 100%; height: 100%; object-fit: cover; border: none; display: block; }
+
+/* SECTIONS */
+.section { padding: 80px 48px 0; max-width: 1200px; margin: 0 auto; }
+.section:last-of-type { padding-bottom: 90px; }
+.section-head {
+  display: flex; align-items: baseline; gap: 18px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 14px; margin-bottom: 14px;
+}
+.section-num { font-family: 'VT323', monospace; font-size: 20px; color: var(--accent-dark); letter-spacing: 1px; }
+.section-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(24px, 3.5vw, 38px); text-transform: uppercase; letter-spacing: -0.5px; }
+.section-desc { font-size: 14px; color: var(--muted); line-height: 1.75; max-width: 720px; margin-bottom: 32px; }
+
+/* MEDIA BLOCKS */
+.img-row { display: grid; gap: 16px; margin-bottom: 16px; }
+.img-row.c1 { grid-template-columns: 1fr; }
+.img-row.c2 { grid-template-columns: 1fr 1fr; }
+.img-row.c3 { grid-template-columns: repeat(3, 1fr); }
+.img-row.c21 { grid-template-columns: 2fr 1fr; }
+.img-row.c12 { grid-template-columns: 1fr 2fr; }
+.img-box {
+  border: 1.5px solid var(--line); border-radius: 14px;
+  overflow: hidden; background: white;
+  aspect-ratio: 16/9;
+  box-shadow: 3px 3px 0 var(--accent-soft);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'VT323', monospace; color: #e3b8cd; font-size: 14px; letter-spacing: 1px;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.img-box:hover { transform: translate(-3px,-3px); box-shadow: 6px 6px 0 var(--accent); }
+.img-box img, .img-box video, .img-box iframe { width: 100%; height: 100%; object-fit: cover; border: none; display: block; }
+.img-box.contain img { object-fit: contain; padding: 18px; background: #fff; }
+.img-box.tall { aspect-ratio: 3/4; }
+.img-box.wide { aspect-ratio: 21/9; }
+.img-caption {
+  font-family: 'VT323', monospace; font-size: 14px;
+  color: var(--muted); letter-spacing: 1px;
+  text-align: center; margin: -6px 0 16px;
+}
+
+/* NEXT PROJECT */
+.next-project {
+  margin-top: 90px;
+  background: #2b1420; color: white;
+  padding: 64px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  text-decoration: none; cursor: none;
+  border-top: 1.5px solid var(--accent);
+  transition: background 0.25s, color 0.25s;
+}
+.next-project:hover { background: var(--accent); color: #2b1420; }
+.next-label { font-family: 'VT323', monospace; font-size: 15px; letter-spacing: 3px; opacity: 0.55; margin-bottom: 10px; }
+.next-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(28px, 5vw, 56px); text-transform: uppercase; line-height: 1; }
+.next-arrow { font-family: 'VT323', monospace; font-size: 52px; }
+
+/* CONTACT */
+.contact-bar { background: #2b1420; padding: 32px 48px; display: flex; justify-content: center; align-items: center; gap: 24px; border-top: 1px solid rgba(255,255,255,0.1); flex-wrap: wrap; }
+.contact-bar-icon { font-size: 18px; opacity: 0.4; color: var(--accent-soft); }
+.contact-bar-text { font-family: 'VT323', monospace; font-size: 18px; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
+.contact-bar a { font-family: 'VT323', monospace; font-size: 18px; color: rgba(255,255,255,0.72); text-decoration: none; cursor: none; transition: color 0.2s; }
+.contact-bar a:hover { color: var(--accent-soft); }
+.contact-bar-sep { color: rgba(255,255,255,0.2); font-size: 18px; }
+
+/* BACK TO TOP */
+.back-top {
+  position: fixed; bottom: 26px; right: 26px; z-index: 200;
+  width: 50px; height: 50px;
+  border: 1.5px solid var(--line); border-radius: 50%;
+  background: white;
+  font-family: 'VT323', monospace; font-size: 22px; color: var(--line);
+  display: flex; align-items: center; justify-content: center;
+  cursor: none;
+  opacity: 0; transform: translateY(12px); pointer-events: none;
+  transition: all 0.3s;
+  box-shadow: 2px 2px 0 var(--line);
+}
+.back-top.show { opacity: 1; transform: translateY(0); pointer-events: all; }
+.back-top:hover { background: var(--accent); color: white; border-color: var(--line); }
+
+@media (max-width: 760px) {
+  body { cursor: auto; }
+  .cursor { display: none; }
+  nav { padding: 14px 20px; }
+  .nav-links { gap: 14px; }
+  .nav-link { font-size: 16px; }
+  .hero { padding: 110px 20px 0; }
+  .section { padding: 64px 20px 0; }
+  .img-row.c2, .img-row.c3, .img-row.c21, .img-row.c12 { grid-template-columns: 1fr; }
+  .next-project { padding: 48px 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"><div class="cursor-dot"></div></div>
+
+<nav>
+  <a id="nav-back" href="works.html" class="nav-back">← All Works</a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="works.html" class="nav-link">All Works</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="resume.pdf" class="nav-link">Resume</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Game · 2024</div>
+  <h1 class="hero-title">After<em>taste</em></h1>
+  <p class="hero-desc">
+    <!-- ↓ 一两句话介绍项目，之后替换 -->
+    One or two sentences that hook the reader — what Aftertaste is and why it lingers.
+  </p>
+  <div class="hero-meta">
+    <!-- ↓ 改成你的实际信息 -->
+    <span class="meta-chip">Role: TBD</span>
+    <span class="meta-chip">Team: TBD</span>
+    <span class="meta-chip">Game</span>
+  </div>
+
+  <div class="key-visual">
+    <iframe src="https://www.youtube.com/embed/2b3nRCNQOl4" title="Aftertaste Trailer" allowfullscreen></iframe>
+  </div>
+</div>
+
+<!-- 01 OVERVIEW -->
+<div class="section" id="overview">
+  <div class="section-head">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Overview</h2>
+  </div>
+  <p class="section-desc">
+    Background of the project — the concept, the audience, your goal. A short paragraph is enough.
+  </p>
+  <div class="img-row c1">
+    <div class="img-box wide">key visual / screenshot</div>
+  </div>
+</div>
+
+<!-- 02 SECTION -->
+<div class="section">
+  <div class="section-head">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Visual Development</h2>
+  </div>
+  <p class="section-desc">Sketches, iterations, and final artwork.</p>
+  <div class="img-row c2">
+    <div class="img-box">image 1</div>
+    <div class="img-box">image 2</div>
+  </div>
+  <div class="img-row c3">
+    <div class="img-box">image 3</div>
+    <div class="img-box">image 4</div>
+    <div class="img-box">image 5</div>
+  </div>
+</div>
+
+<!-- 03 SECTION -->
+<div class="section">
+  <div class="section-head">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Process</h2>
+  </div>
+  <p class="section-desc">Behind the scenes — moodboards, prototypes, playtests, making-of.</p>
+  <div class="img-row c1">
+    <div class="img-box wide">process / moodboard</div>
+  </div>
+  <div class="img-row c2">
+    <div class="img-box">making of 1</div>
+    <div class="img-box">making of 2</div>
+  </div>
+</div>
+
+<a href="insync.html" class="next-project">
+  <div>
+    <div class="next-label">NEXT PROJECT</div>
+    <div class="next-title">InSync</div>
+  </div>
+  <div class="next-arrow">→</div>
+</a>
+
+<div class="contact-bar">
+  <span class="contact-bar-icon">✦</span>
+  <span class="contact-bar-text">Contact Me</span>
+  <span class="contact-bar-sep">/</span>
+  <a href="mailto:rowenach@usc.edu">rowenach@usc.edu</a>
+  <span class="contact-bar-sep">/</span>
+  <a href="tel:+16266629366">+1 626 662 9366</a>
+  <span class="contact-bar-icon">✦</span>
+</div>
+
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('a, button, .img-box, .meta-chip').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+});
+
+const backTop = document.getElementById('backTop');
+window.addEventListener('scroll', () => {
+  backTop.classList.toggle('show', window.scrollY > 500);
+});
+</script>
+</body>
+</html>
