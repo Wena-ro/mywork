@@ -52,6 +52,18 @@ body {
   border: 0.5px solid var(--cursor-hover-border);
   backdrop-filter: blur(1px);
 }
+/* PLAY TRAILER 光标标签（页面 cursor div 里放 <div class="cursor-label">…</div> 才会生效） */
+.cursor-label {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'VT323', monospace; font-size: 20px; letter-spacing: 1px;
+  background: var(--accent); color: white;
+  border-radius: 999px; padding: 10px 22px; white-space: nowrap;
+  opacity: 0; scale: 0.5;
+  transition: opacity 0.25s, scale 0.25s cubic-bezier(0.34,1.56,0.64,1);
+}
+.cursor.play-mode .cursor-dot { transform: scale(0); }
+.cursor.play-mode .cursor-label { opacity: 1; scale: 1; }
 
 /* ───────── NAV ───────── */
 nav {

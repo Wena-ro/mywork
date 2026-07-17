@@ -17,6 +17,15 @@
     });
   }
 
+  /* 带 data-trailer="URL" 的元素：hover 光标变 PLAY TRAILER，点击新标签页打开 */
+  document.querySelectorAll('[data-trailer]').forEach(el => {
+    if (cursor) {
+      el.addEventListener('mouseenter', () => cursor.classList.add('play-mode'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('play-mode'));
+    }
+    el.addEventListener('click', () => window.open(el.dataset.trailer, '_blank', 'noopener'));
+  });
+
   const backTop = document.getElementById('backTop');
   if (backTop) {
     window.addEventListener('scroll', () => {

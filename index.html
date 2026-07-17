@@ -538,14 +538,15 @@ body.is-loading { overflow: hidden; }
   const status = document.getElementById('siteLoaderStatus');
   if (!loader || !bar || !percent) return;
 
-  /* 重复访问时跳过 loading：本会话看过 / 30 分钟内看过 / 从站内其他页跳回来 */
+  /* loading 显示规则：刷新(F5)永远重放；从站内其他页跳转过来 或 本会话已看过 则跳过 */
+  let isReload = false;
+  try { isReload = (performance.getEntriesByType('navigation')[0] || {}).type === 'reload'; } catch (e) {}
   let skipLoader = false;
-  try {
-    skipLoader = sessionStorage.getItem('siteLoaderShown') === '1'
-      || Date.now() - Number(localStorage.getItem('siteLoaderAt') || 0) < 30 * 60 * 1000;
-  } catch (e) {}
-  if (!skipLoader && document.referrer) {
-    try { skipLoader = new URL(document.referrer).origin === location.origin; } catch (e) {}
+  if (!isReload) {
+    try { skipLoader = sessionStorage.getItem('siteLoaderShown') === '1'; } catch (e) {}
+    if (!skipLoader && document.referrer) {
+      try { skipLoader = new URL(document.referrer).origin === location.origin; } catch (e) {}
+    }
   }
   if (skipLoader) {
     loader.remove();
@@ -553,10 +554,7 @@ body.is-loading { overflow: hidden; }
     return;
   }
   /* 一开始就记录，避免中途点走导致标记没存上 */
-  try {
-    sessionStorage.setItem('siteLoaderShown', '1');
-    localStorage.setItem('siteLoaderAt', String(Date.now()));
-  } catch (e) {}
+  try { sessionStorage.setItem('siteLoaderShown', '1'); } catch (e) {}
 
   const startedAt = performance.now();
   const minimumVisibleTime = 1050;
