@@ -185,9 +185,86 @@ body.is-loading { overflow: hidden; }
 }
 .ba-head span.active-col { color: var(--accent-hover); border-bottom: 2px solid var(--accent); }
 
+/* ═══ 角色档案：分立 sprite + hover 描边 + 点击弹 profile ═══ */
+.char-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 20px; align-items: end; padding-top: 10px;
+}
+.char-card {
+  background: none; border: none; padding: 0;
+  cursor: none;
+  transition: transform 0.25s;
+}
+.char-card img {
+  width: 100%; height: auto; display: block;
+  transition: filter 0.2s;
+}
+.char-card:hover { transform: translateY(-6px); }
+.char-card:hover img {
+  filter:
+    drop-shadow(3px 0 0 var(--accent))
+    drop-shadow(-3px 0 0 var(--accent))
+    drop-shadow(0 3px 0 var(--accent))
+    drop-shadow(0 -3px 0 var(--accent));
+}
+.char-label {
+  display: block; margin-top: 10px;
+  font-family: 'VT323', monospace; font-size: 17px;
+  letter-spacing: 2px; color: var(--muted); text-align: center;
+  transition: color 0.2s;
+}
+.char-card:hover .char-label { color: var(--accent-dark); }
+
+/* profile 弹层：立绘在左，信息在右 */
+.char-modal {
+  position: fixed; inset: 0; z-index: 9000;
+  background: rgba(0,0,0,0.72);
+  display: grid; place-items: center; padding: 24px;
+  animation: charFade 0.25s ease;
+}
+@keyframes charFade { from { opacity: 0; } to { opacity: 1; } }
+.char-sheet {
+  position: relative;
+  width: min(940px, 94vw); max-height: 92vh; overflow: auto;
+  background: #fff; border: 1.5px solid #111;
+  display: grid; grid-template-columns: 42% 1fr;
+  gap: 32px; padding: 40px 44px;
+}
+.char-sheet-figure { display: flex; align-items: center; justify-content: center; }
+.char-sheet-figure img { max-width: 100%; max-height: 72vh; object-fit: contain; }
+.char-kicker {
+  display: inline-block;
+  font-family: 'VT323', monospace; font-size: 16px;
+  letter-spacing: 3px; color: var(--accent-dark);
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 6px; margin-bottom: 18px;
+}
+.char-name { font-family: 'Archivo Black', sans-serif; font-size: clamp(30px, 4vw, 44px); text-transform: uppercase; line-height: 1; margin-bottom: 6px; }
+.char-role { font-family: 'VT323', monospace; font-size: 17px; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 20px; }
+.char-row {
+  display: grid; grid-template-columns: 110px 1fr; gap: 16px;
+  padding: 10px 0; border-top: 1.5px solid var(--accent);
+  font-size: 13.5px; line-height: 1.6;
+}
+.char-row-label { font-family: 'VT323', monospace; font-size: 15px; letter-spacing: 1.5px; color: var(--muted); padding-top: 1px; }
+.char-note { border-top: 1.5px solid var(--accent); padding: 12px 0 0; margin-top: 0; font-size: 13.5px; line-height: 1.8; }
+.char-close {
+  position: absolute; top: 14px; right: 16px;
+  width: 38px; height: 38px;
+  background: none; border: none;
+  font-family: 'Archivo Black', sans-serif; font-size: 22px; color: #111;
+  cursor: none;
+  transition: color 0.2s, transform 0.2s;
+}
+.char-close:hover { color: var(--accent-dark); transform: rotate(90deg); }
+
 @media (max-width: 760px) {
   .img-box.character, .img-box.workflow { aspect-ratio: 4/3; }
   .ba-head { display: none; }
+  .char-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .char-sheet { grid-template-columns: 1fr; padding: 24px 20px; gap: 18px; }
+  .char-sheet-figure img { max-height: 38vh; }
+  .char-close { cursor: pointer; }
 }
 </style>
 </head>
@@ -288,12 +365,29 @@ body.is-loading { overflow: hidden; }
   <p class="section-desc">
     I designed and illustrated the main cast, translating each character's role, personality, and relationship to the incident into a unified visual language.
   </p>
-  <div class="img-row c1">
-    <div class="img-box character contain">
-      <img src="img/alibi/alibi-character-lineup.png" alt="Alibi character lineup">
-    </div>
+  <div class="char-grid">
+    <button class="char-card" data-char="li">
+      <img src="img/alibi/character-li.png" alt="Li — the teacher">
+      <span class="char-label">LI</span>
+    </button>
+    <button class="char-card" data-char="jiang">
+      <img src="img/alibi/character-jiang.png" alt="Jiang — the therapist">
+      <span class="char-label">JIANG</span>
+    </button>
+    <button class="char-card" data-char="ran">
+      <img src="img/alibi/character-ran.png" alt="Ran — the corpo">
+      <span class="char-label">RAN</span>
+    </button>
+    <button class="char-card" data-char="tao">
+      <img src="img/alibi/character-tao.png" alt="Tao — the otaku">
+      <span class="char-label">TAO</span>
+    </button>
+    <button class="char-card" data-char="zhou">
+      <img src="img/alibi/character-zhou.png" alt="Zhou — the pretender">
+      <span class="char-label">ZHOU</span>
+    </button>
   </div>
-  <div class="img-caption">character lineup — designed and illustrated by Rowena Chen</div>
+  <div class="img-caption">click a character to view their profile ✦ designed and illustrated by Rowena Chen</div>
 </div>
 
 <!-- 02 ENVIRONMENT ART DIRECTION -->
@@ -487,5 +581,93 @@ body.is-loading { overflow: hidden; }
 
 </script>
 <script src="js/common.js"></script>
+<script>
+/* ═══ 角色档案弹层：点击 sprite 打开，立绘在左信息在右 ═══ */
+(() => {
+  const chars = {
+    li: {
+      name: 'Li', role: 'THE TEACHER',
+      sprite: 'img/alibi/character-li.png',
+      age: '40s', occupation: 'High school teacher',
+      persona: 'Strict, no-nonsense, results above all.',
+      note: 'Outwardly authoritative and unyielding — a firm believer in discipline and meritocracy. Beneath the composure, he is driven by insecurity about his legacy; he despises weakness in others because it mirrors his own.'
+    },
+    jiang: {
+      name: 'Jiang', role: 'THE THERAPIST',
+      sprite: 'img/alibi/character-jiang.png',
+      age: '26', occupation: 'Therapist, on hiatus',
+      persona: 'Melancholic urban intellectual.',
+      note: 'Calm and cultured on the surface, endlessly overanalyzing underneath. Taking time off for her own mental health, she carries a notebook everywhere — and stares as if she is reading your mind.'
+    },
+    ran: {
+      name: 'Ran', role: 'THE CORPO',
+      sprite: 'img/alibi/character-ran.png',
+      age: '26', occupation: 'HR professional',
+      persona: 'Polished on duty, cold off it.',
+      note: 'Efficient, shrewd, and fiercely independent. Accommodating while performing, calculating when not — beneath the flawless makeup and doll-like poise sits a deep sense of emptiness.'
+    },
+    tao: {
+      name: 'Tao', role: 'THE OTAKU',
+      sprite: 'img/alibi/character-tao.png',
+      age: '25', occupation: 'Freelance online artist',
+      persona: 'Lively online, wary offline.',
+      note: 'A socially anxious shut-in who makes a living on art commissions. She dreams of finally meeting her online friends in person — but the fear of stepping outside always wins.'
+    },
+    zhou: {
+      name: 'Zhou', role: 'THE PRETENDER',
+      sprite: 'img/alibi/character-zhou.png',
+      age: '25', occupation: 'Office worker',
+      persona: 'Fake gold watch, real ambition.',
+      note: 'Flamboyant and generous in front of peers, submissive toward his boss. Simple-minded with flashes of temper, shaped by hard realities and obsessed with saving face.'
+    }
+  };
+
+  const cursor = document.getElementById('cursor');
+  let modal = null;
+  const closeChar = () => {
+    if (!modal) return;
+    modal.remove();
+    modal = null;
+    document.body.classList.remove('trailer-open');
+    if (cursor) cursor.classList.remove('hovering');
+  };
+  const openChar = key => {
+    const c = chars[key];
+    if (!c) return;
+    closeChar();
+    modal = document.createElement('div');
+    modal.className = 'char-modal';
+    modal.innerHTML =
+      '<div class="char-sheet" role="dialog" aria-label="' + c.name + ' profile">' +
+        '<button class="char-close" aria-label="Close profile">✕</button>' +
+        '<div class="char-sheet-figure"><img src="' + c.sprite + '" alt="' + c.name + ' full illustration"></div>' +
+        '<div class="char-sheet-info">' +
+          '<div class="char-kicker">PROFILE</div>' +
+          '<div class="char-name">' + c.name + '</div>' +
+          '<div class="char-role">' + c.role + '</div>' +
+          '<div class="char-row"><span class="char-row-label">AGE</span><span>' + c.age + '</span></div>' +
+          '<div class="char-row"><span class="char-row-label">OCCUPATION</span><span>' + c.occupation + '</span></div>' +
+          '<div class="char-row"><span class="char-row-label">PERSONA</span><span>' + c.persona + '</span></div>' +
+          '<p class="char-note">' + c.note + '</p>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(modal);
+    document.body.classList.add('trailer-open');
+    modal.addEventListener('click', e => {
+      if (e.target.closest('.char-close') || !e.target.closest('.char-sheet')) closeChar();
+    });
+    if (cursor) {
+      const closeBtn = modal.querySelector('.char-close');
+      closeBtn.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+      closeBtn.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+    }
+  };
+
+  document.querySelectorAll('.char-card').forEach(btn => {
+    btn.addEventListener('click', () => openChar(btn.dataset.char));
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeChar(); });
+})();
+</script>
 </body>
 </html>
