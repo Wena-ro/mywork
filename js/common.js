@@ -17,13 +17,54 @@
     });
   }
 
-  /* 带 data-trailer="URL" 的元素：hover 光标变 PLAY TRAILER，点击新标签页打开 */
+  /* 带 data-trailer="URL" 的元素：hover 光标变 PLAY TRAILER，点击在本页弹层播放 */
+  const toEmbedUrl = url => {
+    try {
+      const u = new URL(url);
+      let id = '';
+      if (u.hostname.includes('youtu.be')) id = u.pathname.slice(1);
+      else if (u.pathname.startsWith('/embed/')) id = u.pathname.split('/')[2] || '';
+      else id = u.searchParams.get('v') || '';
+      return id ? 'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0' : url;
+    } catch (e) { return url; }
+  };
+
+  let trailerModal = null;
+  const closeTrailer = () => {
+    if (!trailerModal) return;
+    trailerModal.remove();
+    trailerModal = null;
+    document.body.classList.remove('trailer-open');
+  };
+  const openTrailer = url => {
+    closeTrailer();
+    trailerModal = document.createElement('div');
+    trailerModal.className = 'trailer-modal';
+    trailerModal.innerHTML =
+      '<div class="trailer-frame">' +
+        '<button class="trailer-close" aria-label="Close trailer">✕</button>' +
+        '<iframe src="' + toEmbedUrl(url) + '" title="Trailer" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>' +
+      '</div>';
+    document.body.appendChild(trailerModal);
+    document.body.classList.add('trailer-open');
+    /* 点 ✕ 或点视频外的空白处关闭 */
+    trailerModal.addEventListener('click', e => {
+      if (e.target.closest('.trailer-close') || !e.target.closest('.trailer-frame')) closeTrailer();
+    });
+    if (cursor) {
+      cursor.classList.remove('play-mode');
+      trailerModal.querySelector('.trailer-close').addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+      trailerModal.querySelector('.trailer-close').addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+    }
+  };
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTrailer(); });
+
   document.querySelectorAll('[data-trailer]').forEach(el => {
     if (cursor) {
       el.addEventListener('mouseenter', () => cursor.classList.add('play-mode'));
       el.addEventListener('mouseleave', () => cursor.classList.remove('play-mode'));
     }
-    el.addEventListener('click', () => window.open(el.dataset.trailer, '_blank', 'noopener'));
+    el.addEventListener('click', () => openTrailer(el.dataset.trailer));
   });
 
   const backTop = document.getElementById('backTop');

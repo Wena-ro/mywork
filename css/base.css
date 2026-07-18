@@ -112,6 +112,34 @@ nav {
 .back-top.show { opacity: 1; transform: translateY(0); pointer-events: all; }
 .back-top:hover { background: var(--accent); color: var(--backtop-hover-color, white); border-color: var(--accent); }
 
+/* ───────── TRAILER 弹层（common.js 动态创建）───────── */
+body.trailer-open { overflow: hidden; }
+.trailer-modal {
+  position: fixed; inset: 0; z-index: 9000;
+  background: rgba(0,0,0,0.86);
+  display: grid; place-items: center;
+  padding: 24px;
+  animation: trailerFade 0.25s ease;
+}
+@keyframes trailerFade { from { opacity: 0; } to { opacity: 1; } }
+.trailer-frame { position: relative; width: min(1000px, 92vw); }
+.trailer-frame iframe {
+  width: 100%; aspect-ratio: 16/9;
+  border: none; display: block;
+  background: #000;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.55);
+}
+.trailer-close {
+  position: absolute; right: 0; top: -46px;
+  width: 36px; height: 36px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.5); border-radius: 50%;
+  color: #fff; font-size: 16px; line-height: 1;
+  cursor: none;
+  transition: background 0.2s, border-color 0.2s;
+}
+.trailer-close:hover { background: var(--accent); border-color: var(--accent); }
+
 /* ───────── MOBILE ───────── */
 @media (max-width: 760px) {
   body { cursor: auto; }
@@ -119,4 +147,5 @@ nav {
   nav { padding: 14px 20px; }
   .nav-links { gap: 14px; }
   .nav-link { font-size: 16px; }
+  .trailer-close { cursor: pointer; }
 }
