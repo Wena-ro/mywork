@@ -32,4 +32,40 @@
       backTop.classList.toggle('show', window.scrollY > 500);
     });
   }
+
+  /* 滚动叙事 .design-scroll：按滚动进度切换 .ds-stage-text / figure / .ds-progress span */
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const mobileLayout = window.matchMedia('(max-width: 760px)');
+  document.querySelectorAll('.design-scroll').forEach(wrap => {
+    const stageTexts = wrap.querySelectorAll('.ds-stage-text');
+    const figures = wrap.querySelectorAll('.ds-visuals figure');
+    const dots = wrap.querySelectorAll('.ds-progress span');
+    const count = figures.length;
+    if (!count) return;
+    let current = 0;
+    let ticking = false;
+
+    const setStage = i => {
+      if (i === current) return;
+      current = i;
+      [stageTexts, figures, dots].forEach(list =>
+        list.forEach((el, n) => el.classList.toggle('is-active', n === i))
+      );
+    };
+
+    const update = () => {
+      ticking = false;
+      if (mobileLayout.matches || reduceMotion.matches) return;
+      const rect = wrap.getBoundingClientRect();
+      const total = rect.height - window.innerHeight;
+      if (total <= 0) return;
+      const progress = Math.min(1, Math.max(0, -rect.top / total));
+      setStage(Math.min(count - 1, Math.floor(progress * count)));
+    };
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    update();
+  });
 })();

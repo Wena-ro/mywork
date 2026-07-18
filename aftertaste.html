@@ -8,7 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=VT323&family=DM+Sans:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/project.css">
-<link rel="preload" as="image" href="img/aftertaste/aftertaste_banner.png">
+<link rel="preload" as="image" href="img/aftertaste/aftertaste-topkv.jpg">
+<link rel="preload" as="image" href="img/aftertaste/aftertaste-logo.png">
 <style>
 /* ═══ AFTERTASTE PALETTE: soft paper + pink ═══ */
 :root {
@@ -56,10 +57,9 @@
 
 <!-- 顶部通栏 KV：固定不动，内容滚上来盖住；hover 出 PLAY TRAILER，点击打开 YouTube -->
 <div class="banner" data-trailer="https://youtu.be/2b3nRCNQOl4">
-  <img class="banner-bg" src="img/aftertaste/aftertaste_banner.png" alt="Aftertaste key art">
+  <img class="banner-bg" src="img/aftertaste/aftertaste-topkv.jpg" alt="Aftertaste key art">
   <div class="banner-center">
-    <h1 class="banner-title">After<em>taste</em></h1>
-    <!-- ↑ 有 logo 图之后换成：<img class="banner-logo" src="img/aftertaste/xxx-logo.png" alt="Aftertaste logo"> -->
+    <img class="banner-logo" src="img/aftertaste/aftertaste-logo.png" alt="Aftertaste logo">
     <div class="banner-tag">2.5D Narrative Platformer</div>
     <p class="banner-desc">
       <!-- ↓ 一两句话简介，之后替换 -->
@@ -96,10 +96,59 @@
   </div>
 </div>
 
-<!-- 02 SECTION -->
-<div class="section">
+<!-- 02 CHARACTER DESIGN: TAMI（三阶段滚动叙事，同 insync Omu）-->
+<div class="section" id="character-design">
   <div class="section-head">
     <span class="section-num">02</span>
+    <h2 class="section-title">Character Design</h2>
+  </div>
+
+  <div class="design-scroll">
+    <div class="ds-sticky">
+      <div class="ds-text">
+        <div class="ds-kicker">CHARACTER DESIGN</div>
+        <div class="ds-title">Tami</div>
+        <!-- ↓ 三段阶段说明文字自己改 -->
+        <div class="ds-stage-text is-active">
+          <h4>01 — Sketch</h4>
+          <p>Early exploration of Tami's silhouette, expressions, and personality.</p>
+        </div>
+        <div class="ds-stage-text">
+          <h4>02 — First Pass</h4>
+          <p>Refining proportions, costume, and the first full color palette.</p>
+        </div>
+        <div class="ds-stage-text">
+          <h4>03 — Final</h4>
+          <p>The final design — resolved shapes and colors, ready for animation and in-game implementation.</p>
+        </div>
+        <div class="ds-progress">
+          <span class="is-active">01 Sketch</span>
+          <span>02 First Pass</span>
+          <span>03 Final</span>
+        </div>
+      </div>
+      <div class="ds-visuals">
+        <figure class="is-active">
+          <img src="img/aftertaste/tami-design-1.png" alt="Early sketch of Tami exploring silhouette and personality">
+          <figcaption><strong>01 — Sketch</strong>Early exploration of Tami's silhouette, expressions, and personality.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/aftertaste/tami-design-2.png" alt="First pass of Tami's design refining proportions and colors">
+          <figcaption><strong>02 — First Pass</strong>Refining proportions, costume, and the first full color palette.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/aftertaste/tami-design-3.png" alt="Final design of Tami">
+          <figcaption><strong>03 — Final</strong>The final design — resolved shapes and colors, ready for animation and in-game implementation.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 03 SECTION -->
+<div class="section">
+  <div class="section-head">
+    <span class="section-num">03</span>
     <h2 class="section-title">Visual Development</h2>
   </div>
   <p class="section-desc">Sketches, iterations, and final artwork.</p>
@@ -114,10 +163,10 @@
   </div>
 </div>
 
-<!-- 03 SECTION -->
+<!-- 04 SECTION -->
 <div class="section">
   <div class="section-head">
-    <span class="section-num">03</span>
+    <span class="section-num">04</span>
     <h2 class="section-title">Process</h2>
   </div>
   <p class="section-desc">Behind the scenes — moodboards, prototypes, playtests, making-of.</p>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Pet Your Cat — Rowena Chen</title>
+<link rel="icon" type="image/png" href="./tab.png">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=DM+Sans:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/project.css">
+<link rel="preload" as="image" href="img/htpyc/htpyc_banner.png">
+<link rel="preload" as="image" href="img/htpyc/htpyc-logo.png">
+<style>
+/* ═══ HTPYC PALETTE: soft paper + apple green ═══ */
+:root {
+  --accent: #7cc41c;
+  --accent-hover: #578f0d;
+  --accent-soft: #d8efad;
+  --text: #2b3a18;
+  --muted: #93a87b;
+  --line: #2b3a18;
+  --bg: #f9fdf2;
+  --dot: #e4f2cd;
+  --nav-bg: rgba(249,253,242,0.9);
+  --footer-bg: #1a2410;
+  --footer-hover-text: #1a2410;
+  --footer-link-hover: var(--accent-soft);
+  --footer-icon-color: var(--accent-soft);
+  --cursor-hover-bg: rgba(124,196,28,0.12);
+  --cursor-hover-border: var(--accent-hover);
+  --box-placeholder: #c4dba0;
+  /* 图片平面化：无圆角/描边/阴影/hover 特效 */
+  --box-border: none;
+  --box-radius: 0;
+  --box-shadow: none;
+  --box-hover-transform: none;
+  --box-hover-shadow: none;
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"><div class="cursor-dot"></div></div>
+
+<nav>
+  <a id="nav-back" href="works.html" class="nav-back">← All Works</a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="works.html" class="nav-link">All Works</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="resume.pdf" class="nav-link">Resume</a>
+  </div>
+</nav>
+
+<!-- 顶部通栏 KV：固定不动，内容滚上来盖住（有 trailer 后在 .banner 上加 data-trailer="链接"） -->
+<div class="banner">
+  <img class="banner-bg" src="img/htpyc/htpyc_banner.png" alt="How to Pet Your Cat key art">
+  <div class="banner-center">
+    <img class="banner-logo" src="img/htpyc/htpyc-logo.png" alt="How to Pet Your Cat logo">
+    <div class="banner-tag">Game</div>
+    <p class="banner-desc">
+      <!-- ↓ 一两句话简介，之后替换 -->
+      One or two sentences that hook the reader — what this game is and why it's charming.
+    </p>
+  </div>
+</div>
+<div class="banner-spacer"></div>
+
+<!-- 从这里开始的内容盖在 KV 上滚动 -->
+<div class="page-content">
+
+<!-- 项目信息（紧凑双列，内容待补）-->
+<div class="info-table">
+  <div class="info-item"><span class="info-label">DURATION</span><span class="info-value">TBD</span></div>
+  <div class="info-item"><span class="info-label">PLATFORM</span><span class="info-value">TBD</span></div>
+  <div class="info-item"><span class="info-label">ENGINE</span><span class="info-value">TBD</span></div>
+  <div class="info-item"><span class="info-label">TEAM SIZE</span><span class="info-value">TBD</span></div>
+  <div class="info-item wide"><span class="info-label">ROLE</span><span class="info-value"><em>TBD</em></span></div>
+  <div class="info-item wide"><span class="info-label">GENRE</span><span class="info-value">TBD</span></div>
+</div>
+
+<!-- 01 OVERVIEW -->
+<div class="section" id="overview">
+  <div class="section-head">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Overview</h2>
+  </div>
+  <p class="section-desc">
+    Background of the project — the concept, the audience, your goal. A short paragraph is enough.
+  </p>
+  <div class="img-row c1">
+    <div class="img-box wide">key visual / screenshot</div>
+  </div>
+</div>
+
+<!-- 02 SECTION -->
+<div class="section">
+  <div class="section-head">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Visual Development</h2>
+  </div>
+  <p class="section-desc">Sketches, iterations, and final artwork.</p>
+  <div class="img-row c2">
+    <div class="img-box">image 1</div>
+    <div class="img-box">image 2</div>
+  </div>
+  <div class="img-row c3">
+    <div class="img-box">image 3</div>
+    <div class="img-box">image 4</div>
+    <div class="img-box">image 5</div>
+  </div>
+</div>
+
+<!-- 03 SECTION -->
+<div class="section">
+  <div class="section-head">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Process</h2>
+  </div>
+  <p class="section-desc">Behind the scenes — moodboards, prototypes, playtests, making-of.</p>
+  <div class="img-row c1">
+    <div class="img-box wide">process / moodboard</div>
+  </div>
+  <div class="img-row c2">
+    <div class="img-box">making of 1</div>
+    <div class="img-box">making of 2</div>
+  </div>
+</div>
+
+<a href="alibi.html" class="next-project">
+  <div>
+    <div class="next-label">NEXT PROJECT</div>
+    <div class="next-title">Alibi</div>
+  </div>
+  <div class="next-arrow">→</div>
+</a>
+
+<div class="contact-bar">
+  <span class="contact-bar-icon">✦</span>
+  <span class="contact-bar-text">Contact Me</span>
+  <span class="contact-bar-sep">/</span>
+  <a href="mailto:rowenach@usc.edu">rowenach@usc.edu</a>
+  <span class="contact-bar-sep">/</span>
+  <a href="tel:+16266629366">+1 626 662 9366</a>
+  <span class="contact-bar-icon">✦</span>
+</div>
+
+</div><!-- /page-content -->
+
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script src="js/common.js"></script>
+</body>
+</html>

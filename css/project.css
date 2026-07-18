@@ -196,6 +196,74 @@
 }
 .next-arrow { font-family: 'VT323', monospace; font-size: 52px; }
 
+/* ───────── 滚动叙事组件 design-scroll（三阶段角色设计等）─────────
+   用法：.design-scroll > .ds-sticky > [.ds-text(kicker/title/stage-texts/progress) + .ds-visuals(figures)]
+   桌面端 300vh 滚动切换阶段；移动端 / reduced-motion 自动纵向平铺显示 figcaption
+   JS 在 common.js，自动绑定所有 .design-scroll */
+.design-scroll { height: 300vh; }
+.ds-sticky {
+  position: sticky; top: 0; height: 100vh;
+  display: grid; grid-template-columns: 32% 1fr;
+  align-items: center; gap: 36px;
+  padding: 90px 0 40px;
+}
+.ds-text { text-align: left; }
+.ds-kicker { font-family: 'VT323', monospace; font-size: 16px; letter-spacing: 3px; color: var(--accent-hover, var(--accent)); margin-bottom: 10px; }
+.ds-title {
+  font-family: var(--font-display, 'Space Grotesk', sans-serif);
+  font-weight: var(--font-display-weight, 700);
+  font-size: clamp(32px, 4vw, 54px); text-transform: uppercase;
+  line-height: 1; margin-bottom: 26px;
+}
+.ds-stage-text { display: none; }
+.ds-stage-text.is-active { display: block; animation: dsFade 0.8s ease; }
+@keyframes dsFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.ds-stage-text h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 17px; letter-spacing: 0.5px; color: var(--accent-hover, var(--accent)); margin-bottom: 10px; }
+.ds-stage-text p { font-size: 14px; color: var(--text); line-height: 1.8; max-width: 340px; }
+.ds-progress { display: flex; gap: 22px; margin-top: 32px; }
+.ds-progress span {
+  font-family: 'VT323', monospace; font-size: 15px; letter-spacing: 1.5px;
+  color: var(--muted); opacity: 0.75;
+  padding-top: 8px; border-top: 1px solid var(--line);
+  min-width: 74px;
+  transition: color 0.5s ease, border-color 0.5s ease, opacity 0.5s ease;
+}
+.ds-progress span.is-active { color: var(--accent-hover, var(--accent)); border-top-color: var(--accent); opacity: 1; }
+.ds-visuals { position: relative; height: min(78vh, 640px); }
+.ds-visuals figure {
+  position: absolute; inset: 0; margin: 0;
+  opacity: 0; transform: scale(0.98);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.ds-visuals figure.is-active { opacity: 1; transform: scale(1); }
+.ds-visuals img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.ds-visuals figcaption { display: none; }
+.ds-outro { max-width: 720px; padding-top: 48px; }
+.ds-outro p { font-size: 14.5px; color: var(--text); line-height: 1.9; margin-bottom: 18px; }
+
+@media (max-width: 760px) {
+  .design-scroll { height: auto; }
+  .ds-sticky { position: static; height: auto; display: block; padding: 0; }
+  .ds-title { margin-bottom: 20px; }
+  .ds-stage-text, .ds-progress { display: none !important; }
+  .ds-visuals { height: auto; }
+  .ds-visuals figure { position: static; opacity: 1; transform: none; margin-bottom: 36px; }
+  .ds-visuals img { height: auto; max-height: 70vh; }
+  .ds-visuals figcaption { display: block; font-size: 13.5px; color: var(--muted); line-height: 1.7; margin-top: 10px; }
+  .ds-visuals figcaption strong { display: block; font-family: 'VT323', monospace; font-weight: 400; font-size: 15px; letter-spacing: 1.5px; color: var(--accent-hover, var(--accent)); margin-bottom: 4px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .design-scroll { height: auto; }
+  .ds-sticky { position: static; height: auto; display: block; padding: 0; }
+  .ds-stage-text, .ds-progress { display: none !important; }
+  .ds-stage-text.is-active { animation: none; }
+  .ds-visuals { height: auto; }
+  .ds-visuals figure { position: static; opacity: 1; transform: none; transition: none; margin-bottom: 36px; }
+  .ds-visuals img { height: auto; max-height: 70vh; }
+  .ds-visuals figcaption { display: block; font-size: 13.5px; color: var(--muted); line-height: 1.7; margin-top: 10px; }
+  .ds-visuals figcaption strong { display: block; font-family: 'VT323', monospace; font-weight: 400; font-size: 15px; letter-spacing: 1.5px; color: var(--accent-hover, var(--accent)); margin-bottom: 4px; }
+}
+
 /* ───────── MOBILE ───────── */
 @media (max-width: 760px) {
   .hero { padding: 110px 20px 0; }
