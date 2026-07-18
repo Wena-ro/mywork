@@ -8,6 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=VT323&family=DM+Sans:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/project.css">
+<link rel="preload" as="image" href="img/insync/insync-topkv.png">
+<link rel="preload" as="image" href="img/insync/insync-logo.png">
 <style>
 /* ═══ INSYNC PALETTE: black + blue-leaning blue-violet ═══ */
 :root {
@@ -82,37 +84,45 @@
 </head>
 <body>
 
-<div class="cursor" id="cursor"><div class="cursor-dot"></div></div>
+<div class="cursor" id="cursor">
+  <div class="cursor-dot"></div>
+  <div class="cursor-label">PLAY TRAILER →</div>
+</div>
 
 <nav>
   <a id="nav-back" href="works.html" class="nav-back">← All Works</a>
   <div class="nav-links">
     <a href="index.html" class="nav-link">Home</a>
-    <a href="works.html" class="nav-link">All Works</a>
+    <a href="works.html" class="nav-link">Works</a>
     <a href="about.html" class="nav-link">About</a>
     <a href="resume.pdf" class="nav-link">Resume</a>
   </div>
 </nav>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-tag">Immersive Installation · 2024</div>
-  <h1 class="hero-title">InSync</h1>
-  <p class="hero-desc">
-    A sensory experience in darkness — visitors feel their way through a tactile maze
-    guided by touch and sound, until the path opens into an encounter with Omu,
-    a living, mythical animatronic presence that answers touch with warmth.
-  </p>
-  <div class="hero-meta">
-    <!-- ↓ 改成你的实际信息 -->
-    <span class="meta-chip">Role: TBD</span>
-    <span class="meta-chip">Team: TBD</span>
-    <span class="meta-chip">Installation</span>
+<!-- 顶部通栏 KV：固定不动，内容滚上来盖住；hover 出 PLAY TRAILER，点击弹层播放 -->
+<div class="banner" data-trailer="https://youtu.be/-mhhiLOMKMw">
+  <img class="banner-bg" src="img/insync/insync-topkv.png" alt="InSync key art">
+  <div class="banner-center">
+    <img class="banner-logo" src="img/insync/insync-logo.png" alt="InSync logo">
+    <div class="banner-tag">Immersive Installation</div>
+    <p class="banner-desc">
+      A sensory experience in darkness — visitors feel their way through a tactile maze
+      guided by touch and sound, until the path opens into an encounter with Omu,
+      a living, mythical animatronic presence that answers touch with warmth.
+    </p>
   </div>
+</div>
+<div class="banner-spacer"></div>
 
-  <div class="key-visual">
-    <iframe src="https://www.youtube.com/embed/-mhhiLOMKMw" title="InSync Trailer" allowfullscreen></iframe>
-  </div>
+<!-- 从这里开始的内容盖在 KV 上滚动 -->
+<div class="page-content">
+
+<!-- 项目信息（紧凑双列，内容待补）-->
+<div class="info-table">
+  <div class="info-item"><span class="info-label">DURATION</span><span class="info-value">2024 · TBD</span></div>
+  <div class="info-item"><span class="info-label">TEAM SIZE</span><span class="info-value">TBD</span></div>
+  <div class="info-item wide"><span class="info-label">ROLE</span><span class="info-value"><em>TBD</em></span></div>
+  <div class="info-item wide"><span class="info-label">TYPE</span><span class="info-value">Immersive Installation, Tactile Maze, Animatronics</span></div>
 </div>
 
 <!-- 01 OVERVIEW -->
@@ -270,6 +280,8 @@
   <a href="tel:+16266629366">+1 626 662 9366</a>
   <span class="contact-bar-icon">✦</span>
 </div>
+
+</div><!-- /page-content -->
 
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
