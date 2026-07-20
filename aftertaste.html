@@ -36,6 +36,10 @@
   --box-hover-transform: none;
   --box-hover-shadow: none;
 }
+.credit-list { max-width: 820px; border-top: 1px solid var(--line); }
+.credit-row { display: grid; grid-template-columns: 180px 1fr; gap: 24px; padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 13.5px; line-height: 1.7; }
+.credit-row strong { color: var(--accent-hover); font-family: 'VT323', monospace; font-size: 15px; font-weight: 400; letter-spacing: 1.4px; text-transform: uppercase; }
+@media (max-width: 760px) { .credit-row { grid-template-columns: 1fr; gap: 4px; } }
 </style>
 </head>
 <body>
@@ -130,15 +134,15 @@
       <div class="ds-visuals">
         <figure class="is-active">
           <img src="img/aftertaste/tami-design-1.png" alt="Early sketch of Tami exploring silhouette and personality">
-          <figcaption><strong>01 — Sketch</strong>Early exploration of Tami's silhouette, expressions, and personality.</figcaption>
+          <figcaption><strong>01 — Initial Design</strong>Initial character design by Rowena Chen.</figcaption>
         </figure>
         <figure>
           <img src="img/aftertaste/tami-design-2.png" alt="First pass of Tami's design refining proportions and colors">
-          <figcaption><strong>02 — First Pass</strong>Refining proportions, costume, and the first full color palette.</figcaption>
+          <figcaption><strong>02 — First Pass</strong>First pass by Mingye Fan; revision direction and feedback by Rowena Chen.</figcaption>
         </figure>
         <figure>
           <img src="img/aftertaste/tami-design-3.png" alt="Final design of Tami">
-          <figcaption><strong>03 — Final</strong>The final design — resolved shapes and colors, ready for animation and in-game implementation.</figcaption>
+          <figcaption><strong>03 — Final</strong>Final execution by Mingye Fan, incorporating revision feedback from Rowena Chen.</figcaption>
         </figure>
       </div>
     </div>
@@ -176,6 +180,17 @@
   <div class="img-row c2">
     <div class="img-box">making of 1</div>
     <div class="img-box">making of 2</div>
+  </div>
+</div>
+
+<!-- 05 CREDITS -->
+<div class="section" id="credits">
+  <div class="section-head">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Selected Credits</h2>
+  </div>
+  <div class="credit-list">
+    <div class="credit-row"><strong>Tami Design</strong><span>Initial design — Rowena Chen · First pass — Mingye Fan · Revision direction and feedback — Rowena Chen · Final execution — Mingye Fan</span></div>
   </div>
 </div>
 

@@ -124,6 +124,30 @@
   border-left: 1px solid var(--accent); color: var(--text);
   font-size: 14.5px; line-height: 1.9;
 }
+.official-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--accent-hover); font-weight: 600; text-decoration: none;
+  border-bottom: 1px solid var(--accent); padding-bottom: 2px;
+}
+.official-link:hover { color: var(--text); }
+.build-details {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 36px;
+}
+.build-detail { border-top: 1px solid var(--line); padding-top: 16px; }
+.build-detail h3 {
+  font-family: 'Space Grotesk', sans-serif; font-size: 17px;
+  color: var(--accent-hover); margin-bottom: 10px; text-transform: uppercase;
+}
+.build-detail p { font-size: 13.5px; line-height: 1.8; color: var(--text); }
+.build-media { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; }
+.build-media img { width: 100%; display: block; background: var(--panel); }
+.poster-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 32px; }
+.poster-compare img { width: 100%; display: block; aspect-ratio: 16 / 9; object-fit: cover; }
+.poster-label { margin-top: 10px; font-family: 'VT323', monospace; font-size: 16px; letter-spacing: 1.5px; color: var(--muted); }
+.poster-label em { color: var(--accent-hover); font-style: normal; }
+.credit-list { max-width: 820px; border-top: 1px solid var(--line); }
+.credit-row { display: grid; grid-template-columns: 180px 1fr; gap: 24px; padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 13.5px; line-height: 1.7; }
+.credit-row strong { color: var(--accent-hover); font-family: 'VT323', monospace; font-size: 15px; font-weight: 400; letter-spacing: 1.4px; text-transform: uppercase; }
 
 @media (max-width: 760px) {
   .principles { grid-template-columns: 1fr; gap: 40px; }
@@ -131,6 +155,8 @@
   .process-feature figure:last-child, .process-grid figure, .with-omu-grid figure { aspect-ratio: auto; }
   .process-feature img, .process-grid img, .playtest-grid img, .with-omu-grid img { height: auto; }
   .playtest-hero, .playtest-side { min-height: 0; grid-row: auto; }
+  .build-details, .build-media, .poster-compare { grid-template-columns: 1fr; }
+  .credit-row { grid-template-columns: 1fr; gap: 4px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .principle { opacity: 1; transform: none; transition: none; }
@@ -174,10 +200,13 @@
 
 <!-- 项目信息（紧凑双列，内容待补）-->
 <div class="info-table">
-  <div class="info-item"><span class="info-label">DURATION</span><span class="info-value">2024 · TBD</span></div>
-  <div class="info-item"><span class="info-label">TEAM SIZE</span><span class="info-value">TBD</span></div>
-  <div class="info-item wide"><span class="info-label">ROLE</span><span class="info-value"><em>TBD</em></span></div>
-  <div class="info-item wide"><span class="info-label">TYPE</span><span class="info-value">Immersive Installation, Tactile Maze, Animatronics</span></div>
+  <div class="info-item"><span class="info-label">DURATION</span><span class="info-value">May 2024 – May 2025</span></div>
+  <div class="info-item"><span class="info-label">TEAM SIZE</span><span class="info-value">22</span></div>
+  <div class="info-item"><span class="info-label">LENGTH</span><span class="info-value">10–15 min</span></div>
+  <div class="info-item"><span class="info-label">FORM</span><span class="info-value">15 × 15 ft² interactive maze with an animatronic creature</span></div>
+  <div class="info-item wide"><span class="info-label">ROLE</span><span class="info-value"><em>Art Lead, Installation Artist</em></span></div>
+  <div class="info-item wide"><span class="info-label">GENRE</span><span class="info-value">Interactive Installation, Themed Entertainment, Immersive Experience</span></div>
+  <div class="info-item wide"><span class="info-label">WEBSITE</span><span class="info-value"><a class="official-link" href="https://www.dachu-interactive.com/insync-maze" target="_blank" rel="noopener noreferrer">Visit Official Website ↗</a></span></div>
 </div>
 
 <!-- 01 OVERVIEW -->
@@ -228,7 +257,7 @@
 <div class="section" id="maze">
   <div class="section-head">
     <span class="section-num">03</span>
-    <h2 class="section-title">The Path Into the Unknown</h2>
+    <h2 class="section-title">Maze Experience Design</h2>
   </div>
   <p class="section-desc">
     Hidden paths, sonic triggers, and shifting landscapes — the maze is navigated by hands
@@ -249,7 +278,7 @@
 <div class="section" id="creature-design">
   <div class="section-head">
     <span class="section-num">04</span>
-    <h2 class="section-title">Creature Design</h2>
+    <h2 class="section-title">Omu Creature Design</h2>
   </div>
 
   <div class="design-scroll">
@@ -303,7 +332,7 @@
 <div class="section" id="storyboard">
   <div class="section-head">
     <span class="section-num">05</span>
-    <h2 class="section-title">Shaping the Emotional Journey</h2>
+    <h2 class="section-title">Storyboard Development</h2>
   </div>
   <p class="section-desc">
     The storyboard became a tool for designing more than sequence. Across three passes,
@@ -356,7 +385,7 @@
 <div class="section" id="process">
   <div class="section-head">
     <span class="section-num">06</span>
-    <h2 class="section-title">Building a Living Presence</h2>
+    <h2 class="section-title">Fabrication Process</h2>
   </div>
   <p class="section-desc">
     Translating Omu from a drawing into a body meant solving for scale, softness, structure,
@@ -377,12 +406,68 @@
     <figure class="case-figure"><img src="img/insync/process-2.jpg" alt="Close-up of Omu's finished face during fabrication"></figure>
     <figure class="case-figure"><img src="img/insync/process-3.jpg" alt="Omu's large body structure under construction in the studio"></figure>
   </div>
+  <div class="build-details">
+    <div class="build-detail">
+      <h3>Face Construction</h3>
+      <p>Omu's face was built with practical creature-costume techniques. A 3D-printed skull created the structure, while hand-shaped fur, painted teeth, soft fabric layers, wooden supports, and mechanical joints produced natural head movement.</p>
+    </div>
+    <div class="build-detail">
+      <h3>Body &amp; Breathing</h3>
+      <p>Soft foam pads the body, with thicker edges protecting the wooden frame and a thinner center allowing an internal air pump to expand the surface. This breathing motion reinforces Omu's warm, approachable presence.</p>
+    </div>
+    <div class="build-detail">
+      <h3>Tail Mechanism</h3>
+      <p>A flexible fabric surface wraps a 3D-printed skeleton. Internal fishing lines control direction, creating a biomimetic movement inspired by fish tails and tentacles.</p>
+    </div>
+  </div>
+  <div class="build-media">
+    <img src="img/insync/omu-head.gif" alt="Omu's mechanical head moving during a fabrication test">
+    <img src="img/insync/omu-tail.gif" alt="Omu's articulated tail moving during a fabrication test">
+  </div>
 </div>
 
-<!-- 07 PLAYTEST -->
-<div class="section" id="playtest">
+<!-- 07 POSTER ART DIRECTION -->
+<div class="section" id="poster-direction">
   <div class="section-head">
     <span class="section-num">07</span>
+    <h2 class="section-title">Marketing Poster Art Direction</h2>
+  </div>
+  <p class="section-desc">As Art Lead, I revised the original poster to improve hierarchy, readability, atmosphere, and alignment with InSync's blue-violet visual identity. The comparison shows how targeted art-direction feedback strengthened the campaign without discarding the original composition.</p>
+  <div class="poster-compare">
+    <figure class="case-figure"><img src="img/insync/poster-origin.jpg" alt="Original InSync marketing poster by Shunran Shen"><figcaption class="poster-label">ORIGINAL — Shunran Shen</figcaption></figure>
+    <figure class="case-figure"><img src="img/insync/poster-fixed.jpg" alt="Revised InSync marketing poster by Rowena Chen"><figcaption class="poster-label"><em>ART DIRECTION REVISION — Rowena Chen</em></figcaption></figure>
+  </div>
+</div>
+
+<!-- 08 TAROT CARD -->
+<div class="section" id="tarot-card">
+  <div class="section-head">
+    <span class="section-num">08</span>
+    <h2 class="section-title">Tarot Card Design</h2>
+  </div>
+  <p class="section-desc">The Judgement card visualizes Omu's call as a moment of awakening. Across three phases, the composition shifted toward a clearer interaction between Omu and the player, stronger focal lighting, and a print-ready visual hierarchy.</p>
+  <div class="design-scroll">
+    <div class="ds-sticky">
+      <div class="ds-text">
+        <div class="ds-kicker">VISUAL DEVELOPMENT</div><div class="ds-title">Judgement</div>
+        <div class="ds-stage-text is-active"><h4>01 — Sketch</h4><p>I established Omu's horn call, the human figure, and the tail as a visual path linking creature and player.</p></div>
+        <div class="ds-stage-text"><h4>02 — First Pass</h4><p>The first pass adapted the idea to a limited print palette and shifted the gesture toward direct interaction.</p></div>
+        <div class="ds-stage-text"><h4>03 — Final</h4><p>I refined scale, reduced visual clutter, and added light particles and guiding rays to strengthen the focal point.</p></div>
+        <div class="ds-progress"><span class="is-active">01 Sketch</span><span>02 First Pass</span><span>03 Final</span></div>
+      </div>
+      <div class="ds-visuals">
+        <figure class="is-active"><img src="img/insync/taro-sketch.png" alt="Judgement tarot card sketch by Rowena Chen"><figcaption><strong>01 — Sketch</strong>Concept and sketch by Rowena Chen.</figcaption></figure>
+        <figure><img src="img/insync/taro-firstpass.png" alt="First pass of the Judgement tarot card by Shunran Shen"><figcaption><strong>02 — First Pass</strong>First pass by Shunran Shen.</figcaption></figure>
+        <figure><img src="img/insync/taro-final.png" alt="Final Judgement tarot card by Rowena Chen"><figcaption><strong>03 — Final</strong>Final revision by Rowena Chen.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 09 PLAYTEST -->
+<div class="section" id="playtest">
+  <div class="section-head">
+    <span class="section-num">09</span>
     <h2 class="section-title">Learning Through Touch</h2>
   </div>
   <p class="section-desc">
@@ -399,10 +484,10 @@
   <p class="case-caption"><strong>OBSERVATION</strong>Players approached cautiously, then shifted into broader and more confident gestures as Omu became familiar.</p>
 </div>
 
-<!-- 08 PERSONAL EPILOGUE -->
+<!-- 10 PERSONAL EPILOGUE -->
 <div class="section" id="with-omu">
   <div class="section-head">
-    <span class="section-num">08</span>
+    <span class="section-num">10</span>
     <h2 class="section-title">A Quiet Moment with Omu</h2>
   </div>
   <p class="section-desc">
@@ -415,6 +500,17 @@
     <figure class="case-figure"><img src="img/insync/witho-2.jpg" alt="Rowena posing beside Omu in two candid photographs"></figure>
   </div>
   <p class="personal-note">For me, the most meaningful part of InSync was watching something imagined on paper become a presence that people could meet, trust, and remember.</p>
+</div>
+
+<!-- 11 CREDITS -->
+<div class="section" id="credits">
+  <div class="section-head"><span class="section-num">11</span><h2 class="section-title">Selected Credits</h2></div>
+  <div class="credit-list">
+    <div class="credit-row"><strong>Omu Design</strong><span>Sketch, first pass, and final design — Rowena Chen</span></div>
+    <div class="credit-row"><strong>Storyboard</strong><span>Initial storyboard — Shunran Shen · Revision and art-direction notes — Rowena Chen · Final execution — Shunran Shen</span></div>
+    <div class="credit-row"><strong>Marketing Poster</strong><span>Original artwork — Shunran Shen · Art-direction revision — Rowena Chen</span></div>
+    <div class="credit-row"><strong>Judgement Tarot</strong><span>Sketch — Rowena Chen · First pass — Shunran Shen · Final revision — Rowena Chen</span></div>
+  </div>
 </div>
 
 <a href="aftertaste.html" class="next-project">
