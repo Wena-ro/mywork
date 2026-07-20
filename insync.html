@@ -78,7 +78,9 @@
 .overview-poster { margin: 0; }
 .overview-poster img { width: 100%; height: auto; display: block; }
 .overview-copy .section-desc { margin-bottom: 0; }
-.info-item.website { grid-column: 2; }
+.section-head { align-items: center; gap: 12px; }
+.section-num { font-size: 25px; min-width: 30px; line-height: 1; }
+.section-title { line-height: 1.05; }
 
 .playtest-grid, .with-omu-grid { margin-top: 32px; }
 .playtest-grid img, .with-omu-grid img { width: 100%; height: 100%; display: block; object-fit: cover; }
@@ -93,7 +95,7 @@
   display: block; margin-bottom: 3px;
 }
 .media-credit { margin-top: 9px; text-align: right; color: var(--muted); font-family: 'VT323', monospace; font-size: 14px; letter-spacing: 1.2px; }
-.sticky-credit { position: absolute; right: 0; bottom: 0; z-index: 3; color: var(--muted); font-family: 'VT323', monospace; font-size: 14px; letter-spacing: 1.2px; text-align: right; }
+.sticky-credit { position: absolute; right: 0; bottom: 8px; z-index: 3; color: var(--muted); font-family: 'VT323', monospace; font-size: 14px; letter-spacing: 1.2px; text-align: right; }
 
 .fabrication-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 18px; margin-top: 32px; align-items: start; }
 .face-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -143,7 +145,6 @@
   .principles { grid-template-columns: 1fr; gap: 40px; }
   .overview-layout, .fabrication-layout, .full-body-build, .playtest-grid, .with-omu-grid, .poster-compare, .tarot-grid { grid-template-columns: 1fr; }
   .overview-poster { width: min(70vw, 300px); }
-  .info-item.website { grid-column: auto; }
   .with-omu-grid figure { aspect-ratio: auto; }
   .playtest-grid img, .with-omu-grid img { height: auto; }
   .playtest-hero, .playtest-side { min-height: 0; grid-row: auto; }
@@ -197,8 +198,8 @@
   <div class="info-item"><span class="info-label">TEAM SIZE</span><span class="info-value">22</span></div>
   <div class="info-item"><span class="info-label">LENGTH</span><span class="info-value">10–15 min</span></div>
   <div class="info-item"><span class="info-label">FORM</span><span class="info-value">15 × 15 ft² interactive maze with an animatronic creature</span></div>
-  <div class="info-item website"><span class="info-label">WEBSITE</span><span class="info-value"><a class="official-link" href="https://www.dachu-interactive.com/insync-maze" target="_blank" rel="noopener noreferrer">Visit Official Website ↗</a></span></div>
-  <div class="info-item wide"><span class="info-label">ROLE</span><span class="info-value"><em>Art Lead, Installation Artist</em></span></div>
+  <div class="info-item"><span class="info-label">ROLE</span><span class="info-value"><em>Art Lead, Installation Artist</em></span></div>
+  <div class="info-item"><span class="info-label">WEBSITE</span><span class="info-value"><a class="official-link" href="https://www.dachu-interactive.com/insync-maze" target="_blank" rel="noopener noreferrer">Visit Official Website ↗</a></span></div>
   <div class="info-item wide"><span class="info-label">GENRE</span><span class="info-value">Interactive Installation, Themed Entertainment, Immersive Experience</span></div>
 </div>
 
@@ -409,7 +410,7 @@
     <figure class="case-figure"><img src="img/insync/witho-1.jpg" alt="Rowena resting with the completed Omu installation"></figure>
     <figure class="case-figure"><img src="img/insync/witho-2.jpg" alt="Rowena posing beside Omu in two candid photographs"></figure>
   </div>
-  <p class="personal-note">For me, the most meaningful part of InSync was watching something imagined on paper become a presence that people could meet, trust, and remember.</p>
+  <p class="personal-note">Thank you for the encounter, Omu. And thank you to Dachu Interactive for bringing this experience to life.</p>
 </div>
 
 <a href="aftertaste.html" class="next-project">
