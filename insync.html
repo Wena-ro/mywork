@@ -44,7 +44,6 @@
   --box-shadow: none;
   --box-hover-transform: none;
   --box-hover-shadow: none;
-  --box-placeholder: #47435f;
   --backtop-bg: var(--panel);
   --backtop-shadow: var(--accent-soft);
   --backtop-hover-color: #0a0a14;
@@ -145,6 +144,16 @@
 .poster-compare img { width: 100%; display: block; aspect-ratio: 16 / 9; object-fit: cover; }
 .poster-label { margin-top: 10px; font-family: 'VT323', monospace; font-size: 16px; letter-spacing: 1.5px; color: var(--muted); }
 .poster-label em { color: var(--accent-hover); font-style: normal; }
+.vertical-poster {
+  display: grid; grid-template-columns: minmax(240px, 420px) minmax(0, 420px);
+  justify-content: center; align-items: center; gap: 56px; margin-top: 52px;
+}
+.vertical-poster img { width: 100%; display: block; }
+.vertical-poster-copy h3 {
+  font-family: 'Space Grotesk', sans-serif; font-size: 22px;
+  text-transform: uppercase; color: var(--accent-hover); margin-bottom: 14px;
+}
+.vertical-poster-copy p { font-size: 14px; line-height: 1.85; color: var(--text); }
 .credit-list { max-width: 820px; border-top: 1px solid var(--line); }
 .credit-row { display: grid; grid-template-columns: 180px 1fr; gap: 24px; padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 13.5px; line-height: 1.7; }
 .credit-row strong { color: var(--accent-hover); font-family: 'VT323', monospace; font-size: 15px; font-weight: 400; letter-spacing: 1.4px; text-transform: uppercase; }
@@ -156,6 +165,8 @@
   .process-feature img, .process-grid img, .playtest-grid img, .with-omu-grid img { height: auto; }
   .playtest-hero, .playtest-side { min-height: 0; grid-row: auto; }
   .build-details, .build-media, .poster-compare { grid-template-columns: 1fr; }
+  .vertical-poster { grid-template-columns: 1fr; gap: 22px; }
+  .vertical-poster figure { max-width: 420px; }
   .credit-row { grid-template-columns: 1fr; gap: 4px; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -180,7 +191,7 @@
   </div>
 </nav>
 
-<!-- 顶部通栏 KV：固定不动，内容滚上来盖住；hover 出 PLAY TRAILER，点击弹层播放 -->
+<!-- 顶部通栏 KV：固定不动，内容滚上来盖住 -->
 <div class="banner" data-trailer="https://youtu.be/-mhhiLOMKMw">
   <img class="banner-bg" src="img/insync/insync-topkv.png" alt="InSync key art">
   <div class="banner-center">
@@ -191,6 +202,7 @@
       guided by touch and sound, until the path opens into an encounter with Omu,
       a living, mythical animatronic presence that answers touch with warmth.
     </p>
+    <button class="trailer-button" type="button" data-trailer="https://youtu.be/-mhhiLOMKMw" aria-label="Play the InSync trailer">PLAY TRAILER →</button>
   </div>
 </div>
 <div class="banner-spacer"></div>
@@ -220,9 +232,6 @@
     sitting, stretching — becomes a way of sensing. Pressure sensors trigger audio cues that
     guide the journey through shifting textures of moss, leaves, and metal.
   </p>
-  <div class="img-row c1">
-    <div class="img-box wide">key visual / installation shot</div>
-  </div>
 </div>
 
 <!-- 02 EXPERIENCE PRINCIPLES -->
@@ -263,15 +272,6 @@
     Hidden paths, sonic triggers, and shifting landscapes — the maze is navigated by hands
     and bodies alone, with sound as the only light.
   </p>
-  <div class="img-row c2">
-    <div class="img-box">maze detail 1</div>
-    <div class="img-box">maze detail 2</div>
-  </div>
-  <div class="img-row c3">
-    <div class="img-box">texture 1</div>
-    <div class="img-box">texture 2</div>
-    <div class="img-box">texture 3</div>
-  </div>
 </div>
 
 <!-- 04 OMU CREATURE DESIGN -->
@@ -437,6 +437,16 @@
     <figure class="case-figure"><img src="img/insync/poster-origin.jpg" alt="Original InSync marketing poster by Shunran Shen"><figcaption class="poster-label">ORIGINAL — Shunran Shen</figcaption></figure>
     <figure class="case-figure"><img src="img/insync/poster-fixed.jpg" alt="Revised InSync marketing poster by Rowena Chen"><figcaption class="poster-label"><em>ART DIRECTION REVISION — Rowena Chen</em></figcaption></figure>
   </div>
+  <div class="vertical-poster">
+    <figure class="case-figure">
+      <img src="img/insync/poster-vertical.jpg" alt="Vertical InSync exhibition poster designed by Rowena Chen">
+      <figcaption class="poster-label"><em>VERTICAL POSTER — Rowena Chen</em></figcaption>
+    </figure>
+    <div class="vertical-poster-copy">
+      <h3>Vertical Exhibition Poster</h3>
+      <p>I designed the vertical-format poster for exhibition use, adapting InSync's visual identity to a taller composition while preserving a clear title hierarchy and the sense of entering an unfamiliar, tactile environment.</p>
+    </div>
+  </div>
 </div>
 
 <!-- 08 TAROT CARD -->
@@ -509,6 +519,7 @@
     <div class="credit-row"><strong>Omu Design</strong><span>Sketch, first pass, and final design — Rowena Chen</span></div>
     <div class="credit-row"><strong>Storyboard</strong><span>Initial storyboard — Shunran Shen · Revision and art-direction notes — Rowena Chen · Final execution — Shunran Shen</span></div>
     <div class="credit-row"><strong>Marketing Poster</strong><span>Original artwork — Shunran Shen · Art-direction revision — Rowena Chen</span></div>
+    <div class="credit-row"><strong>Vertical Poster</strong><span>Design and artwork — Rowena Chen</span></div>
     <div class="credit-row"><strong>Judgement Tarot</strong><span>Sketch — Rowena Chen · First pass — Shunran Shen · Final revision — Rowena Chen</span></div>
   </div>
 </div>

@@ -149,6 +149,14 @@
 .banner-tag::before { content: '✦ '; }
 .banner-tag::after { content: ' ✦'; }
 .banner-desc { font-size: 14.5px; line-height: 1.8; max-width: 640px; color: #fff; text-align: center; text-shadow: 0 2px 10px rgba(0,0,0,0.6); }
+.trailer-button {
+  display: none; align-items: center; justify-content: center;
+  margin-top: 18px; padding: 11px 18px;
+  border: 1px solid rgba(255,255,255,0.72); color: #fff;
+  background: rgba(10,10,20,0.45); backdrop-filter: blur(8px);
+  font-family: 'VT323', monospace; font-size: 17px; letter-spacing: 2px;
+  cursor: pointer;
+}
 .banner-spacer { height: clamp(380px, var(--banner-h, calc(100vh - 260px)), 880px); }
 .page-content {
   position: relative; z-index: 1;
@@ -251,6 +259,9 @@
   .ds-visuals img { height: auto; max-height: 70vh; }
   .ds-visuals figcaption { display: block; font-size: 13.5px; color: var(--muted); line-height: 1.7; margin-top: 10px; }
   .ds-visuals figcaption strong { display: block; font-family: 'VT323', monospace; font-weight: 400; font-size: 15px; letter-spacing: 1.5px; color: var(--accent-hover, var(--accent)); margin-bottom: 4px; }
+}
+@media (max-width: 1024px), (hover: none), (pointer: coarse) {
+  .trailer-button { display: inline-flex; }
 }
 @media (prefers-reduced-motion: reduce) {
   .design-scroll { height: auto; }

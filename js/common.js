@@ -64,7 +64,11 @@
       el.addEventListener('mouseenter', () => cursor.classList.add('play-mode'));
       el.addEventListener('mouseleave', () => cursor.classList.remove('play-mode'));
     }
-    el.addEventListener('click', () => openTrailer(el.dataset.trailer));
+    el.addEventListener('click', e => {
+      /* 嵌套在可点击 banner 内的移动端按钮只触发自身一次 */
+      if (e.target.closest('[data-trailer]') !== el) return;
+      openTrailer(el.dataset.trailer);
+    });
   });
 
   const backTop = document.getElementById('backTop');
