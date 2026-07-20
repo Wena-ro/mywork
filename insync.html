@@ -74,8 +74,63 @@
 
 /* 三阶段滚动叙事用 css/project.css 的 .design-scroll 组件 */
 
+/* ═══════ INSYNC CASE STUDY GALLERIES ═══════ */
+.process-feature,
+.process-grid,
+.playtest-grid,
+.with-omu-grid { margin-top: 32px; }
+
+.process-feature img,
+.process-grid img,
+.playtest-grid img,
+.with-omu-grid img {
+  width: 100%; height: 100%; display: block; object-fit: cover;
+}
+.process-feature {
+  display: grid; grid-template-columns: 1.35fr 0.65fr; gap: 16px;
+  align-items: start;
+}
+.process-feature figure:first-child { aspect-ratio: 4 / 3; }
+.process-feature figure:last-child { aspect-ratio: 4 / 3; }
+.process-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+}
+.process-grid figure { aspect-ratio: 4 / 3; }
+
+.case-figure { margin: 0; overflow: hidden; background: var(--panel); }
+.case-caption {
+  margin-top: 12px; font-size: 13px; line-height: 1.65; color: var(--muted);
+}
+.case-caption strong {
+  color: var(--accent-hover); font-family: 'VT323', monospace;
+  font-size: 15px; font-weight: 400; letter-spacing: 1.4px;
+  display: block; margin-bottom: 3px;
+}
+
+.playtest-grid {
+  display: grid; grid-template-columns: 0.78fr 1.22fr; gap: 16px;
+  align-items: stretch;
+}
+.playtest-hero { grid-column: 1 / -1; aspect-ratio: 2.1 / 1; }
+.playtest-grid figure:nth-child(2) { aspect-ratio: 0.83 / 1; }
+.playtest-grid figure:nth-child(3) { aspect-ratio: 1.3 / 1; }
+.playtest-grid .playtest-hero img { object-position: center; }
+.playtest-grid .playtest-side img { object-position: center; }
+
+.with-omu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.with-omu-grid figure { aspect-ratio: 4 / 3; }
+.personal-note {
+  max-width: 720px; margin-top: 28px; padding-left: 20px;
+  border-left: 1px solid var(--accent); color: var(--text);
+  font-size: 14.5px; line-height: 1.9;
+}
+
 @media (max-width: 760px) {
   .principles { grid-template-columns: 1fr; gap: 40px; }
+  .process-feature, .process-grid, .playtest-grid, .with-omu-grid { grid-template-columns: 1fr; }
+  .process-feature figure:last-child, .process-grid figure, .with-omu-grid figure { aspect-ratio: auto; }
+  .process-feature img, .process-grid img, .playtest-grid img, .with-omu-grid img { height: auto; }
+  .playtest-hero, .playtest-side { min-height: 0; grid-row: auto; }
 }
 @media (prefers-reduced-motion: reduce) {
   .principle { opacity: 1; transform: none; transition: none; }
@@ -222,15 +277,15 @@
       </div>
       <div class="ds-visuals">
         <figure class="is-active">
-          <img src="img/insync/omu-sketch.png" alt="Early sketch exploring Omu's silhouette through land, sea, and sky qualities">
+          <img src="img/insync/omu-design-1.png" alt="Early sketch exploring Omu's silhouette through land, sea, and sky qualities">
           <figcaption><strong>01 — Sketch</strong>Exploring Omu's silhouette through the three elemental qualities of land, sea, and sky.</figcaption>
         </figure>
         <figure>
-          <img src="img/insync/omu-first-pass.png" alt="First pass of Omu's design, refining proportions and gestures of connection">
+          <img src="img/insync/omu-design-2.png" alt="First pass of Omu's design, refining proportions and gestures of connection">
           <figcaption><strong>02 — First Pass</strong>Refining the creature's proportions and translating gestures of connection into its anatomy.</figcaption>
         </figure>
         <figure>
-          <img src="img/insync/omu-final.png" alt="Final design of Omu uniting creature, players, and environmental energy">
+          <img src="img/insync/omu-design-3.png" alt="Final design of Omu uniting creature, players, and environmental energy">
           <figcaption><strong>03 — Final</strong>Bringing the creature, players, and environmental energy together into one visual system.</figcaption>
         </figure>
       </div>
@@ -244,23 +299,122 @@
   </div>
 </div>
 
-<!-- 05 LAYOUT & STORYBOARD -->
-<div class="section" id="layout">
+<!-- 05 STORYBOARD DEVELOPMENT -->
+<div class="section" id="storyboard">
   <div class="section-head">
     <span class="section-num">05</span>
-    <h2 class="section-title">Layout &amp; Storyboard</h2>
+    <h2 class="section-title">Shaping the Emotional Journey</h2>
   </div>
   <p class="section-desc">
-    Guest flow through the installation, and the storyboard that maps the emotional arc
-    from uncertainty to acceptance.
+    The storyboard became a tool for designing more than sequence. Across three passes,
+    I clarified how color, rhythm, and the gesture of touch could carry players from
+    uncertainty in the dark toward trust, connection, and a hopeful return to light.
   </p>
-  <div class="img-row c1">
-    <div class="img-box wide contain">layout / guest flow diagram</div>
+
+  <div class="design-scroll">
+    <div class="ds-sticky">
+      <div class="ds-text">
+        <div class="ds-kicker">STORYBOARD DEVELOPMENT</div>
+        <div class="ds-title">From Fear to Trust</div>
+        <div class="ds-stage-text is-active">
+          <h4>01 — Narrative Foundation</h4>
+          <p>Mapping a journey from losing sight to discovering Omu through touch, then carrying that connection back into the world.</p>
+        </div>
+        <div class="ds-stage-text">
+          <h4>02 — Interaction &amp; Atmosphere</h4>
+          <p>Clarifying Omu's call, the entwining hand gesture, and the blue-violet language that distinguishes the cave encounter.</p>
+        </div>
+        <div class="ds-stage-text">
+          <h4>03 — Final Emotional Rhythm</h4>
+          <p>Strengthening contrast and panel progression so the final encounter lands as the emotional center of the experience.</p>
+        </div>
+        <div class="ds-progress">
+          <span class="is-active">01 Foundation</span>
+          <span>02 Revision</span>
+          <span>03 Final</span>
+        </div>
+      </div>
+      <div class="ds-visuals">
+        <figure class="is-active">
+          <img src="img/insync/storyboard-fix-1.png" alt="First storyboard pass mapping the journey from darkness to connection">
+          <figcaption><strong>01 — Narrative Foundation</strong>The first pass establishes the arc from losing sight to forming a tactile bond with Omu.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/insync/storyboard-fix-2.png" alt="Second storyboard pass refining interaction, color, and visual storytelling">
+          <figcaption><strong>02 — Interaction &amp; Atmosphere</strong>The revision clarifies Omu's call, the entwining gesture, and the cave's blue-violet atmosphere.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/insync/storyboard-fix-3.png" alt="Final storyboard with refined color, contrast, and emotional pacing">
+          <figcaption><strong>03 — Final Emotional Rhythm</strong>The final pass strengthens color, contrast, and pacing around the encounter.</figcaption>
+        </figure>
+      </div>
+    </div>
   </div>
-  <div class="img-row c2">
-    <div class="img-box">storyboard 1</div>
-    <div class="img-box">storyboard 2</div>
+</div>
+
+<!-- 06 PHYSICAL BUILD -->
+<div class="section" id="process">
+  <div class="section-head">
+    <span class="section-num">06</span>
+    <h2 class="section-title">Building a Living Presence</h2>
   </div>
+  <p class="section-desc">
+    Translating Omu from a drawing into a body meant solving for scale, softness, structure,
+    and touch. We moved from quick material studies to a full internal frame, layered foam,
+    articulated forms, and a fur finish that could feel gentle at human scale.
+  </p>
+  <div class="process-feature">
+    <figure class="case-figure">
+      <img src="img/insync/process-4.jpg" alt="Omu's full-scale foam body and wing structure during fabrication">
+    </figure>
+    <figure class="case-figure">
+      <img src="img/insync/process-0.png" alt="Early taped maquette testing the shape of Omu's head">
+    </figure>
+  </div>
+  <p class="case-caption"><strong>FROM MAQUETTE TO FULL SCALE</strong>Fast studies helped us test expression before committing to the final internal structure and surface treatment.</p>
+  <div class="process-grid">
+    <figure class="case-figure"><img src="img/insync/process-1.jpg" alt="Omu's fur-covered head during fabrication"></figure>
+    <figure class="case-figure"><img src="img/insync/process-2.jpg" alt="Close-up of Omu's finished face during fabrication"></figure>
+    <figure class="case-figure"><img src="img/insync/process-3.jpg" alt="Omu's large body structure under construction in the studio"></figure>
+  </div>
+</div>
+
+<!-- 07 PLAYTEST -->
+<div class="section" id="playtest">
+  <div class="section-head">
+    <span class="section-num">07</span>
+    <h2 class="section-title">Learning Through Touch</h2>
+  </div>
+  <p class="section-desc">
+    Playtesting revealed whether Omu felt like a character rather than a prop. Without sight,
+    players naturally slowed down, listened more closely, and used both hands to read Omu's
+    scale and expression. Their hesitation giving way to curiosity confirmed that touch could
+    carry the emotional arc we had designed on paper.
+  </p>
+  <div class="playtest-grid">
+    <figure class="case-figure playtest-hero"><img src="img/insync/playtest-1.png" alt="A sequence of blindfolded players exploring Omu through touch"></figure>
+    <figure class="case-figure playtest-side"><img src="img/insync/playtest-2.jpg" alt="Two blindfolded players reaching out to Omu during a playtest"></figure>
+    <figure class="case-figure playtest-side"><img src="img/insync/playtest-3.jpg" alt="A blindfolded player gently touching Omu's chest"></figure>
+  </div>
+  <p class="case-caption"><strong>OBSERVATION</strong>Players approached cautiously, then shifted into broader and more confident gestures as Omu became familiar.</p>
+</div>
+
+<!-- 08 PERSONAL EPILOGUE -->
+<div class="section" id="with-omu">
+  <div class="section-head">
+    <span class="section-num">08</span>
+    <h2 class="section-title">A Quiet Moment with Omu</h2>
+  </div>
+  <p class="section-desc">
+    After months of sketching, storyboarding, building, and testing, Omu no longer felt like
+    an object assembled from foam and fur. These small moments are my personal record of the
+    distance between the first drawing and the presence we finally brought into the room.
+  </p>
+  <div class="with-omu-grid">
+    <figure class="case-figure"><img src="img/insync/witho-1.jpg" alt="Rowena resting with the completed Omu installation"></figure>
+    <figure class="case-figure"><img src="img/insync/witho-2.jpg" alt="Rowena posing beside Omu in two candid photographs"></figure>
+  </div>
+  <p class="personal-note">For me, the most meaningful part of InSync was watching something imagined on paper become a presence that people could meet, trust, and remember.</p>
 </div>
 
 <a href="aftertaste.html" class="next-project">
