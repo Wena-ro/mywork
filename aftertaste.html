@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aftertaste — Rowena Chen</title>
+<title>Aftertaste &mdash; Rowena Chen</title>
 <link rel="icon" type="image/png" href="./tab.png">
 <link href="https://fonts.googleapis.com/css2?family=VT323&family=DM+Sans:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/base.css">
@@ -11,46 +11,162 @@
 <link rel="preload" as="image" href="img/aftertaste/aftertaste-topkv.jpg">
 <link rel="preload" as="image" href="img/aftertaste/aftertaste-logo.png">
 <style>
-/* ═══ AFTERTASTE PALETTE: soft paper + pink ═══ */
 :root {
   --accent: #e85d9e;
   --accent-hover: #c23d7e;
   --accent-soft: #f9c2dc;
   --text: #3a2230;
-  --muted: #a87b93;
+  --muted: #936d81;
   --line: #3a2230;
   --bg: #fef8fb;
   --dot: #f8dcea;
-  --nav-bg: rgba(254,248,251,0.9);
+  --nav-bg: rgba(254,248,251,.9);
   --footer-bg: #2b1420;
   --footer-hover-text: #2b1420;
   --footer-link-hover: var(--accent-soft);
   --footer-icon-color: var(--accent-soft);
-  --cursor-hover-bg: rgba(232,93,158,0.12);
+  --cursor-hover-bg: rgba(232,93,158,.12);
   --cursor-hover-border: var(--accent-hover);
-  --box-placeholder: #e3b8cd;
-  /* 图片平面化：无圆角/描边/阴影/hover 特效 */
   --box-border: none;
   --box-radius: 0;
   --box-shadow: none;
   --box-hover-transform: none;
   --box-hover-shadow: none;
 }
-.credit-list { max-width: 820px; border-top: 1px solid var(--line); }
-.credit-row { display: grid; grid-template-columns: 180px 1fr; gap: 24px; padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 13.5px; line-height: 1.7; }
-.credit-row strong { color: var(--accent-hover); font-family: 'VT323', monospace; font-size: 15px; font-weight: 400; letter-spacing: 1.4px; text-transform: uppercase; }
-@media (max-width: 760px) { .credit-row { grid-template-columns: 1fr; gap: 4px; } }
+
+.section:not(#character-design) { padding-top: 104px; }
+.section-intro {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 410px);
+  gap: 56px; align-items: start; margin-bottom: 44px;
+}
+.section-intro .section-desc { margin: 0; }
+.eyebrow, .media-label, .placeholder-label, .chapter-index {
+  font-family: 'VT323', monospace; text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.eyebrow { color: var(--accent-hover); font-size: 16px; }
+.contribution-grid {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--line); margin-top: 26px;
+}
+.contribution-item {
+  display: grid; grid-template-columns: 44px 1fr; gap: 10px;
+  padding: 18px 18px 18px 0; border-bottom: 1px solid var(--line);
+}
+.contribution-item:nth-child(odd) { border-right: 1px solid var(--line); }
+.contribution-item:nth-child(even) { padding-left: 18px; }
+.contribution-item .chapter-index { color: var(--accent-hover); font-size: 16px; }
+.contribution-item h3 { font-size: 15px; margin-bottom: 6px; }
+.contribution-item p { color: var(--muted); font-size: 13px; line-height: 1.65; }
+
+.credit-anchor { position: relative; }
+.art-credit {
+  position: absolute; right: 0; bottom: 8px; z-index: 4;
+  color: var(--muted); font-family: 'VT323', monospace;
+  font-size: 14px; letter-spacing: 1.2px; line-height: 1.25;
+  text-align: right; pointer-events: none;
+}
+
+.diagram-card { margin-top: 10px; }
+.diagram-trigger {
+  width: 100%; padding: 0; border: 1px solid var(--line);
+  background: #fff; cursor: zoom-in; position: relative; display: block;
+}
+.diagram-trigger img {
+  display: block; width: 100%; height: auto; max-height: 620px; object-fit: contain;
+}
+.diagram-trigger::after {
+  content: 'OPEN FULL DIAGRAM \2197'; position: absolute; right: 14px; bottom: 14px;
+  padding: 8px 11px; color: #fff; background: rgba(43,20,32,.88);
+  font-family: 'VT323', monospace; font-size: 14px; letter-spacing: 1.5px;
+}
+.media-caption {
+  display: flex; justify-content: space-between; gap: 24px;
+  margin-top: 10px; color: var(--muted); font-size: 12.5px; line-height: 1.55;
+}
+.media-label { color: var(--accent-hover); font-size: 15px; white-space: nowrap; }
+
+.animation-group { margin-top: 70px; }
+.animation-group-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 24px; border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 18px;
+}
+.animation-group h3 {
+  font-family: 'Space Grotesk', sans-serif; font-size: clamp(23px, 3vw, 34px);
+  text-transform: uppercase;
+}
+.animation-group-head p { color: var(--muted); font-size: 12.5px; }
+.clip-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 36px 18px; }
+.clip-card video {
+  display: block; width: 100%; aspect-ratio: 16/9; object-fit: contain;
+  background: #261820; border: 1px solid rgba(58,34,48,.28);
+}
+.clip-card .media-caption { margin-top: 8px; }
+
+.level-stack { display: grid; gap: 112px; margin-top: 56px; }
+.level {
+  display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 30px;
+}
+.level-aside { padding-top: 5px; }
+.level-number { font-family: 'VT323', monospace; color: var(--accent-hover); font-size: 18px; letter-spacing: 2px; }
+.level-name {
+  font-family: 'Space Grotesk', sans-serif; font-size: 24px;
+  text-transform: uppercase; margin-top: 5px;
+}
+.level-status { color: var(--muted); font-size: 12px; line-height: 1.55; margin-top: 12px; }
+.level-media { display: grid; gap: 28px; }
+.scene-placeholder {
+  aspect-ratio: 16/7; display: grid; place-items: center; text-align: center;
+  border: 1px dashed var(--accent); background:
+    linear-gradient(135deg, rgba(232,93,158,.07), rgba(249,194,220,.18));
+}
+.placeholder-label { color: var(--accent-hover); font-size: 16px; }
+.scene-placeholder small {
+  display: block; margin-top: 8px; color: var(--muted);
+  font-family: 'DM Sans', sans-serif; letter-spacing: 0; text-transform: none;
+}
+.level .diagram-trigger img { max-height: 760px; }
+
+.diagram-modal {
+  position: fixed; inset: 0; z-index: 10000; padding: 26px;
+  background: rgba(24,10,18,.94); display: grid; place-items: center;
+}
+.diagram-modal[hidden] { display: none; }
+.diagram-modal img { max-width: 96vw; max-height: 90vh; object-fit: contain; background: #fff; }
+.diagram-close {
+  position: fixed; top: 18px; right: 20px; width: 42px; height: 42px;
+  border: 1px solid rgba(255,255,255,.7); color: #fff; background: rgba(0,0,0,.4);
+  font-size: 23px; cursor: pointer;
+}
+body.diagram-open { overflow: hidden; }
+
+@media (max-width: 760px) {
+  .section:not(#character-design) { padding-top: 76px; }
+  .section-intro { grid-template-columns: 1fr; gap: 18px; margin-bottom: 30px; }
+  .contribution-grid, .clip-grid { grid-template-columns: 1fr; }
+  .contribution-item:nth-child(odd) { border-right: 0; }
+  .contribution-item:nth-child(even) { padding-left: 0; }
+  .level { grid-template-columns: 1fr; gap: 14px; }
+  .level-stack { gap: 78px; }
+  .scene-placeholder { aspect-ratio: 4/3; }
+  .media-caption, .animation-group-head { align-items: flex-start; flex-direction: column; gap: 5px; }
+  .diagram-trigger::after { right: 8px; bottom: 8px; }
+  .art-credit { position: static; display: block; margin-top: 7px; font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; }
+}
 </style>
 </head>
 <body>
 
 <div class="cursor" id="cursor">
   <div class="cursor-dot"></div>
-  <div class="cursor-label">PLAY TRAILER →</div>
+  <div class="cursor-label">PLAY TRAILER &rarr;</div>
 </div>
 
 <nav>
-  <a id="nav-back" href="works.html" class="nav-back">← All Works</a>
+  <a id="nav-back" href="works.html" class="nav-back">&larr; All Works</a>
   <div class="nav-links">
     <a href="index.html" class="nav-link">Home</a>
     <a href="works.html" class="nav-link">Works</a>
@@ -59,7 +175,6 @@
   </div>
 </nav>
 
-<!-- 顶部通栏 KV：固定不动，内容滚上来盖住；hover 出 PLAY TRAILER，点击打开 YouTube -->
 <div class="banner" data-trailer="https://youtu.be/2b3nRCNQOl4">
   <img class="banner-bg" src="img/aftertaste/aftertaste-topkv.jpg" alt="Aftertaste key art">
   <div class="banner-center">
@@ -74,149 +189,227 @@
 </div>
 <div class="banner-spacer"></div>
 
-<!-- 从这里开始的内容盖在 KV 上滚动 -->
-<div class="page-content">
-
-<!-- 项目信息（紧凑双列）-->
-<div class="info-table">
-  <div class="info-item"><span class="info-label">DURATION</span><span class="info-value">May 2025 – present</span></div>
-  <div class="info-item"><span class="info-label">PLATFORM</span><span class="info-value">PC and Mac</span></div>
-  <div class="info-item"><span class="info-label">ENGINE</span><span class="info-value">Unity</span></div>
-  <div class="info-item"><span class="info-label">TEAM SIZE</span><span class="info-value">~50</span></div>
-  <div class="info-item wide"><span class="info-label">ROLE</span><span class="info-value"><em>Art Director</em></span></div>
-  <div class="info-item wide"><span class="info-label">GENRE</span><span class="info-value">2.5D Platformer, Narrative Adventure, Puzzle, Indie</span></div>
-</div>
-
-<!-- 01 OVERVIEW -->
-<div class="section" id="overview">
-  <div class="section-head">
-    <span class="section-num">01</span>
-    <h2 class="section-title">Overview</h2>
-  </div>
-  <p class="section-desc">
-    Background of the project — the concept, the audience, your goal. A short paragraph is enough.
-  </p>
-  <div class="img-row c1">
-    <div class="img-box wide">key visual / screenshot</div>
-  </div>
-</div>
-
-<!-- 02 CHARACTER DESIGN: TAMI（三阶段滚动叙事，同 insync Omu）-->
-<div class="section" id="character-design">
-  <div class="section-head">
-    <span class="section-num">02</span>
-    <h2 class="section-title">Character Design</h2>
+<main class="page-content">
+  <div class="info-table">
+    <div class="info-item"><span class="info-label">DURATION</span><span class="info-value">May 2025 &mdash; present</span></div>
+    <div class="info-item"><span class="info-label">PLATFORM</span><span class="info-value">PC and Mac</span></div>
+    <div class="info-item"><span class="info-label">ENGINE</span><span class="info-value">Unity</span></div>
+    <div class="info-item"><span class="info-label">TEAM SIZE</span><span class="info-value">~50</span></div>
+    <div class="info-item wide"><span class="info-label">ROLE</span><span class="info-value"><em>Art Director</em></span></div>
+    <div class="info-item wide"><span class="info-label">GENRE</span><span class="info-value">2.5D Platformer &middot; Narrative Adventure &middot; Puzzle</span></div>
   </div>
 
-  <div class="design-scroll">
-    <div class="ds-sticky">
-      <div class="ds-text">
-        <div class="ds-kicker">CHARACTER DESIGN</div>
-        <div class="ds-title">Tami</div>
-        <!-- ↓ 三段阶段说明文字自己改 -->
-        <div class="ds-stage-text is-active">
-          <h4>01 — Sketch</h4>
-          <p>Early exploration of Tami's silhouette, expressions, and personality.</p>
+  <section class="section" id="contribution">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2 class="section-title">My Contribution</h2>
+    </div>
+    <div class="section-intro">
+      <p class="eyebrow">Art direction across a multidisciplinary team</p>
+      <p class="section-desc">A concise view of my responsibilities. Individual artwork and collaborative work are credited at the point where they appear.</p>
+    </div>
+    <div class="contribution-grid">
+      <article class="contribution-item"><span class="chapter-index">01</span><div><h3>Art Direction</h3><p>Established the art bible and reviewed visual work throughout production.</p></div></article>
+      <article class="contribution-item"><span class="chapter-index">02</span><div><h3>Team Direction</h3><p>Planned weekly art priorities around team strengths and production milestones.</p></div></article>
+      <article class="contribution-item"><span class="chapter-index">03</span><div><h3>Cross-discipline Coordination</h3><p>Worked with design and engineering on visual requests and feature needs.</p></div></article>
+      <article class="contribution-item"><span class="chapter-index">04</span><div><h3>Marketing</h3><p>Created promotional posters and exhibition materials.</p></div></article>
+    </div>
+  </section>
+
+  <section class="section" id="character-design">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Character Design</h2>
+    </div>
+    <div class="design-scroll">
+      <div class="ds-sticky">
+        <div class="ds-text">
+          <div class="ds-kicker">CHARACTER DESIGN</div>
+          <div class="ds-title">Tami</div>
+          <!-- ↓ 三段阶段说明文字自己改 -->
+          <div class="ds-stage-text is-active">
+            <h4>01 — Sketch</h4>
+            <p>Early exploration of Tami's silhouette, expressions, and personality.</p>
+          </div>
+          <div class="ds-stage-text">
+            <h4>02 — First Pass</h4>
+            <p>Refining proportions, costume, and the first full color palette.</p>
+          </div>
+          <div class="ds-stage-text">
+            <h4>03 — Final</h4>
+            <p>The final design — resolved shapes and colors, ready for animation and in-game implementation.</p>
+          </div>
+          <div class="ds-progress">
+            <span class="is-active">01 Sketch</span>
+            <span>02 First Pass</span>
+            <span>03 Final</span>
+          </div>
         </div>
-        <div class="ds-stage-text">
-          <h4>02 — First Pass</h4>
-          <p>Refining proportions, costume, and the first full color palette.</p>
+        <div class="ds-visuals">
+          <figure class="is-active credit-anchor">
+            <img src="img/aftertaste/tami-design-1.png" alt="Early sketch of Tami exploring silhouette and personality">
+            <span class="art-credit">INITIAL DESIGN — ROWENA CHEN</span>
+            <figcaption><strong>01 — Initial Design</strong>Initial character design by Rowena Chen.</figcaption>
+          </figure>
+          <figure class="credit-anchor">
+            <img src="img/aftertaste/tami-design-2.png" alt="First pass of Tami's design refining proportions and colors">
+            <span class="art-credit">FIRST PASS — MINGYE FAN<br>REVISION DIRECTION — ROWENA CHEN</span>
+            <figcaption><strong>02 — First Pass</strong>First pass by Mingye Fan; revision direction and feedback by Rowena Chen.</figcaption>
+          </figure>
+          <figure class="credit-anchor">
+            <img src="img/aftertaste/tami-design-3.png" alt="Final design of Tami">
+            <span class="art-credit">FINAL EXECUTION — MINGYE FAN</span>
+            <figcaption><strong>03 — Final</strong>Final execution by Mingye Fan, incorporating revision feedback from Rowena Chen.</figcaption>
+          </figure>
         </div>
-        <div class="ds-stage-text">
-          <h4>03 — Final</h4>
-          <p>The final design — resolved shapes and colors, ready for animation and in-game implementation.</p>
-        </div>
-        <div class="ds-progress">
-          <span class="is-active">01 Sketch</span>
-          <span>02 First Pass</span>
-          <span>03 Final</span>
-        </div>
-      </div>
-      <div class="ds-visuals">
-        <figure class="is-active">
-          <img src="img/aftertaste/tami-design-1.png" alt="Early sketch of Tami exploring silhouette and personality">
-          <figcaption><strong>01 — Initial Design</strong>Initial character design by Rowena Chen.</figcaption>
-        </figure>
-        <figure>
-          <img src="img/aftertaste/tami-design-2.png" alt="First pass of Tami's design refining proportions and colors">
-          <figcaption><strong>02 — First Pass</strong>First pass by Mingye Fan; revision direction and feedback by Rowena Chen.</figcaption>
-        </figure>
-        <figure>
-          <img src="img/aftertaste/tami-design-3.png" alt="Final design of Tami">
-          <figcaption><strong>03 — Final</strong>Final execution by Mingye Fan, incorporating revision feedback from Rowena Chen.</figcaption>
-        </figure>
       </div>
     </div>
+  </section>
+
+  <section class="section" id="animation">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Animation System</h2>
+    </div>
+    <div class="section-intro">
+      <p class="eyebrow">From animation logic to motion studies</p>
+      <p class="section-desc">The flowchart introduces the system as a whole. The 2D and 3D studies are grouped below so their different roles can be read without breaking the chapter apart.</p>
+    </div>
+    <figure class="diagram-card">
+      <button class="diagram-trigger" type="button" data-diagram="img/aftertaste/tami_animation_flowchart.jpg" aria-label="Open the full Tami animation flowchart">
+        <img loading="lazy" src="img/aftertaste/tami_animation_flowchart.jpg" alt="Overview of Tami's animation flowchart">
+      </button>
+      <figcaption class="media-caption"><span class="media-label">SYSTEM OVERVIEW</span><span>Open the diagram to inspect the full animation logic. Credit: TODO.</span></figcaption>
+    </figure>
+
+    <div class="animation-group">
+      <div class="animation-group-head"><h3>2D Motion Studies</h3><p>4 selected clips &middot; controls available</p></div>
+      <div class="clip-grid">
+        <figure class="clip-card"><video controls muted loop playsinline preload="metadata" aria-label="2D jump animation"><source data-src="img/aftertaste/2Danim_jump.mp4" type="video/mp4"></video><figcaption class="media-caption"><span class="media-label">JUMP</span><span>2D animation &middot; Credit: TODO</span></figcaption></figure>
+        <figure class="clip-card"><video controls muted loop playsinline preload="metadata" aria-label="2D pickup animation"><source data-src="img/aftertaste/2Danim_pickup.mp4" type="video/mp4"></video><figcaption class="media-caption"><span class="media-label">PICKUP</span><span>2D animation &middot; Credit: TODO</span></figcaption></figure>
+        <figure class="clip-card"><video controls muted loop playsinline preload="metadata" aria-label="2D swing animation"><source data-src="img/aftertaste/2Danim_swing.mp4" type="video/mp4"></video><figcaption class="media-caption"><span class="media-label">SWING</span><span>2D animation &middot; Credit: TODO</span></figcaption></figure>
+        <figure class="clip-card"><video controls muted loop playsinline preload="metadata" aria-label="2D taste animation"><source data-src="img/aftertaste/2Danim_taste.mp4" type="video/mp4"></video><figcaption class="media-caption"><span class="media-label">TASTE</span><span>2D animation &middot; Credit: TODO</span></figcaption></figure>
+      </div>
+    </div>
+
+    <div class="animation-group">
+      <div class="animation-group-head"><h3>3D Motion Studies</h3><p>5 selected clips &middot; controls available</p></div>
+      <div class="clip-grid">
+        <figure class="clip-card"><video controls muted loop playsinline preload="metadata" aria-label="3D idle animation"><source data-src="img/aftertaste/3Danim_idle.mp4" type="video/mp4"></video><figcaption class="media-caption"><span class="media-label">IDLE</span><span>3D animation &middot; Credit: TODO</span></figcaption></figure>
+        <figure class="clip-card"><video controls muted loop playsinline preload="metadata" aria-label="3D jump animation"><source data-src="img/aftertaste/3Danim_jump.mp4" type="video/mp4"></video><figcaption class="media-caption"><span class="media-label">JUMP</span><span>3D animation &middot; Credit: TODO</span></figcaption></figure>
+        <figure class="clip-card"><video controls muted loop playsinline preload="metadata" aria-label="3D swing fail animation"><source data-src="img/aftertaste/3Danim_swingfail.mp4" type="video/mp4"></video><figcaption class="media-caption"><span class="media-label">SWING / FAIL</span><span>3D animation &middot; Credit: TODO</span></figcaption></figure>
+        <figure class="clip-card"><video controls muted loop playsinline preload="metadata" aria-label="3D walk animation"><source data-src="img/aftertaste/3Danim_walk.mp4" type="video/mp4"></video><figcaption class="media-caption"><span class="media-label">WALK 01</span><span>3D animation &middot; Credit: TODO</span></figcaption></figure>
+        <figure class="clip-card"><video controls muted loop playsinline preload="metadata" aria-label="Second 3D walk animation"><source data-src="img/aftertaste/3Danim_walk2.mp4" type="video/mp4"></video><figcaption class="media-caption"><span class="media-label">WALK 02</span><span>3D animation &middot; Credit: TODO</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="levels">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Three Environment Workflows</h2>
+    </div>
+    <div class="section-intro">
+      <p class="eyebrow">Scene first, process second</p>
+      <p class="section-desc">Each environment will begin with one strong in-game scene before revealing its workflow. Until those images are ready, the openings remain clearly marked as editorial placeholders.</p>
+    </div>
+    <div class="level-stack">
+      <article class="level">
+        <header class="level-aside"><span class="level-number">LEVEL 01</span><h3 class="level-name">Exterior</h3><p class="level-status">Final scene image pending.<br>Workflow available now.</p></header>
+        <div class="level-media">
+          <div class="scene-placeholder" role="img" aria-label="Placeholder for a future exterior gameplay scene"><div class="placeholder-label">SCENE IMAGE TO ADD<small>level-01-gameplay &middot; Exterior beauty shot</small></div></div>
+          <figure><button class="diagram-trigger" type="button" data-diagram="img/aftertaste/exterior_workflow.png" aria-label="Open the full exterior workflow"><img loading="lazy" src="img/aftertaste/exterior_workflow.png" alt="Exterior level workflow diagram"></button><figcaption class="media-caption"><span class="media-label">WORKFLOW</span><span>Exterior environment &middot; Role and credits: TODO</span></figcaption></figure>
+        </div>
+      </article>
+      <article class="level">
+        <header class="level-aside"><span class="level-number">LEVEL 02</span><h3 class="level-name">Interior</h3><p class="level-status">Final scene image pending.<br>Workflow available now.</p></header>
+        <div class="level-media">
+          <div class="scene-placeholder" role="img" aria-label="Placeholder for a future interior gameplay scene"><div class="placeholder-label">SCENE IMAGE TO ADD<small>level-02-gameplay &middot; Interior beauty shot</small></div></div>
+          <figure><button class="diagram-trigger" type="button" data-diagram="img/aftertaste/interior_workflow.png" aria-label="Open the full interior workflow"><img loading="lazy" src="img/aftertaste/interior_workflow.png" alt="Interior level workflow diagram"></button><figcaption class="media-caption"><span class="media-label">WORKFLOW</span><span>Interior environment &middot; Role and credits: TODO</span></figcaption></figure>
+        </div>
+      </article>
+      <article class="level">
+        <header class="level-aside"><span class="level-number">LEVEL 03</span><h3 class="level-name">Boss</h3><p class="level-status">Final scene image pending.<br>Workflow available now.</p></header>
+        <div class="level-media">
+          <div class="scene-placeholder" role="img" aria-label="Placeholder for a future boss gameplay scene"><div class="placeholder-label">SCENE IMAGE TO ADD<small>level-03-gameplay &middot; Boss beauty shot</small></div></div>
+          <figure><button class="diagram-trigger" type="button" data-diagram="img/aftertaste/boss_workflow.png" aria-label="Open the full boss workflow"><img loading="lazy" src="img/aftertaste/boss_workflow.png" alt="Boss level workflow diagram"></button><figcaption class="media-caption"><span class="media-label">WORKFLOW</span><span>Boss environment &middot; Role and credits: TODO</span></figcaption></figure>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <a href="insync.html" class="next-project">
+    <div><div class="next-label">NEXT PROJECT</div><div class="next-title">InSync</div></div>
+    <div class="next-arrow">&rarr;</div>
+  </a>
+  <div class="contact-bar">
+    <span class="contact-bar-icon">&#10022;</span><span class="contact-bar-text">Contact Me</span>
+    <span class="contact-bar-sep">/</span><a href="mailto:rowenach@usc.edu">rowenach@usc.edu</a>
+    <span class="contact-bar-sep">/</span><a href="tel:+16266629366">+1 626 662 9366</a><span class="contact-bar-icon">&#10022;</span>
   </div>
+</main>
+
+<div class="diagram-modal" id="diagramModal" hidden role="dialog" aria-modal="true" aria-label="Expanded workflow diagram">
+  <button class="diagram-close" type="button" aria-label="Close expanded diagram">&times;</button>
+  <img src="" alt="">
 </div>
-
-<!-- 03 SECTION -->
-<div class="section">
-  <div class="section-head">
-    <span class="section-num">03</span>
-    <h2 class="section-title">Visual Development</h2>
-  </div>
-  <p class="section-desc">Sketches, iterations, and final artwork.</p>
-  <div class="img-row c2">
-    <div class="img-box">image 1</div>
-    <div class="img-box">image 2</div>
-  </div>
-  <div class="img-row c3">
-    <div class="img-box">image 3</div>
-    <div class="img-box">image 4</div>
-    <div class="img-box">image 5</div>
-  </div>
-</div>
-
-<!-- 04 SECTION -->
-<div class="section">
-  <div class="section-head">
-    <span class="section-num">04</span>
-    <h2 class="section-title">Process</h2>
-  </div>
-  <p class="section-desc">Behind the scenes — moodboards, prototypes, playtests, making-of.</p>
-  <div class="img-row c1">
-    <div class="img-box wide">process / moodboard</div>
-  </div>
-  <div class="img-row c2">
-    <div class="img-box">making of 1</div>
-    <div class="img-box">making of 2</div>
-  </div>
-</div>
-
-<!-- 05 CREDITS -->
-<div class="section" id="credits">
-  <div class="section-head">
-    <span class="section-num">05</span>
-    <h2 class="section-title">Selected Credits</h2>
-  </div>
-  <div class="credit-list">
-    <div class="credit-row"><strong>Tami Design</strong><span>Initial design — Rowena Chen · First pass — Mingye Fan · Revision direction and feedback — Rowena Chen · Final execution — Mingye Fan</span></div>
-  </div>
-</div>
-
-<a href="insync.html" class="next-project">
-  <div>
-    <div class="next-label">NEXT PROJECT</div>
-    <div class="next-title">InSync</div>
-  </div>
-  <div class="next-arrow">→</div>
-</a>
-
-<div class="contact-bar">
-  <span class="contact-bar-icon">✦</span>
-  <span class="contact-bar-text">Contact Me</span>
-  <span class="contact-bar-sep">/</span>
-  <a href="mailto:rowenach@usc.edu">rowenach@usc.edu</a>
-  <span class="contact-bar-sep">/</span>
-  <a href="tel:+16266629366">+1 626 662 9366</a>
-  <span class="contact-bar-icon">✦</span>
-</div>
-
-</div><!-- /page-content -->
-
-<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&uarr;</button>
 
 <script src="js/common.js"></script>
+<script>
+(() => {
+  const deferredVideos = document.querySelectorAll('video source[data-src]');
+  const loadVideo = video => {
+    const source = video.querySelector('source[data-src]');
+    if (!source) return;
+    source.src = source.dataset.src;
+    source.removeAttribute('data-src');
+    video.load();
+  };
+  if ('IntersectionObserver' in window) {
+    const videoObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        loadVideo(entry.target);
+        videoObserver.unobserve(entry.target);
+      });
+    }, { rootMargin: '500px 0px' });
+    deferredVideos.forEach(source => videoObserver.observe(source.parentElement));
+  } else {
+    deferredVideos.forEach(source => loadVideo(source.parentElement));
+  }
+
+  const modal = document.getElementById('diagramModal');
+  const modalImage = modal.querySelector('img');
+  const closeButton = modal.querySelector('.diagram-close');
+  let lastTrigger = null;
+
+  const closeDiagram = () => {
+    modal.hidden = true;
+    modalImage.src = '';
+    document.body.classList.remove('diagram-open');
+    if (lastTrigger) lastTrigger.focus();
+  };
+
+  document.querySelectorAll('[data-diagram]').forEach(button => {
+    button.addEventListener('click', () => {
+      lastTrigger = button;
+      modalImage.src = button.dataset.diagram;
+      modalImage.alt = button.querySelector('img').alt;
+      modal.hidden = false;
+      document.body.classList.add('diagram-open');
+      closeButton.focus();
+    });
+  });
+
+  closeButton.addEventListener('click', closeDiagram);
+  modal.addEventListener('click', event => {
+    if (event.target === modal) closeDiagram();
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && !modal.hidden) closeDiagram();
+  });
+})();
+</script>
 </body>
 </html>
