@@ -40,7 +40,7 @@
   gap: 56px; align-items: start; margin-bottom: 44px;
 }
 .section-intro .section-desc { margin: 0; }
-.eyebrow, .media-label, .placeholder-label, .chapter-index {
+.eyebrow, .media-label, .chapter-index {
   font-family: 'VT323', monospace; text-transform: uppercase;
   letter-spacing: 2px;
 }
@@ -115,16 +115,7 @@
 }
 .level-status { color: var(--muted); font-size: 12px; line-height: 1.55; margin-top: 12px; }
 .level-media { display: grid; gap: 28px; }
-.scene-placeholder {
-  aspect-ratio: 16/7; display: grid; place-items: center; text-align: center;
-  border: 1px dashed var(--accent); background:
-    linear-gradient(135deg, rgba(232,93,158,.07), rgba(249,194,220,.18));
-}
-.placeholder-label { color: var(--accent-hover); font-size: 16px; }
-.scene-placeholder small {
-  display: block; margin-top: 8px; color: var(--muted);
-  font-family: 'DM Sans', sans-serif; letter-spacing: 0; text-transform: none;
-}
+.scene-image img { display: block; width: 100%; aspect-ratio: 16/9; object-fit: cover; }
 .level .diagram-trigger img { max-height: 760px; }
 
 .diagram-modal {
@@ -148,7 +139,6 @@ body.diagram-open { overflow: hidden; }
   .contribution-item:nth-child(even) { padding-left: 0; }
   .level { grid-template-columns: 1fr; gap: 14px; }
   .level-stack { gap: 78px; }
-  .scene-placeholder { aspect-ratio: 4/3; }
   .media-caption, .animation-group-head { align-items: flex-start; flex-direction: column; gap: 5px; }
   .diagram-trigger::after { right: 8px; bottom: 8px; }
   .art-credit { position: static; display: block; margin-top: 7px; font-size: 12px; }
@@ -180,10 +170,6 @@ body.diagram-open { overflow: hidden; }
   <div class="banner-center">
     <img class="banner-logo" src="img/aftertaste/aftertaste-logo.png" alt="Aftertaste logo">
     <div class="banner-tag">2.5D Narrative Platformer</div>
-    <p class="banner-desc">
-      <!-- ↓ 一两句话简介，之后替换 -->
-      One or two sentences that hook the reader — what Aftertaste is and why it lingers.
-    </p>
     <button class="trailer-button" type="button" data-trailer="https://youtu.be/2b3nRCNQOl4" aria-label="Play the Aftertaste trailer">PLAY TRAILER →</button>
   </div>
 </div>
@@ -279,27 +265,27 @@ body.diagram-open { overflow: hidden; }
       <button class="diagram-trigger" type="button" data-diagram="img/aftertaste/tami_animation_flowchart.jpg" aria-label="Open the full Tami animation flowchart">
         <img loading="lazy" src="img/aftertaste/tami_animation_flowchart.jpg" alt="Overview of Tami's animation flowchart">
       </button>
-      <figcaption class="media-caption"><span class="media-label">SYSTEM OVERVIEW</span><span>Open the diagram to inspect the full animation logic. Credit: TODO.</span></figcaption>
+      <figcaption class="media-caption"><span class="media-label">SYSTEM OVERVIEW</span><span>Open the diagram to inspect the full animation logic.</span></figcaption>
     </figure>
 
     <div class="animation-group">
       <div class="animation-group-head"><h3>2D Motion Studies</h3><p>4 selected clips &middot; controls available</p></div>
       <div class="clip-grid">
-        <figure class="clip-card"><video controls muted loop playsinline preload="metadata" aria-label="2D jump animation"><source data-src="img/aftertaste/2Danim_jump.mp4" type="video/mp4"></video><figcaption class="media-caption"><span class="media-label">JUMP</span><span>2D animation &middot; Credit: TODO</span></figcaption></figure>
-        <figure class="clip-card"><video controls muted loop playsinline preload="metadata" aria-label="2D pickup animation"><source data-src="img/aftertaste/2Danim_pickup.mp4" type="video/mp4"></video><figcaption class="media-caption"><span class="media-label">PICKUP</span><span>2D animation &middot; Credit: TODO</span></figcaption></figure>
-        <figure class="clip-card"><video controls muted loop playsinline preload="metadata" aria-label="2D swing animation"><source data-src="img/aftertaste/2Danim_swing.mp4" type="video/mp4"></video><figcaption class="media-caption"><span class="media-label">SWING</span><span>2D animation &middot; Credit: TODO</span></figcaption></figure>
-        <figure class="clip-card"><video controls muted loop playsinline preload="metadata" aria-label="2D taste animation"><source data-src="img/aftertaste/2Danim_taste.mp4" type="video/mp4"></video><figcaption class="media-caption"><span class="media-label">TASTE</span><span>2D animation &middot; Credit: TODO</span></figcaption></figure>
+        <figure class="clip-card"><video controls muted loop playsinline preload="metadata" aria-label="2D jump animation"><source data-src="img/aftertaste/2Danim_jump.mp4" type="video/mp4"></video><figcaption class="media-caption"><span class="media-label">JUMP</span><span>2D animation</span></figcaption></figure>
+        <figure class="clip-card"><video controls muted loop playsinline preload="metadata" aria-label="2D pickup animation"><source data-src="img/aftertaste/2Danim_pickup.mp4" type="video/mp4"></video><figcaption class="media-caption"><span class="media-label">PICKUP</span><span>2D animation</span></figcaption></figure>
+        <figure class="clip-card"><video controls muted loop playsinline preload="metadata" aria-label="2D swing animation"><source data-src="img/aftertaste/2Danim_swing.mp4" type="video/mp4"></video><figcaption class="media-caption"><span class="media-label">SWING</span><span>2D animation</span></figcaption></figure>
+        <figure class="clip-card"><video controls muted loop playsinline preload="metadata" aria-label="2D taste animation"><source data-src="img/aftertaste/2Danim_taste.mp4" type="video/mp4"></video><figcaption class="media-caption"><span class="media-label">TASTE</span><span>2D animation</span></figcaption></figure>
       </div>
     </div>
 
     <div class="animation-group">
       <div class="animation-group-head"><h3>3D Motion Studies</h3><p>5 selected clips &middot; controls available</p></div>
       <div class="clip-grid">
-        <figure class="clip-card"><video controls muted loop playsinline preload="metadata" aria-label="3D idle animation"><source data-src="img/aftertaste/3Danim_idle.mp4" type="video/mp4"></video><figcaption class="media-caption"><span class="media-label">IDLE</span><span>3D animation &middot; Credit: TODO</span></figcaption></figure>
-        <figure class="clip-card"><video controls muted loop playsinline preload="metadata" aria-label="3D jump animation"><source data-src="img/aftertaste/3Danim_jump.mp4" type="video/mp4"></video><figcaption class="media-caption"><span class="media-label">JUMP</span><span>3D animation &middot; Credit: TODO</span></figcaption></figure>
-        <figure class="clip-card"><video controls muted loop playsinline preload="metadata" aria-label="3D swing fail animation"><source data-src="img/aftertaste/3Danim_swingfail.mp4" type="video/mp4"></video><figcaption class="media-caption"><span class="media-label">SWING / FAIL</span><span>3D animation &middot; Credit: TODO</span></figcaption></figure>
-        <figure class="clip-card"><video controls muted loop playsinline preload="metadata" aria-label="3D walk animation"><source data-src="img/aftertaste/3Danim_walk.mp4" type="video/mp4"></video><figcaption class="media-caption"><span class="media-label">WALK 01</span><span>3D animation &middot; Credit: TODO</span></figcaption></figure>
-        <figure class="clip-card"><video controls muted loop playsinline preload="metadata" aria-label="Second 3D walk animation"><source data-src="img/aftertaste/3Danim_walk2.mp4" type="video/mp4"></video><figcaption class="media-caption"><span class="media-label">WALK 02</span><span>3D animation &middot; Credit: TODO</span></figcaption></figure>
+        <figure class="clip-card"><video controls muted loop playsinline preload="metadata" aria-label="3D idle animation"><source data-src="img/aftertaste/3Danim_idle.mp4" type="video/mp4"></video><figcaption class="media-caption"><span class="media-label">IDLE</span><span>3D animation</span></figcaption></figure>
+        <figure class="clip-card"><video controls muted loop playsinline preload="metadata" aria-label="3D jump animation"><source data-src="img/aftertaste/3Danim_jump.mp4" type="video/mp4"></video><figcaption class="media-caption"><span class="media-label">JUMP</span><span>3D animation</span></figcaption></figure>
+        <figure class="clip-card"><video controls muted loop playsinline preload="metadata" aria-label="3D swing fail animation"><source data-src="img/aftertaste/3Danim_swingfail.mp4" type="video/mp4"></video><figcaption class="media-caption"><span class="media-label">SWING / FAIL</span><span>3D animation</span></figcaption></figure>
+        <figure class="clip-card"><video controls muted loop playsinline preload="metadata" aria-label="3D walk animation"><source data-src="img/aftertaste/3Danim_walk.mp4" type="video/mp4"></video><figcaption class="media-caption"><span class="media-label">WALK 01</span><span>3D animation</span></figcaption></figure>
+        <figure class="clip-card"><video controls muted loop playsinline preload="metadata" aria-label="Second 3D walk animation"><source data-src="img/aftertaste/3Danim_walk2.mp4" type="video/mp4"></video><figcaption class="media-caption"><span class="media-label">WALK 02</span><span>3D animation</span></figcaption></figure>
       </div>
     </div>
   </section>
@@ -311,28 +297,28 @@ body.diagram-open { overflow: hidden; }
     </div>
     <div class="section-intro">
       <p class="eyebrow">Scene first, process second</p>
-      <p class="section-desc">Each environment will begin with one strong in-game scene before revealing its workflow. Until those images are ready, the openings remain clearly marked as editorial placeholders.</p>
+      <p class="section-desc">Each environment begins with one selected in-game scene before revealing the workflow behind it.</p>
     </div>
     <div class="level-stack">
       <article class="level">
-        <header class="level-aside"><span class="level-number">LEVEL 01</span><h3 class="level-name">Exterior</h3><p class="level-status">Final scene image pending.<br>Workflow available now.</p></header>
+        <header class="level-aside"><span class="level-number">LEVEL 01</span><h3 class="level-name">Exterior</h3><p class="level-status">Selected in-game scene.<br>Workflow below.</p></header>
         <div class="level-media">
-          <div class="scene-placeholder" role="img" aria-label="Placeholder for a future exterior gameplay scene"><div class="placeholder-label">SCENE IMAGE TO ADD<small>level-01-gameplay &middot; Exterior beauty shot</small></div></div>
-          <figure><button class="diagram-trigger" type="button" data-diagram="img/aftertaste/exterior_workflow.png" aria-label="Open the full exterior workflow"><img loading="lazy" src="img/aftertaste/exterior_workflow.png" alt="Exterior level workflow diagram"></button><figcaption class="media-caption"><span class="media-label">WORKFLOW</span><span>Exterior environment &middot; Role and credits: TODO</span></figcaption></figure>
+          <figure class="scene-image"><img loading="lazy" src="img/aftertaste/level-01-gameplay.jpg" alt="Aftertaste exterior level gameplay scene"><figcaption class="media-caption"><span class="media-label">IN-GAME</span><span>Exterior environment</span></figcaption></figure>
+          <figure><button class="diagram-trigger" type="button" data-diagram="img/aftertaste/exterior_workflow.png" aria-label="Open the full exterior workflow"><img loading="lazy" src="img/aftertaste/exterior_workflow.png" alt="Exterior level workflow diagram"></button><figcaption class="media-caption"><span class="media-label">WORKFLOW</span><span>Exterior environment</span></figcaption></figure>
         </div>
       </article>
       <article class="level">
-        <header class="level-aside"><span class="level-number">LEVEL 02</span><h3 class="level-name">Interior</h3><p class="level-status">Final scene image pending.<br>Workflow available now.</p></header>
+        <header class="level-aside"><span class="level-number">LEVEL 02</span><h3 class="level-name">Interior</h3><p class="level-status">Selected in-game scene.<br>Workflow below.</p></header>
         <div class="level-media">
-          <div class="scene-placeholder" role="img" aria-label="Placeholder for a future interior gameplay scene"><div class="placeholder-label">SCENE IMAGE TO ADD<small>level-02-gameplay &middot; Interior beauty shot</small></div></div>
-          <figure><button class="diagram-trigger" type="button" data-diagram="img/aftertaste/interior_workflow.png" aria-label="Open the full interior workflow"><img loading="lazy" src="img/aftertaste/interior_workflow.png" alt="Interior level workflow diagram"></button><figcaption class="media-caption"><span class="media-label">WORKFLOW</span><span>Interior environment &middot; Role and credits: TODO</span></figcaption></figure>
+          <figure class="scene-image"><img loading="lazy" src="img/aftertaste/level-02-gameplay.jpg" alt="Aftertaste interior level gameplay scene"><figcaption class="media-caption"><span class="media-label">IN-GAME</span><span>Interior environment</span></figcaption></figure>
+          <figure><button class="diagram-trigger" type="button" data-diagram="img/aftertaste/interior_workflow.png" aria-label="Open the full interior workflow"><img loading="lazy" src="img/aftertaste/interior_workflow.png" alt="Interior level workflow diagram"></button><figcaption class="media-caption"><span class="media-label">WORKFLOW</span><span>Interior environment</span></figcaption></figure>
         </div>
       </article>
       <article class="level">
-        <header class="level-aside"><span class="level-number">LEVEL 03</span><h3 class="level-name">Boss</h3><p class="level-status">Final scene image pending.<br>Workflow available now.</p></header>
+        <header class="level-aside"><span class="level-number">LEVEL 03</span><h3 class="level-name">Boss</h3><p class="level-status">Selected in-game scene.<br>Workflow below.</p></header>
         <div class="level-media">
-          <div class="scene-placeholder" role="img" aria-label="Placeholder for a future boss gameplay scene"><div class="placeholder-label">SCENE IMAGE TO ADD<small>level-03-gameplay &middot; Boss beauty shot</small></div></div>
-          <figure><button class="diagram-trigger" type="button" data-diagram="img/aftertaste/boss_workflow.png" aria-label="Open the full boss workflow"><img loading="lazy" src="img/aftertaste/boss_workflow.png" alt="Boss level workflow diagram"></button><figcaption class="media-caption"><span class="media-label">WORKFLOW</span><span>Boss environment &middot; Role and credits: TODO</span></figcaption></figure>
+          <figure class="scene-image"><img loading="lazy" src="img/aftertaste/level-03-gameplay.jpg" alt="Aftertaste boss level gameplay scene"><figcaption class="media-caption"><span class="media-label">IN-GAME</span><span>Boss environment</span></figcaption></figure>
+          <figure><button class="diagram-trigger" type="button" data-diagram="img/aftertaste/boss_workflow.png" aria-label="Open the full boss workflow"><img loading="lazy" src="img/aftertaste/boss_workflow.png" alt="Boss level workflow diagram"></button><figcaption class="media-caption"><span class="media-label">WORKFLOW</span><span>Boss environment</span></figcaption></figure>
         </div>
       </article>
     </div>
