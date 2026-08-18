@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=VT323&family=DM+Sans:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/project.css">
-<link rel="preload" as="image" href="img/htpyc/htpyc_banner.png">
+<link rel="preload" as="image" href="img/htpyc/htpyc_topkv.png">
 <link rel="preload" as="image" href="img/htpyc/htpyc-logo.png">
 <style>
 /* ═══ HTPYC PALETTE: soft paper + apple green ═══ */
@@ -28,13 +28,42 @@
   --footer-icon-color: var(--accent-soft);
   --cursor-hover-bg: rgba(124,196,28,0.12);
   --cursor-hover-border: var(--accent-hover);
-  --box-placeholder: #c4dba0;
   /* 图片平面化：无圆角/描边/阴影/hover 特效 */
   --box-border: none;
   --box-radius: 0;
   --box-shadow: none;
   --box-hover-transform: none;
   --box-hover-shadow: none;
+}
+
+.section-intro {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 430px);
+  gap: 56px; align-items: start; margin-bottom: 38px;
+}
+.section-intro .section-desc { margin: 0; }
+.eyebrow, .media-label {
+  font-family: 'VT323', monospace; text-transform: uppercase; letter-spacing: 2px;
+}
+.eyebrow { color: var(--accent-hover); font-size: 17px; }
+.media-grid { display: grid; gap: 20px; }
+.media-grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.media-card img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.media-card.artwork img { aspect-ratio: 4/3; object-fit: contain; background: #edf5e2; }
+.media-card.portrait img { aspect-ratio: 4/3; object-fit: contain; background: #edf5e2; }
+.media-card.photo img { aspect-ratio: 4/3; }
+.media-card.feature img { aspect-ratio: 16/9; }
+.media-caption {
+  display: flex; justify-content: space-between; gap: 24px;
+  margin-top: 10px; color: var(--muted); font-size: 12.5px; line-height: 1.55;
+}
+.media-label { color: var(--accent-hover); font-size: 15px; white-space: nowrap; }
+.credit-note { max-width: 390px; text-align: right; }
+
+@media (max-width: 760px) {
+  .section-intro, .media-grid.two { grid-template-columns: 1fr; }
+  .section-intro { gap: 18px; margin-bottom: 28px; }
+  .media-caption { flex-direction: column; gap: 4px; }
+  .credit-note { max-width: none; text-align: left; }
 }
 </style>
 </head>
@@ -52,24 +81,18 @@
   </div>
 </nav>
 
-<!-- 顶部通栏 KV：固定不动，内容滚上来盖住（有 trailer 后在 .banner 上加 data-trailer="链接"） -->
 <div class="banner">
-  <img class="banner-bg" src="img/htpyc/htpyc_banner.png" alt="How to Pet Your Cat key art">
+  <img class="banner-bg" src="img/htpyc/htpyc_topkv.png" alt="How to Pet Your Cat key art">
   <div class="banner-center">
     <img class="banner-logo" src="img/htpyc/htpyc-logo.png" alt="How to Pet Your Cat logo">
-    <div class="banner-tag">Game</div>
-    <p class="banner-desc">
-      <!-- ↓ 一两句话简介，之后替换 -->
-      One or two sentences that hook the reader — what this game is and why it's charming.
-    </p>
+    <div class="banner-tag">Alt.ctrl Game · Physical Installation</div>
+    <p class="banner-desc">A playful social game built around a giant plush cat controller.</p>
   </div>
 </div>
 <div class="banner-spacer"></div>
 
-<!-- 从这里开始的内容盖在 KV 上滚动 -->
 <div class="page-content">
 
-<!-- 项目信息（紧凑双列，内容待补）-->
 <div class="info-table">
   <div class="info-item"><span class="info-label">DURATION</span><span class="info-value">Oct 2024 – Dec 2024 (Development) · Mar 2025 – Present (Exhibition)</span></div>
   <div class="info-item"><span class="info-label">TEAM SIZE</span><span class="info-value">10</span></div>
@@ -79,51 +102,64 @@
   <div class="info-item wide"><span class="info-label">GENRE</span><span class="info-value">Alt.ctrl Game, Party Game, Casual Arcade, Social Play Installation, Humor Game</span></div>
 </div>
 
-<!-- 01 OVERVIEW -->
 <div class="section" id="overview">
   <div class="section-head">
     <span class="section-num">01</span>
     <h2 class="section-title">Overview</h2>
   </div>
-  <p class="section-desc">
-    Background of the project — the concept, the audience, your goal. A short paragraph is enough.
-  </p>
-  <div class="img-row c1">
-    <div class="img-box wide">key visual / screenshot</div>
+  <div class="section-intro">
+    <p class="eyebrow">Pet together, score together</p>
+    <p class="section-desc">How to Pet Your Cat is a short alt.ctrl experience that turns a large plush cat into a shared physical controller. Players gather around the installation, pet the cat together, and respond to the game on screen in a playful burst of social interaction.</p>
   </div>
+  <figure class="media-card feature">
+    <img loading="lazy" src="img/htpyc/gdc_withme.jpg" alt="How to Pet Your Cat plush controller and screen at GDC">
+    <figcaption class="media-caption"><span class="media-label">AT GDC</span><span>The plush controller and game running together on the exhibition floor.</span></figcaption>
+  </figure>
 </div>
 
-<!-- 02 SECTION -->
-<div class="section">
+<div class="section" id="marketing">
   <div class="section-head">
     <span class="section-num">02</span>
-    <h2 class="section-title">Visual Development</h2>
+    <h2 class="section-title">Marketing for Print</h2>
   </div>
-  <p class="section-desc">Sketches, iterations, and final artwork.</p>
-  <div class="img-row c2">
-    <div class="img-box">image 1</div>
-    <div class="img-box">image 2</div>
+  <div class="section-intro">
+    <p class="eyebrow">Preparing the game for exhibition</p>
+    <p class="section-desc">I adapted the team's existing artwork into print-ready marketing materials for the GDC exhibition, adjusting the assets for physical production while preserving the original visual direction.</p>
   </div>
-  <div class="img-row c3">
-    <div class="img-box">image 3</div>
-    <div class="img-box">image 4</div>
-    <div class="img-box">image 5</div>
+  <div class="media-grid two">
+    <figure class="media-card artwork">
+      <img loading="lazy" src="img/htpyc/gdc_instruction.png" alt="Printed How to Pet Your Cat instruction graphic">
+      <figcaption class="media-caption"><span class="media-label">INSTRUCTION</span><span class="credit-note">Artwork by Shunran Shen · Print adaptation by Rowena Chen</span></figcaption>
+    </figure>
+    <figure class="media-card portrait">
+      <img loading="lazy" src="img/htpyc/gdc_mktpostcard.png" alt="How to Pet Your Cat printed promotional poster">
+      <figcaption class="media-caption"><span class="media-label">POSTER</span><span class="credit-note">Original artwork by Yangyi · Print adaptation by Rowena Chen</span></figcaption>
+    </figure>
   </div>
 </div>
 
-<!-- 03 SECTION -->
-<div class="section">
+<div class="section" id="exhibition">
   <div class="section-head">
     <span class="section-num">03</span>
-    <h2 class="section-title">Process</h2>
+    <h2 class="section-title">Exhibition at GDC</h2>
   </div>
-  <p class="section-desc">Behind the scenes — moodboards, prototypes, playtests, making-of.</p>
-  <div class="img-row c1">
-    <div class="img-box wide">process / moodboard</div>
+  <div class="section-intro">
+    <p class="eyebrow">From setup to live play</p>
+    <p class="section-desc">The installation paired the oversized plush controller with a screen and exhibition signage. On the floor, it became a gathering point where players could immediately understand the physical interaction and join in together.</p>
   </div>
-  <div class="img-row c2">
-    <div class="img-box">making of 1</div>
-    <div class="img-box">making of 2</div>
+  <div class="media-grid two">
+    <figure class="media-card photo">
+      <img loading="lazy" src="img/htpyc/gdc_setup.jpg" alt="Setting up the How to Pet Your Cat booth at GDC">
+      <figcaption class="media-caption"><span class="media-label">SETUP</span><span>Preparing the installation on the exhibition floor.</span></figcaption>
+    </figure>
+    <figure class="media-card photo">
+      <img loading="lazy" src="img/htpyc/player_2.jpg" alt="Players petting the plush cat controller together">
+      <figcaption class="media-caption"><span class="media-label">LIVE PLAY</span><span>Players interacting with the shared controller.</span></figcaption>
+    </figure>
+  </div>
+  <div class="media-grid two" style="margin-top: 20px;">
+    <figure class="media-card photo"><img loading="lazy" src="img/htpyc/player_1.jpg" alt="Player reacting while playing How to Pet Your Cat"></figure>
+    <figure class="media-card photo"><img loading="lazy" src="img/htpyc/player_3.jpg" alt="Visitors gathered around the How to Pet Your Cat installation"></figure>
   </div>
 </div>
 
@@ -145,7 +181,7 @@
   <span class="contact-bar-icon">✦</span>
 </div>
 
-</div><!-- /page-content -->
+</div>
 
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
