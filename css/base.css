@@ -82,6 +82,10 @@ nav {
   font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 700;
   letter-spacing: -0.25px;
 }
+a:focus-visible, button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
 .brand-icon {
   width: 32px; height: 32px; flex: 0 0 32px;
   display: inline-block; border: 1.5px solid var(--line); border-radius: 8px;
@@ -165,4 +169,12 @@ body.trailer-open { overflow: hidden; }
   .site-brand { gap: 8px; font-size: 15px; }
   .brand-icon { width: 28px; height: 28px; flex-basis: 28px; }
   .trailer-close { cursor: pointer; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rowena Chen — Portfolio</title>
+<meta name="description" content="Portfolio of Rowena Chen, a visual developer and game artist creating distinctive characters, immersive worlds, games, and interactive experiences.">
+<link rel="canonical" href="https://rowenachen.com/">
+<meta property="og:title" content="Rowena Chen — Visual Development & Game Art">
+<meta property="og:description" content="Games, character art, immersive installations, and visual development by Rowena Chen.">
+<meta property="og:image" content="https://rowenachen.com/img/aftertaste/aftertaste_banner.png">
+<meta property="og:url" content="https://rowenachen.com/">
+<meta property="og:type" content="website">
 <link rel="icon" type="image/png" href="./tab.png">
 <link href="https://fonts.googleapis.com/css2?family=VT323&family=DM+Sans:wght@300;400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/base.css">
@@ -384,17 +391,17 @@ body.is-loading { overflow: hidden; }
        文件命名 trailer1.mp4 ~ trailer4.mp4 传到 repo
        poster 是视频加载前显示的封面图
        ============================== -->
-  <video class="trailer-video active" id="v0" src="./trailer1.mp4" poster="img/aftertaste/aftertaste_banner.png" muted playsinline preload="auto"></video>
-  <video class="trailer-video" id="v1" src="./trailer2.mp4" poster="img/insync/insync_banner.png" muted playsinline preload="auto"></video>
-  <video class="trailer-video" id="v2" src="./trailer3.mp4" poster="img/htpyc/htpyc_banner.png" muted playsinline preload="auto"></video>
-  <video class="trailer-video" id="v3" src="./trailer4.mp4" poster="img/alibi/alibi_banner.png" muted playsinline preload="auto"></video>
+  <video class="trailer-video active" id="v0" src="./trailer1.mp4" poster="img/aftertaste/aftertaste_banner.png" muted playsinline preload="metadata"></video>
+  <video class="trailer-video" id="v1" data-src="./trailer2.mp4" poster="img/insync/insync_banner.png" muted playsinline preload="none"></video>
+  <video class="trailer-video" id="v2" data-src="./trailer3.mp4" poster="img/htpyc/htpyc_banner.png" muted playsinline preload="none"></video>
+  <video class="trailer-video" id="v3" data-src="./trailer4.mp4" poster="img/alibi/alibi_banner.png" muted playsinline preload="none"></video>
 
   <!-- top bar -->
   <div class="hero-top">
     <div class="hero-nav">
       <a href="works.html">Works</a>
       <a href="about.html">About</a>
-      <a href="resume.pdf">Resume</a>
+      <a href="Rowena_Chen_Resume.pdf" target="_blank" rel="noopener">Resume</a>
     </div>
   </div>
 
@@ -507,7 +514,7 @@ body.is-loading { overflow: hidden; }
   <span class="contact-bar-icon">✦</span>
   <span class="contact-bar-text">Contact Me</span>
   <span class="contact-bar-sep">/</span>
-  <a href="mailto:rowenach@usc.edu">rowenach@usc.edu</a>
+  <a href="mailto:Kexin2436@outlook.com">Kexin2436@outlook.com</a>
   <span class="contact-bar-sep">/</span>
   <a href="tel:+16266629366">+1 626 662 9366</a>
   <span class="contact-bar-icon">✦</span>
@@ -551,16 +558,6 @@ body.is-loading { overflow: hidden; }
       if (img.complete) return resolve();
       img.addEventListener('load', resolve, { once: true });
       img.addEventListener('error', resolve, { once: true });
-    }));
-  });
-
-  document.querySelectorAll('video').forEach(video => {
-    tasks.push(new Promise(resolve => {
-      if (video.readyState >= 3) return resolve();
-      video.addEventListener('canplay', resolve, { once: true });
-      video.addEventListener('error', resolve, { once: true });
-      video.preload = 'auto';
-      video.load();
     }));
   });
 
@@ -632,13 +629,22 @@ const fills  = [0,1,2,3].map(i => document.getElementById('p'+i));
 const countEl = document.getElementById('trailerCount');
 const titleEl = document.getElementById('trailerTitle');
 const scrollHint = document.getElementById('scrollHint');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 let cur = 0;
 let cycled = false;
 
 function playCurrent() {
   videos.forEach((v,i) => {
     v.classList.toggle('active', i === cur);
-    if (i === cur) { v.currentTime = 0; v.play().catch(()=>{}); }
+    if (i === cur) {
+      if (reduceMotion) { v.pause(); return; }
+      if (!v.getAttribute('src') && v.dataset.src) {
+        v.src = v.dataset.src;
+        v.load();
+      }
+      v.currentTime = 0;
+      v.play().catch(()=>{});
+    }
     else v.pause();
   });
   countEl.textContent = String(cur+1).padStart(2,'0') + ' / ' + String(videos.length).padStart(2,'0');
