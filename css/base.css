@@ -76,6 +76,21 @@ nav {
 }
 .nav-logo { display: flex; align-items: center; cursor: none; }
 .nav-logo img { height: 40px; width: auto; }
+.site-brand {
+  display: inline-flex; align-items: center; gap: 10px;
+  color: var(--text); text-decoration: none; cursor: none;
+  font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 700;
+  letter-spacing: -0.25px;
+}
+.brand-icon {
+  width: 32px; height: 32px; flex: 0 0 32px;
+  display: inline-block; border: 1.5px solid var(--line); border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent) 0 48%, transparent 48% 58%, var(--text) 58% 100%);
+  box-shadow: 2px 2px 0 var(--line);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.site-brand:hover .brand-icon { transform: translate(-1px,-1px); box-shadow: 3px 3px 0 var(--line); }
+.site-brand:hover { color: var(--accent-hover, var(--accent)); }
 .nav-back { font-family: 'VT323', monospace; font-size: 19px; color: var(--text); text-decoration: none; cursor: none; letter-spacing: 1px; transition: color 0.2s; }
 .nav-back:hover { color: var(--accent-hover, var(--accent)); }
 .nav-links { display: flex; gap: 26px; }
@@ -147,5 +162,7 @@ body.trailer-open { overflow: hidden; }
   nav { padding: 14px 20px; }
   .nav-links { gap: 14px; }
   .nav-link { font-size: 16px; }
+  .site-brand { gap: 8px; font-size: 15px; }
+  .brand-icon { width: 28px; height: 28px; flex-basis: 28px; }
   .trailer-close { cursor: pointer; }
 }

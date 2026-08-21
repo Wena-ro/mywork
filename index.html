@@ -133,11 +133,11 @@ body.is-loading { overflow: hidden; }
   position: absolute; top: 0; left: 0; right: 0;
   z-index: 10;
   display: flex; justify-content: space-between; align-items: center;
-  padding: 24px 40px;
+  padding: 16px 40px;
 }
 .hero-logo { display: flex; align-items: center; cursor: none; }
 .hero-logo img { height: 44px; width: auto; }
-.hero-nav { display: flex; gap: 28px; }
+.hero-nav { display: flex; gap: 26px; margin-left: auto; }
 .hero-nav a {
   font-family: 'VT323', monospace; font-size: 19px;
   color: white; text-decoration: none; cursor: none;
@@ -146,6 +146,11 @@ body.is-loading { overflow: hidden; }
   transition: color 0.2s;
 }
 .hero-nav a:hover { color: #00a8b8; }
+@media (max-width: 760px) {
+  .hero-top { padding: 14px 20px; }
+  .hero-nav { gap: 14px; }
+  .hero-nav a { font-size: 16px; }
+}
 
 /* project name of current trailer */
 .trailer-info {
@@ -340,20 +345,6 @@ body.is-loading { overflow: hidden; }
 .hero-arrow.right { right: 28px; }
 
 /* ───────── FLOATING LOGO (appears on scroll) ───────── */
-.float-logo {
-  position: fixed; top: 18px; left: 24px;
-  z-index: 200; cursor: none;
-  opacity: 0; transform: translateY(-12px);
-  pointer-events: none;
-  transition: opacity 0.35s, transform 0.35s;
-}
-.float-logo.show { opacity: 1; transform: translateY(0); pointer-events: all; }
-.float-logo img {
-  height: 42px; width: auto;
-  transition: opacity 0.2s;
-}
-.float-logo img:hover { opacity: 0.7; }
-
 /* back-top / contact-bar 样式在 base.css */
 </style>
 </head>
@@ -383,9 +374,6 @@ body.is-loading { overflow: hidden; }
 </div>
 
 <!-- FLOATING LOGO + BACK TO TOP -->
-<a href="index.html" class="float-logo" id="floatLogo">
-  <img src="./logo.png" alt="Rowena" onerror="this.style.display='none'">
-</a>
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <!-- ═══════════ HERO: TRAILER CYCLE ═══════════ -->
@@ -396,16 +384,13 @@ body.is-loading { overflow: hidden; }
        文件命名 trailer1.mp4 ~ trailer4.mp4 传到 repo
        poster 是视频加载前显示的封面图
        ============================== -->
-  <video class="trailer-video active" id="v0" src="./trailer1.mp4" poster="./1.png" muted playsinline preload="auto"></video>
-  <video class="trailer-video" id="v1" src="./trailer2.mp4" poster="./2.png" muted playsinline preload="auto"></video>
-  <video class="trailer-video" id="v2" src="./trailer3.mp4" poster="./3.png" muted playsinline preload="auto"></video>
-  <video class="trailer-video" id="v3" src="./trailer4.mp4" poster="./4.png" muted playsinline preload="auto"></video>
+  <video class="trailer-video active" id="v0" src="./trailer1.mp4" poster="img/aftertaste/aftertaste_banner.png" muted playsinline preload="auto"></video>
+  <video class="trailer-video" id="v1" src="./trailer2.mp4" poster="img/insync/insync_banner.png" muted playsinline preload="auto"></video>
+  <video class="trailer-video" id="v2" src="./trailer3.mp4" poster="img/htpyc/htpyc_banner.png" muted playsinline preload="auto"></video>
+  <video class="trailer-video" id="v3" src="./trailer4.mp4" poster="img/alibi/alibi_banner.png" muted playsinline preload="auto"></video>
 
   <!-- top bar -->
   <div class="hero-top">
-    <a href="index.html" class="hero-logo">
-      <img src="./logo.png" alt="Rowena" onerror="this.style.display='none'">
-    </a>
     <div class="hero-nav">
       <a href="works.html">Works</a>
       <a href="about.html">About</a>
@@ -470,7 +455,7 @@ body.is-loading { overflow: hidden; }
         </div>
         <div class="slide-body">
           <div class="slide-title">Aftertaste</div>
-          <div class="slide-desc">Short description — what it is, your role.</div>
+          <div class="slide-desc">A 2.5D narrative platformer shaped through art direction and environmental storytelling.</div>
         </div>
       </a>
 
@@ -481,7 +466,7 @@ body.is-loading { overflow: hidden; }
         </div>
         <div class="slide-body">
           <div class="slide-title">Insync</div>
-          <div class="slide-desc">Short description — what it is, your role.</div>
+          <div class="slide-desc">An immersive tactile maze guided by touch, sound, and an encounter with Omu.</div>
         </div>
       </a>
 
@@ -492,7 +477,7 @@ body.is-loading { overflow: hidden; }
         </div>
         <div class="slide-body">
           <div class="slide-title">How to Pet Your Cat</div>
-          <div class="slide-desc">Short description — what it is, your role.</div>
+          <div class="slide-desc">A playful social game built around a giant plush cat controller.</div>
         </div>
       </a>
 
@@ -503,7 +488,7 @@ body.is-loading { overflow: hidden; }
         </div>
         <div class="slide-body">
           <div class="slide-title">Alibi</div>
-          <div class="slide-desc">Short description — what it is, your role.</div>
+          <div class="slide-desc">A 2D mystery told through conflicting memories of school bullying and lingering trauma.</div>
         </div>
       </a>
 
@@ -622,7 +607,7 @@ document.addEventListener('mousemove', e => {
   cursor.style.left = e.clientX + 'px';
   cursor.style.top = e.clientY + 'px';
 });
-document.querySelectorAll('a, button, .work-slide, .prog-bar, .hero-arrow, .back-top, .float-logo').forEach(el => {
+document.querySelectorAll('a, button, .work-slide, .prog-bar, .hero-arrow, .back-top').forEach(el => {
   el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
   el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
 });
@@ -707,11 +692,9 @@ function heroPrev() {
 }
 
 /* floating logo + back to top on scroll */
-const floatLogo = document.getElementById('floatLogo');
 const backTop = document.getElementById('backTop');
 window.addEventListener('scroll', () => {
   const past = window.scrollY > window.innerHeight * 0.7;
-  floatLogo.classList.toggle('show', past);
   backTop.classList.toggle('show', past);
 });
 
