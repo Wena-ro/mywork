@@ -80,7 +80,7 @@ nav {
   display: inline-flex; align-items: center; gap: 10px;
   color: var(--text); text-decoration: none; cursor: none;
   font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 700;
-  letter-spacing: -0.25px;
+  font-synthesis: none; line-height: 1; letter-spacing: -0.25px; white-space: nowrap;
 }
 a:focus-visible, button:focus-visible {
   outline: 3px solid var(--accent);
@@ -88,12 +88,11 @@ a:focus-visible, button:focus-visible {
 }
 .brand-icon {
   width: 32px; height: 32px; flex: 0 0 32px;
-  display: inline-block; border: 1.5px solid var(--line); border-radius: 8px;
-  background: linear-gradient(135deg, var(--accent) 0 48%, transparent 48% 58%, var(--text) 58% 100%);
-  box-shadow: 2px 2px 0 var(--line);
-  transition: transform 0.2s, box-shadow 0.2s;
+  display: inline-block; border-radius: 6px;
+  background: url('../tab.png') center / cover no-repeat;
+  transition: transform 0.2s, opacity 0.2s;
 }
-.site-brand:hover .brand-icon { transform: translate(-1px,-1px); box-shadow: 3px 3px 0 var(--line); }
+.site-brand:hover .brand-icon { transform: translateY(-1px); opacity: 0.82; }
 .site-brand:hover { color: var(--accent-hover, var(--accent)); }
 .nav-back { font-family: 'VT323', monospace; font-size: 19px; color: var(--text); text-decoration: none; cursor: none; letter-spacing: 1px; transition: color 0.2s; }
 .nav-back:hover { color: var(--accent-hover, var(--accent)); }
