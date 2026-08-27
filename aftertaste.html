@@ -73,6 +73,20 @@
   text-align: right; pointer-events: none;
 }
 
+.steam-button {
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  margin-top: 10px; padding: 13px 24px; border: 2px solid #fff; border-radius: 999px;
+  color: #fff; background: var(--accent); box-shadow: 0 8px 24px rgba(232,93,158,.36);
+  font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 700;
+  letter-spacing: 1.2px; text-decoration: none; text-transform: uppercase;
+  transition: transform .2s ease, background-color .2s ease, box-shadow .2s ease;
+}
+.steam-button:hover, .steam-button:focus-visible {
+  color: #fff; background: var(--accent-hover); transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(194,61,126,.42);
+}
+.steam-button:focus-visible { outline: 3px solid var(--accent-soft); outline-offset: 3px; }
+
 .diagram-card { margin-top: 10px; }
 .diagram-trigger {
   width: 100%; padding: 0; border: 1px solid var(--line);
@@ -176,6 +190,7 @@ body.diagram-open { overflow: hidden; }
   <div class="banner-center">
     <img class="banner-logo" src="img/aftertaste/aftertaste-logo.png" alt="Aftertaste logo">
     <div class="banner-tag">2.5D Narrative Platformer</div>
+    <a class="steam-button" href="https://store.steampowered.com/app/4440750/Aftertaste/" target="_blank" rel="noopener noreferrer" aria-label="View Aftertaste on Steam (opens in a new tab)">VIEW ON STEAM <span aria-hidden="true">&#8599;</span></a>
     <button class="trailer-button" type="button" data-trailer="https://youtu.be/2b3nRCNQOl4" aria-label="Play the Aftertaste trailer">PLAY TRAILER →</button>
   </div>
 </div>

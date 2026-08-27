@@ -67,6 +67,8 @@
     el.addEventListener('click', e => {
       /* 嵌套在可点击 banner 内的移动端按钮只触发自身一次 */
       if (e.target.closest('[data-trailer]') !== el) return;
+      /* 让 banner 内的普通链接保持自己的跳转行为 */
+      if (e.target.closest('a[href]')) return;
       openTrailer(el.dataset.trailer);
     });
   });
