@@ -60,15 +60,25 @@
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTrailer(); });
 
   document.querySelectorAll('[data-trailer]').forEach(el => {
+    const isNestedNonTrailerControl = target => {
+      const control = target && target.closest('a, button, input, select, textarea, [role="button"]');
+      return control && control !== el && !control.hasAttribute('data-trailer');
+    };
+
     if (cursor) {
-      el.addEventListener('mouseenter', () => cursor.classList.add('play-mode'));
+      const updateTrailerCursor = e => {
+        const target = document.elementFromPoint(e.clientX, e.clientY) || e.target;
+        cursor.classList.toggle('play-mode', !isNestedNonTrailerControl(target));
+      };
+      el.addEventListener('mouseenter', updateTrailerCursor);
+      el.addEventListener('mousemove', updateTrailerCursor);
       el.addEventListener('mouseleave', () => cursor.classList.remove('play-mode'));
     }
     el.addEventListener('click', e => {
       /* 嵌套在可点击 banner 内的移动端按钮只触发自身一次 */
       if (e.target.closest('[data-trailer]') !== el) return;
       /* 让 banner 内的普通链接保持自己的跳转行为 */
-      if (e.target.closest('a[href]')) return;
+      if (isNestedNonTrailerControl(e.target)) return;
       openTrailer(el.dataset.trailer);
     });
   });
